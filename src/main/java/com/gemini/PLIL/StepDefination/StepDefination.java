@@ -7,6 +7,7 @@ import com.gemini.generic.ui.utils.DriverAction;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
+
 import org.openqa.selenium.support.Color;
 
 import java.io.IOException;
@@ -55,6 +56,8 @@ public class StepDefination {
         } else {
             GemTestReporter.addTestStep("Validation", "User not able to logout", STATUS.FAIL, DriverAction.takeSnapShot());
         }
+
+
 
     }
     @Given ("^Validate UI Elements (.+),(.+),(.+),(.+),(.+),(.+),(.+)$")
@@ -136,3 +139,5 @@ public class StepDefination {
 
 
 }
+
+
