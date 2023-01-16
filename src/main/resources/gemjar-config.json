@@ -1,8 +1,12 @@
 {
   "environment": "dev",
-  "projectName": "PLIL",
+
+  "projectName": "PLIL_QA",
+  "reportName": "PLIL Report",
   "gemjarSubID": "test_id",
   "gemjarUserName": "ABC",
+  "tagName": "",
+
   "glueCode":"com.gemini.PLIL.StepDefination",
   "dev": {
     "browserName": "chrome",
