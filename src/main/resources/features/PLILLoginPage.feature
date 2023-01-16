@@ -11,9 +11,14 @@ Feature: PLILHomepage
       | deepak.kumar@geminisolutions.com | Asdf@1234 |Home |
 
  
-  Scenario: PLIL Login
-    Given Enter username and password
-    Then Click on Login button
+  Scenario Outline:Logout PILI
+    Given Enter username and password <Username>,<Password>
+    Then Click on Login button and Validate <Validate_text>
+    Then Logout and verify
+
+    Examples:
+      | Username                         | Password  |Validate_text|
+      | deepak.kumar@geminisolutions.com | Asdf@1234 |Home |
 
 
   Scenario Outline: Launch PLIL
