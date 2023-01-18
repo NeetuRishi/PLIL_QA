@@ -1,17 +1,19 @@
 {
-  "environment": "dev",
-  "projectName": "PLIL_QA",
+  "environment": "prod",
+  "projectName": "PLIL",
   "reportName": "PLIL Report",
   "gemjarSubID": "test_id",
-  "gemjarUserName": "ABC",
-  "tagName": "",
+  "gemjarUserName": "radhikari123",
+  "gemjarToken" :"b1ac2749-8aa1-43b4-a0e4-d41580f664631673942898710",
+  "jewelEntryUrl": "https://apis.gemecosystem.com/enter-point",
+  "tagName": "@Hello",
   "glueCode":"com.gemini.PLIL.StepDefination",
-  "dev": {
+  "prod": {
     "browserName": "chrome",
     "launchUrl": "https://groupuat.pramericalife.in/",
     "browserTimeout": 100
   },
-  "prod": {
+  "beta": {
     "browserName": "chrome",
     "launchUrl": "https://groupdev.pramericalife.in/",
     "browserTimeout": 100
