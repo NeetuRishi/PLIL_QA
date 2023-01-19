@@ -4,6 +4,7 @@ import com.gemini.PLIL.Locators.Locator;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.generic.ui.utils.DriverManager;
 import com.sun.jdi.connect.Connector;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -127,61 +128,98 @@ public class StepDefination {
 
         Boolean isPassed = false;
 
-        if (DriverAction.getElement(Locator.Logo).isDisplayed()) isPassed = true;
-        else isPassed = false;
+        if (DriverAction.getElement(Locator.Logo).isDisplayed()){
+            isPassed = true;
+            GemTestReporter.addTestStep("Validation", "Logo is present on Login Page", STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "Logo is not present on Login Page", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+        if (DriverAction.getElement(Locator.Welcome).isDisplayed()) {
+            isPassed = true;
+            GemTestReporter.addTestStep("Validation", "Welcome Label is present on Login Page", STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "Welcome Label is not present on Login Page", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
 
-        if (DriverAction.getElement(Locator.Welcome).isDisplayed()) isPassed = true;
-        else isPassed = false;
+        if (DriverAction.getElement(Locator.Email_Id).isDisplayed()){
+            isPassed = true;
+            GemTestReporter.addTestStep("Validation", "Email Input is present on Login Page", STATUS.PASS, DriverAction.takeSnapShot());
 
-        if (DriverAction.getElement(Locator.Email_Id).isDisplayed()) isPassed = true;
-        else isPassed = false;
+        }
+        else {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "Email Input is not present on Login Page", STATUS.FAIL, DriverAction.takeSnapShot());
 
-        if (DriverAction.getElement(Locator.Password_Id).isDisplayed()) isPassed = true;
-        else isPassed = false;
-
+        }
+            if (DriverAction.getElement(Locator.Password_Id).isDisplayed()){
+                isPassed = true;
+                GemTestReporter.addTestStep("Validation", "Password Input is present on Login Page", STATUS.PASS, DriverAction.takeSnapShot());
+            }
+            else {
+                isPassed = false;
+                GemTestReporter.addTestStep("Validation", "Password Input is not present on Login Page", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
         if (DriverAction.getElement(Locator.Password_Eye_Before_Click).isDisplayed()) {
             String str_before_click = DriverAction.getElement(Locator.Password_Eye_Before_Click).getText();
             String str_after_click = "";
-            isPassed = true;
-            if (isPassed) {
-                DriverAction.click(Locator.Password_Eye_Before_Click);
-                DriverAction.waitSec(2);
-                str_after_click = DriverAction.getElement(Locator.Password_Eye_After_Click).getText();
-            }
-            if (!str_before_click.equals(str_after_click)) isPassed = true;
-            else isPassed = false;
-        } else isPassed = false;
+            DriverAction.click(Locator.Password_Eye_Before_Click);
+            DriverAction.waitSec(2);
+            str_after_click = DriverAction.getElement(Locator.Password_Eye_After_Click).getText();
+            if (!str_before_click.equals(str_after_click))
+                GemTestReporter.addTestStep("Validation", "Eye icon is clickable on Login Page", STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "Eye icon is not clickable  on Login Page", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
         if (DriverAction.getElement(Locator.Login).isDisplayed()) {
-            isPassed = true;
             String str_before_login = DriverAction.getCurrentURL();
             String str_after_login = "";
             System.out.print("Before Login Click ->:" + str_before_login);
-            if (isPassed) {
-                DriverAction.click(Locator.Login);
-                str_after_login = DriverAction.getCurrentURL();
-                System.out.print("After Login Click -> " + str_after_login);
+            DriverAction.click(Locator.Login);
+            str_after_login = DriverAction.getCurrentURL();
+            System.out.print("After Login Click -> " + str_after_login);
+            if (!str_after_login.equals(str_before_login)) {
+                GemTestReporter.addTestStep("Validation", "Login button is clickable on Login Page", STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validation", "Login button is not clickable  on Login Page", STATUS.FAIL, DriverAction.takeSnapShot());
             }
-            if (!str_after_login.equals(str_before_login)) isPassed = true;
-            else isPassed = false;
-        } else isPassed = false;
+        }else {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "Login button is not present   on Login Page", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
 
-        if (DriverAction.getElement(Locator.Forgot_Label).isDisplayed()) isPassed = true;
-        else isPassed = false;
+
+        if (DriverAction.getElement(Locator.Forgot_Label).isDisplayed()) {
+            isPassed = true;
+            GemTestReporter.addTestStep("Validation", "Forgot Label is present on Login Page", STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "Forgot Label is not present   on Login Page", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
 
         if (DriverAction.getElement(Locator.Click_Here).isDisplayed()) {
-            isPassed = true;
             String str_before = DriverAction.getCurrentURL();
             String str_after = "";
             System.out.print("Before Click ->:" + str_before);
-            if (isPassed) {
-                DriverAction.click(Locator.Click_Here);
-                str_after = DriverAction.getCurrentURL();
-                System.out.print("After Click -> " + str_after);
-            }
-            if (!str_after.equals(str_before)) isPassed = true;
-            else isPassed = false;
-        } else isPassed = false;
-
+            DriverAction.click(Locator.Click_Here);
+            str_after = DriverAction.getCurrentURL();
+            System.out.print("After Click -> " + str_after);
+            if (!str_after.equals(str_before))
+            {
+                GemTestReporter.addTestStep("Validation", "Click Here is clickable on Login Page", STATUS.PASS, DriverAction.takeSnapShot());
+        } else {
+            GemTestReporter.addTestStep("Validation", "Click Here is not clickable  on Login Page", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+        } else {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "Click Here is not present   on Login Page", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
         if (isPassed) {
             GemTestReporter.addTestStep("Validation", "UI Elements are visible", STATUS.PASS, DriverAction.takeSnapShot());
         } else {
@@ -263,13 +301,112 @@ public class StepDefination {
         }
     }
 
-    @Then("^Enter Username (.+)$")
+    @Then("^validate set new password screen (.+),(.+),(.+),(.+)$")
+    public void EnterUsername(String new_pass,String confirm_pass,String Req_Label,String Home_Screen_Label) throws IOException {
+        DriverAction.waitSec(30);
+        DriverAction.click(Locator.Verifybtn);
+        Boolean isPassed=false;
+        if (DriverAction.getElement(Locator.setnewpassword_label).isDisplayed()) {
+            isPassed=true;
+            String Fetched_Label = DriverAction.getElement(Locator.setnewpassword_label).getText();
+            if(Fetched_Label.equals(Req_Label)) {
+                GemTestReporter.addTestStep("Validation", "Successfully  navigate to set new password screen and Expected Label-> " + Req_Label + " Actual Label-> " + Fetched_Label, STATUS.PASS, DriverAction.takeSnapShot());
+            }
+            else {
+                GemTestReporter.addTestStep("Validation", "Successfully navigate to set new password screen but There is Mismatch of <br> Expected Label-> " + Req_Label + " Actual Label-> " + Fetched_Label, STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+            }
+        else
+        {
+            GemTestReporter.addTestStep("Validation", "Not able to navigate to set new password screen ", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+        if (DriverAction.getElement(Locator.New_Password).isDisplayed()) {
+            isPassed=true;
+            GemTestReporter.addTestStep("Validation", "New Password input is visible on set new password screen", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.typeText(Locator.New_Password,new_pass);
+        }
+        else
+        {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "New Password input is not visible on set new password screen", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+        if (DriverAction.getElement(Locator.Confirm_Password).isDisplayed()) {
+            isPassed=true;
+            GemTestReporter.addTestStep("Validation", "Confirm Password input is visible on set new password screen", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.typeText(Locator.Confirm_Password,confirm_pass);
+        }
+        else
+        {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "Confirm Password input is not visible on set new password screen", STATUS.FAIL, DriverAction.takeSnapShot());
+
+        }
+        if (DriverAction.getElement(Locator.SetNewPassword_btn).isDisplayed()) {
+            isPassed=true;
+            GemTestReporter.addTestStep("Validation", "Set new Password button  is visible on set new password screen", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.waitSec(15);
+            DriverAction.click(Locator.SetNewPassword_btn);
+        }
+        if (DriverAction.getElement(Locator.Password_Updated_Label).isDisplayed()) {
+            isPassed=true;
+            GemTestReporter.addTestStep("Validation", "Password Updated label is visible on set new password screen", STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "Password Updated label is not visible on set new password screen", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+        if (DriverAction.getElement(Locator.Tick_img).isDisplayed()) {
+            isPassed=true;
+            GemTestReporter.addTestStep("Validation", "Green Tick is visible on set new password updated popup screen", STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "Green Tick is not visible on set new password updated popup screen", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+        if (DriverAction.getElement(Locator.Login_Link).isDisplayed()) {
+            isPassed=true;
+            GemTestReporter.addTestStep("Validation", "Login Link is visible on set new password updated popup screen", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.click(Locator.Login_Link);
+        }
+        else
+        {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "Login Link is not visible on set new password  updated popup screen", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+        if (DriverAction.getElement(Locator.Welcome).isDisplayed()) {
+            isPassed=true;
+            String Fetched_Label = DriverAction.getElement(Locator.Welcome).getText();
+            if(Fetched_Label.equals(Home_Screen_Label)) {
+                GemTestReporter.addTestStep("Validation", "User navigated to Home screen  and Expected Label->" + Home_Screen_Label + "Actual Label->" + Fetched_Label, STATUS.PASS, DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Validation", "User navigated to Home screen  but There is Mismatch of Expected Label->" + Home_Screen_Label + "Actual Label->" + Fetched_Label, STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+            }
+        else {
+            isPassed = false;
+            GemTestReporter.addTestStep("Validation", "User is not navigated to Home screen", STATUS.FAIL, DriverAction.takeSnapShot());
+
+
+        }
+
+
+    }
+        @Then("^Username is Entered (.+)$")
     public void EnterUsername(String Username) throws IOException {
 
         Boolean isPassed = false;
         if (DriverAction.getElement(Locator.Email_Id).isDisplayed()) {
-            DriverAction.typeText(Locator.Email, Username);
+            DriverAction.click(Locator.Email);
+            DriverManager.getWebDriver().findElement(Locator.Email).clear();
+            DriverAction.typeText(Locator.Email,Username.trim());
             DriverAction.click(Locator.RequestOtpBtn);
+
             isPassed=true;
         }
         if (isPassed) {
@@ -283,7 +420,9 @@ public class StepDefination {
 
         Boolean isPassed = false;
         if (DriverAction.getElement(Locator.Email_Id).isDisplayed()) {
-            DriverAction.typeText(Locator.Email,Username);
+            DriverAction.click(Locator.Email);
+            DriverManager.getWebDriver().findElement(Locator.Email).clear();
+            DriverAction.typeText(Locator.Email,Username.trim());
             DriverAction.click(Locator.RequestOtpBtn);
         }
         if (DriverAction.getElement(Locator.Email_Doest_Not_msg).isDisplayed()) {
@@ -315,9 +454,10 @@ public class StepDefination {
             isPassed=true;
             if (isPassed) {
                 GemTestReporter.addTestStep("Validation", "Required Verification label is present on Verification screen", STATUS.PASS, DriverAction.takeSnapShot());
-            } else {
-                GemTestReporter.addTestStep("Validation", "Required Verification label is not present on Verification screen", STATUS.FAIL, DriverAction.takeSnapShot());
             }
+        }
+        else {
+            GemTestReporter.addTestStep("Validation", "Required Verification label is not present on Verification screen", STATUS.FAIL, DriverAction.takeSnapShot());
         }
         isPassed = false;
         List<WebElement> list= DriverAction.getElements(By.xpath("//div[@class='ng-otp-input-wrapper wrapper ng-star-inserted']//input"));
@@ -329,18 +469,20 @@ if(list.size()==4)
             isPassed=true;
             if (isPassed) {
                 GemTestReporter.addTestStep("Validation", "Time is present on Verification screen", STATUS.PASS, DriverAction.takeSnapShot());
-            } else {
-                GemTestReporter.addTestStep("Validation", "Time is not present on Verification screen", STATUS.FAIL, DriverAction.takeSnapShot());
             }
+        }
+        else {
+            GemTestReporter.addTestStep("Validation", "Time is not present on Verification screen", STATUS.FAIL, DriverAction.takeSnapShot());
         }
         isPassed = false;
         if (DriverAction.getElement(Locator.Verifybtn).isDisplayed()){
             isPassed=true;
             if (isPassed) {
                 GemTestReporter.addTestStep("Validation", "Verify button present on Verification screen", STATUS.PASS, DriverAction.takeSnapShot());
-            } else {
-                GemTestReporter.addTestStep("Validation", "Verify button not present on Verification screen", STATUS.FAIL, DriverAction.takeSnapShot());
             }
+        }
+        else {
+            GemTestReporter.addTestStep("Validation", "Verify button not present on Verification screen", STATUS.FAIL, DriverAction.takeSnapShot());
         }
         isPassed = false;
         for(int i=1;i<list.size()+1;i++)
@@ -353,9 +495,10 @@ if(list.size()==4)
             isPassed=true;
             if (isPassed) {
                 GemTestReporter.addTestStep("Validation", "Required message appear on Verification screen", STATUS.PASS, DriverAction.takeSnapShot());
-            } else {
-                GemTestReporter.addTestStep("Validation", "Required message appear does not on Verification screen", STATUS.FAIL, DriverAction.takeSnapShot());
             }
+        }
+        else {
+            GemTestReporter.addTestStep("Validation", "Required message appear does not on Verification screen", STATUS.FAIL, DriverAction.takeSnapShot());
         }
 System.out.println(list.size());
 }
@@ -368,8 +511,6 @@ System.out.println(list.size());
             isPassed = true;
             if (isPassed) {
                 GemTestReporter.addTestStep("Validation", "Here link is present on Verification screen", STATUS.PASS, DriverAction.takeSnapShot());
-            } else {
-                GemTestReporter.addTestStep("Validation", "Here Link Logo is present on Verification screen", STATUS.FAIL, DriverAction.takeSnapShot());
             }
             DriverAction.waitSec(61);
             if (isPassed) {
@@ -381,10 +522,14 @@ System.out.println(list.size());
                 isPassed=true;
                 if (isPassed) {
                     GemTestReporter.addTestStep("Validation", "Otp Resent message appear on Verification screen", STATUS.PASS, DriverAction.takeSnapShot());
-                } else {
-                    GemTestReporter.addTestStep("Validation", "Otp Resent message not appear  on Verification screen", STATUS.FAIL, DriverAction.takeSnapShot());
                 }
             }
+           else {
+               GemTestReporter.addTestStep("Validation", "Otp Resent message not appear  on Verification screen", STATUS.FAIL, DriverAction.takeSnapShot());
+           }
+        }
+        else {
+            GemTestReporter.addTestStep("Validation", "Here Link Logo is present on Verification screen", STATUS.FAIL, DriverAction.takeSnapShot());
         }
     }
 

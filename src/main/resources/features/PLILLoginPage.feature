@@ -102,7 +102,7 @@ Feature: PLILHomepage
 
   Scenario Outline: Forgot_Password->ui->Validation
     Given Click on Forgot Password Link and verify
-    Then Enter Username <Username>
+    Then Username is Entered <Username>
     Then verify Forgot Password Ui
 
 
@@ -112,7 +112,7 @@ Feature: PLILHomepage
 
   Scenario Outline: Forgot_Password->ui->Here_Btn->Validation
     Given Click on Forgot Password Link and verify
-    Then Enter Username <Username>
+    Then Username is Entered <Username>
     Then Click Here Button and Validate
 
 
@@ -127,6 +127,15 @@ Feature: PLILHomepage
     Examples:
       |Username|Error_msg|
       |deepak.kumargeminisolutions.com|Enter Invalid  Username and verify|
+
+  Scenario Outline: Reset/Update_Password->OTP->Set_New_Password->Validation
+    Given Click on Forgot Password Link and verify
+    Then Username is Entered  <Username>
+    Then validate set new password screen <New_Password>,<Confirm_Password>,<Required_Label>,<Home_Label>
+
+    Examples:
+      |Username|New_Password|Confirm_Password|Required_Label|Home_Label|
+      |rahul.adhikari@geminisolutions.com|Asdf@12340|Asdf@12340|Set New Password|Welcome|
 
 
 

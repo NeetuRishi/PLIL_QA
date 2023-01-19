@@ -5,6 +5,18 @@ import org.openqa.selenium.By;
 public class Locator {
 
     public static By Email = By.xpath("//input[@placeholder='Email Id']");
+    public static By Confirm_Password = By.xpath("//input[@formcontrolname='confirmPassword']");
+    public static By New_Password = By.xpath("//input[@formcontrolname='password']");
+    public static By SetNewPassword_btn = By.xpath("//span[text()='Set Password']");
+    public static By Password_Updated_Label = By.xpath("//div[text()='Password Updated']");
+
+    public static By Login_Link = By.xpath("//a");
+
+    public static By Tick_img = By.xpath("//img");
+
+
+
+    //span[text()='Set Password']
     public static By LoginBtn = By.xpath("//span[text()='Login']");
     //span[text()='Login']
     public static By Password = By.xpath("//input[@placeholder='Password']");
@@ -47,6 +59,8 @@ public class Locator {
     public static By InvalidMailError = By.xpath("//mat-error[text()=' Please enter a valid email address ']");
 
     public static By Verifybtn = By.xpath("//span[text()='Verify']");
+    public static By setnewpassword_label = By.xpath("//h3[text()='Set New Password']");
+
 
     public static By ForgotPassword_Text = By.xpath("//h3[text()='Forgot Password']");
 
