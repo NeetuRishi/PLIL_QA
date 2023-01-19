@@ -27,17 +27,10 @@ public class Locator {
     public static By Password_Eye_After_Click = By.xpath("//mat-icon[contains(text(),'visibility')]");
 
     public static By HomeScreen = By.xpath("//h2[text()='Home']");
-    public static By Captcha = By.xpath("//*[@id='recaptcha-anchor']/div[1]");
+    //public static By Captcha = By.xpath("//*[@id='recaptcha-anchor']/div[1]");
     public static By Logout = By.xpath(" //span[text()='Logout']");
 
-
-    
-
-   
-
 }
 
-
-}
 
 
