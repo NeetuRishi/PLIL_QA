@@ -14,3 +14,8 @@ Feature: superAdmin
     Given Login as superAdmin
     Then Navigate to Partner Management
     Then Validate Partner Management Screen
+
+  Scenario: Home - SuperAdmin
+    Given Login as superAdmin
+    Then Navigate to Home
+    Then Validate Home UI Elements

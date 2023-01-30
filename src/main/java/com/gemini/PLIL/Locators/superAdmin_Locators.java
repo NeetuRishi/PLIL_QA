@@ -5,6 +5,52 @@ import org.openqa.selenium.By;
 public class superAdmin_Locators {
 
 
+    // Home Screen Locators
+    public static By Home_Label =By.xpath("//h2[@class='header']");
+    public static By Name_Label = By.xpath("//label[contains(text(),'Name')]");
+    public static By Name_Value = By.xpath("//div[1]/h3");
+    public static By Email_Label = By.xpath("//label[contains(text(),'Email')]");
+    public static By Email_Value = By.xpath("//div[2]/h3");
+    public static By Mobile_Label = By.xpath("//label[contains(text(),'Mobile')]");
+    public static By Mobile_Value = By.xpath("//div[3]/h3");
+
+    public static By Logout_Image = By.xpath("//span[@class='logout']/img");
+    public static By Logout_btn = By.xpath("//span[contains(text(),'Logout')]");
+    public static By Navigate_to_Label = By.xpath("//div/h4[text()='Navigate to']");
+
+    public static By Roles_Card= By.xpath("//div/span[contains(text(),'Roles')]");
+    public static By Roles_Card_Img = By.xpath("//div[@class='row user-navigate']/div[1]/div/span[1]");
+    public static By Roles_Card_Angle = By.xpath("//div[@class='row user-navigate']/div[1]/div/i");
+
+    public static By Master_Management_Card = By.xpath("//div/span[contains(text(),'Master Management')]");
+    public static By Master_Management_Card_Img = By.xpath("//div[@class='row user-navigate']/div[2]/div/span[1]");
+    public static By Master_Management_Card_Angle = By.xpath("//div[@class='row user-navigate']/div[2]/div/i");
+
+    public static By Partner_Product_Card = By.xpath("//div/span[contains(text(),'Partner Product')]");
+    public static By Partner_Product_Card_Img = By.xpath("//div[@class='row user-navigate']/div[3]/div/span[1]");
+    public static By Partner_Product_Card_Angle = By.xpath("//div[@class='row user-navigate']/div[3]/div/i");
+
+    public static By User_Management_Card = By.xpath("//div/span[contains(text(),'User')]");
+    public static By User_Management_Card_Img = By.xpath("//div[@class='row user-navigate']/div[4]/div/span[1]");
+    public static By User_Management_Card_Angle = By.xpath("//div[@class='row user-navigate']/div[4]/div/i");
+
+    public static By Partner_Management_Card = By.xpath("//div/span[contains(text(),'Partner Management')]");
+    public static By Partner_Management_Card_Img = By.xpath("//div[@class='row user-navigate']/div[5]/div/span[1]");
+    public static By Partner_Management_Card_Angle = By.xpath("//div[@class='row user-navigate']/div[5]/div/i");
+
+    public static By Gops_Enquiry_Card = By.xpath("//div/span[contains(text(),'Gops Enquiry')]");
+    public static By Gops_Enquiry_Card_Img = By.xpath("//div[@class='row user-navigate']/div[6]/div/span[1]");
+    public static By Gops_Enquiry_Card_Angle = By.xpath("//div[@class='row user-navigate']/div[6]/div/i");
+
+    public static By Reverse_Feed_Card = By.xpath("//div/span[contains(text(),'Reverse Feed')]");
+    public static By Reverse_Feed_Card_Img = By.xpath("//div[@class='row user-navigate']/div[7]/div/span[1]");
+    public static By Reverse_Feed_Card_Angle = By.xpath("//div[@class='row user-navigate']/div[7]/div/i");
+
+    public static By Generate_Ig_File_Card = By.xpath("//div/span[contains(text(),'Generate Ig File')]");
+    public static By Generate_Ig_File_Card_Img = By.xpath("//div[@class='row user-navigate']/div[8]/div/span[1]");
+    public static By Generate_Ig_File_Card_Angle = By.xpath("//div[@class='row user-navigate']/div[8]/div/i");
+
+
     // Side Navigation Super Admin Locators
 
     public static By SideBar_Logo = By.xpath("//img[@class='expandLogo']");
@@ -66,15 +112,22 @@ public class superAdmin_Locators {
     public static By Pagination_Partner_Management = By.xpath("//div[@class='pageOf']");
     public static By Pagination_Angle_Left_Partner_Management = By.xpath("//span[@class='angle-left']");
     public static By Pagination_Angle_Right_Partner_Management = By.xpath("//span[@class='angle-right']");
-    public static By Create_Partner_Product_Button_Partner_Management = By.xpath("//button[contains(text(),'Create Partner')]");
+
+    public static By Create_Partner_Button_Partner_Management = By.xpath("//button[contains(text(),'Create Partner')]");
     public static By edit_Partner_Management = By.xpath("//tbody/tr[1]/td[4]/div/i");
+    public static By Label_Update_Partner = By.xpath("//h2[contains(text(),'Update Partner')]");
+    public static By Text_Line_Update_Partner = By.xpath("//p[contains(text(),'partner details')]");
+    public static By Update_Partner_Name_Field = By.xpath("//input[@placeholder='Partner Name']");
+    public static By Update_Prefix_Uneditable = By.xpath("//input[@placeholder='Prefix']");
+    public static By Update_Partner_Button = By.xpath("//button[text()='Update Partner']");
+    public static By Discard_Update_Partner_Button = By.xpath("//button[text()='Discard']");
 
     // Create Partner Locators
 
     public static By Label_Create_Partner = By.xpath("//h2[contains(text(),'Create Partner')]");
     public static By Text_Line_Create_Partner = By.xpath("//p[contains(text(),'partner details')]");
-    public static By Enter_Partner_Name= By.xpath("//*[@id='mat-input-2']");
-    public static By Enter_Partner_Prefix = By.xpath("//*[@id='mat-input-3']");
+    public static By Enter_Partner_Name= By.xpath("//*[@placeholder='Partner Name']");
+    public static By Enter_Partner_Prefix = By.xpath("//*[@placeholder='Prefix']");
     public static By Discard_Create_Partner_Button = By.xpath("//button[text()='Discard']");
     public static By Create_Partner_Btn = By.xpath("//button[text()='Create Partner']");
 
