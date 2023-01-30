@@ -1,15 +1,13 @@
 {
   "environment": "dev",
-
   "projectName": "PLIL",
   "reportName": "PLIL Report",
   "gemjarSubID": "test_id",
-  "gemjarUserName": "shubh2107-22",
-  "gemjarToken": "bb58327c-aa6a-4d0f-8d37-13a742d520711673945282144",
-  "jewelEntryUrl": "https://apis-beta.gemecosystem.com/enter-point",
+  "gemjarUserName": "radhikari",
+  "gemjarToken": "b1ac2749-8aa1-43b4-a0e4-d41580f664631673942898710",
+  "jewelEntryUrl": "https://apis.gemecosystem.com/enter-point",
   "reportingLocation": "",
-  "tagName": "",
-
+  "tagName": "@beta",
   "glueCode":"com.gemini.PLIL.StepDefination",
   "dev": {
     "browserName": "chrome",

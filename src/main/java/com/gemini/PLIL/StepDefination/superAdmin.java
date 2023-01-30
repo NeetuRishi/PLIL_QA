@@ -14,9 +14,9 @@ public class superAdmin {
     @Given("^Login as superAdmin$")
     public void Login_as_superAdmin()
     {
-        DriverAction.typeText(Locator.Email, "deepak.kumar@geminisolutions.com");
+        DriverAction.typeText(Locator.Email_Input_Field, "deepak.kumar@geminisolutions.com");
         DriverAction.waitSec(2);
-        DriverAction.typeText(Locator.Password, "Asdf@1234");
+        DriverAction.typeText(Locator.Password_Input_Field, "Asdf@1234");
         DriverAction.waitSec(10);
         DriverAction.click(Locator.Login);
         DriverAction.waitSec(5);

@@ -1,133 +1,66 @@
 Feature: PLILHomepage
 
-  @SuperAdmin @Login @Hello
-  Scenario Outline:Login->PILI
-    Given Enter username and password <Username>,<Password>
-    Then Click on Login button and Validate <Validate_text>
 
-    Examples:
-      | Username                         | Password  |Validate_text|
-      | deepak.kumar@geminisolutions.com | Asdf@1234 |Home |
+  @Login-page
+  Scenario: Launch->PLIL
+    Given Validate UI Elements
 
-  @Hello
-  Scenario Outline:Login->PILI->WithoutEmail->Validation
-    Given Enter  password without Username <Password>
-    Then Validate  Error after login <Validate_text>,<Error_msg>
 
-    Examples:
-      |Password  |Validate_text|Error_msg|
-       | Asdf@1234 |Email Id is required |Email Id is required|
 
-  @Hello
-  Scenario Outline:Login->PILI->WithoutPassword->Validation
-    Given Enter Username without Password <Username>
-    Then Validate  Error after login <Validate_text>,<Error_msg>
 
-    Examples:
-      |Username  |Validate_text|Error_msg|
-      | deepak.kumar@geminisolutions.com |Password is required |Password is required|
-
-  @Hello
-  Scenario Outline:Login->WrongEmail->PILI
-    Given Enter username and password <Username>,<Password>
-    Then Login and validate <Validate_text>,<Error_msg>
-
-    Examples:
-      | Username                         | Password  |Validate_text|Error_msg|
-      | deepak.kumargeminisolutions.com | Asdf@1234 | Please enter a valid email address  |Please enter a valid email address|
-
-  @Hello
-  Scenario Outline:Login->WrongPassword->PILI
-    Given Enter username and password <Username>,<Password>
-    Then Login and validate wrong Password message
-
-    Examples:
-      | Username                         | Password  |
-      | deepak.kumar@geminisolutions.com | Asdf@123445 |
-
-  @Hello
-  Scenario Outline:Login->WithoutSelectingCaptcha->PILI
-    Given Enter username and password <Username>,<Password>
-    Then Login and validate <Validate_text>,<Error_msg>
-
-    Examples:
-      | Username                         | Password  |Validate_text|Error_msg|
-      | deepak.kumar@geminisolutions.com | Asdf@1234 |  Verification required   | Verification required |
-
-  @Hello
-  Scenario Outline:Logout->PILI
-    Given Enter username and password <Username>,<Password>
+  @Login/Logout
+  Scenario Outline: Login->PILI
+    Given Enter username and password
     Then Click on Login button and Validate <Validate_text>
     Then Logout and verify
-
+    Then Enter  password without Username <Password>,<Validate_Error_Text>,<Error_msg>
+    Then Enter Username without Password <Username>,<Validate_Error_Text1>,<Error_msg1>
+    Then Enter wrong username and correct password and validate <Wrong_Username>,<Password>
+    Then Enter correct username and wrong password and validate <Username>,<Wrong_Password>
+    Then Enter username and Password and login without selecting captcha <Error_mgs3>
     Examples:
-      | Username                         | Password  |Validate_text|
-      | deepak.kumar@geminisolutions.com | Asdf@1234 |Home |
-
-  @Hello
-  Scenario Outline: Launch->PLIL
-    Given Validate UI Elements <Logo>,<Welcome_Label>,<Email>,<Password>,<Login_Button>,<Captcha>,<ClickHere_Link>
-
-    Examples:
-      |Logo|Welcome_Label|Email|Password|Login_Button|Captcha|ClickHere_Link|
-      |True|True         |True |True    |True        |True   |True          |
+      | Username                         | Password  |Validate_text|Validate_Error_Text|Error_msg|Validate_Error_Text1|Error_msg1|Wrong_Username|Wrong_Password|Error_mgs3|
+      | deepak.kumar@geminisolutions.com | Asdf@1234 |Home |Email Id is required       |Email Id is required|Password is required |Password is required|deepakk.kumar@geminisolutions.com|Asdf@12335|Verification required|
 
 
-  Scenario: Forgot_Password->Validation
+  @Forgot
+  Scenario Outline: Forgot_Password->Validation
     Given Click on Forgot Password Link and verify
-
-  Scenario Outline: Forgot_Password->Forgot_Password_Ui>Validation
-    Given Click on Forgot Password Link and verify
+    Then verify Here Link on Forgot Password screen
+    Then Enter Username and validate  <Wrong_Username>
     Then Verify Logo,Forgot Password Label <Username>
-
-    Examples:
-    |Username|
-    |deepak.kumar@geminisolutions.com|
-
-  Scenario Outline: Forgot_Password->Here_Link>Validation
-    Given Click on Forgot Password Link and verify
-    Then verify Here Link
-
-    Examples:
-      |Username|
-      |deepak.kumar@geminisolutions.com|
-
-  Scenario Outline: Forgot_Password->WrongEmail->Validation
-    Given Click on Forgot Password Link and verify
-    Then Enter Username and validate  <Username>
-
-    Examples:
-      |Username|
-  |deepakk.kumar@geminisolutions.com|
-
-  Scenario Outline: Forgot_Password->ui->Validation
-    Given Click on Forgot Password Link and verify
+    Then Verification Screen Ui validation
     Then Username is Entered <Username>
-    Then verify Forgot Password Ui
-
-
-    Examples:
-      |Username|
-      |deepak.kumar@geminisolutions.com|
-
-  Scenario Outline: Forgot_Password->ui->Here_Btn->Validation
-    Given Click on Forgot Password Link and verify
-    Then Username is Entered <Username>
-    Then Click Here Button and Validate
-
+    Then Validating Click Here Button Functionality on Verfication Screen
+    Then Enter Invalid  Username and verify <invalid_Username>,<Error_msg>
 
     Examples:
-      |Username|
-      |deepak.kumar@geminisolutions.com|
+      |Username|Wrong_Username|invalid_Username|Error_msg|
+      |deepak.kumar@geminisolutions.com|deepakk.kumar@geminisolutions.com|deepak.kumargeminisolutions.com|Please enter a valid email address|
 
-  Scenario Outline: Forgot_Password->Invalid_Email->Validation
-    Given Click on Forgot Password Link and verify
-    Then Enter Invalid  Username and verify <Username>,<Error_msg>
 
+
+
+
+
+  @First_Time_Login
+  Scenario Outline: Login->PILI->once
+    Given Enter username and password
+    Then Click on Login button and Validate <Validate_text>
+    Then Navigate to subtab <Subtab>
+    Then Create User <Name_inp>,<Email_inp>,<Mobile_inp>,<Name_val>,<Email_val>,<Mobile_val>,<val1>,<val2>
+    Then Logout and verify
+    Then Enter new Username <Email_val>
+    Then validate set new password ui
+    Then Set New Password and validate <new_Pass>
+    Then Login with Wrong Password <Wrong_Pass>
     Examples:
-      |Username|Error_msg|
-      |deepak.kumargeminisolutions.com|Enter Invalid  Username and verify|
+      |Validate_text|Subtab|Name_inp|Email_inp|Mobile_inp|Name_val|Email_val|Mobile_val|val1|val2|new_Pass|Wrong_Pass|
+      |Home         | User Management |name|email|mobile |Rahul   |rahul.adhikari@geminisolutions.com|9501209019|superAdmin|Pramerica Life Insurance Limited|Gemini1334|gemini123|
 
+
+
+  @Reset/Update @beta
   Scenario Outline: Reset/Update_Password->OTP->Set_New_Password->Validation
     Given Click on Forgot Password Link and verify
     Then Username is Entered  <Username>
@@ -135,7 +68,4 @@ Feature: PLILHomepage
 
     Examples:
       |Username|New_Password|Confirm_Password|Required_Label|Home_Label|
-      |rahul.adhikari@geminisolutions.com|Asdf@12340|Asdf@12340|Set New Password|Welcome|
-
-
-
+      |rahul.adhikari@geminisolutions.com|Asdf@12347|Asdf@12347|Set New Password|Welcome|
