@@ -191,4 +191,15 @@ public class superAdmin_Locators {
 
     public static By reversefeedsearch = By.xpath("//input[@placeholder='Search']");
 
+
+
+    //usermanagement
+
+    public static By usermgtHm = By.xpath("(//span[text()='User Management'])[2]");
+
+    public static By createuser = By.xpath("//button[text(),' Create User ']");
+
+
+    public static By usermgtSearch = By.xpath("//input[@placeholder='Search']");
+
 }
