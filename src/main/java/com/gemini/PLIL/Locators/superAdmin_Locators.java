@@ -131,5 +131,25 @@ public class superAdmin_Locators {
     public static By Discard_Create_Partner_Button = By.xpath("//button[text()='Discard']");
     public static By Create_Partner_Btn = By.xpath("//button[text()='Create Partner']");
 
+    public static By Salutation_Label = By.xpath("//h2[text()='Salutation']");
+
+    public static String Salutation_Col = "(//table[@class='mat-table cdk-table mat-sort']/thead/tr/th/div)[itr]";
+
+
+    public static By Salutation_Card = By.xpath("//span[text()='Salutation']");
+
+    public static By Create_btn = By.xpath("//button[text()=' Create ']");
+
+    public static By value_inp = By.xpath("//div[contains(@class,'mat-form-field-infix ng-tns')]//input");
+    public static By code_inp = By.xpath("(//div[contains(@class,'mat-form-field-infix ng-tns')]//input)[2]");
+
+    //div[contains(@class,'mat-form-field-infix ng-tns')]//input
+    public static String Salutation_Column = "(//table[@class='mat-table cdk-table mat-sort']/tbody/tr/td)[itr]";
+
+
+
+    //button[text()=' Create ']
+
+
 
 }
