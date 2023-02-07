@@ -1,6 +1,7 @@
 package com.gemini.PLIL.StepDefination;
 
 import com.gemini.PLIL.Locators.Locator;
+import com.gemini.PLIL.Locators.Read_Locators;
 import com.gemini.PLIL.Locators.superAdmin_Locators;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
@@ -14,11 +15,17 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import java.sql.Driver;
 import java.time.Duration;
 
 public class superAdmin {
+    Logger logger = LoggerFactory.getLogger(StepDefination.class);
 
     // SUPER ADMIN LOGIN
     @Given("^Login as superAdmin$")
@@ -451,6 +458,127 @@ public class superAdmin {
 
     // HOME SCREEN - COVER ALL UI ELEMENTS - LOGOUT, HAMBURGER, SIDE NAV BAR, CARDS
 
+    @Then("^Validate Create Button functionality$")
+    public void validateCreateFunctionality() {
+        try {
+            if(DriverAction.getElement(superAdmin_Locators.Create_btn).isDisplayed()) {
+                GemTestReporter.addTestStep("Validate Create Button is visible on Salutation Screen", "Create button is visible on Salutation Screen", STATUS.PASS, DriverAction.takeSnapShot());
+                DriverAction.getElement(superAdmin_Locators.Create_btn).click();
+                DriverAction.typeText(superAdmin_Locators.value_inp,"demo");
+                DriverAction.typeText(superAdmin_Locators.code_inp,"d1");
+                DriverAction.getElement(superAdmin_Locators.Create_btn).click();
+                for (int i = 1; i <=4; i++) {
+                    String Columns = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Col.replace("itr", String.valueOf(i + 1)))).getText();
+                    if(Columns.equals(""))
+                    {
+
+                    }
+                    else {
+
+                    }
+                    if(Columns.equals(""))
+                    {
+
+                    }
+                    else {
+
+                    }
+                    if(Columns.equals(""))
+                    {
+
+                    }
+                    else {
+
+                    }
+                }
+
+
+
+            }
+
+
+        }
+        catch (Exception e) {
+            logger.info("An exception occurred!", e);
+            GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
+        }
+    }
+    @Then("^Navigate to Master Management Tab and validate logo$")
+    public void Navigate_MasterManagement()
+    {
+        try {
+            DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(3))));
+            if (DriverAction.getElement(Locator.Logo).isDisplayed()) {
+                GemTestReporter.addTestStep("Validating weather Logo is Visible on Master Management Tab", "Logo is visible on Master Management Tab", STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validating weather Logo is Visible on Master Management Tab", "Logo is not visible on Master Management Tab", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+
+            String tab = DriverAction.getElement(Read_Locators.MasterManagementtab).getAttribute("class");
+            if (tab.contains("active")) {
+                GemTestReporter.addTestStep("Validating weather Master Management Tab is highlighted", "Master Management Tab is highlighted", STATUS.PASS, DriverAction.takeSnapShot());
+
+            } else {
+                GemTestReporter.addTestStep("Validating weather Master Management Tab is highlighted", "Master Management Tab is not highlighted", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+        } catch (Exception e) {
+            logger.info("An exception occurred!", e);
+            GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
+        }
+
+    }
+
+
+    @Then("^Navigate to Salutation Card and validate the Ui$")
+    public void validateSalutationUi()
+    {
+        try {
+            if(DriverAction.getElement(superAdmin_Locators.Salutation_Card).isDisplayed())
+            {
+                GemTestReporter.addTestStep("Verify Salutation Card is present on Master Management screen","Salutation card is visible on Master Management screen",STATUS.PASS,DriverAction.takeSnapShot());
+                DriverAction.getElement(superAdmin_Locators.Salutation_Card).click();
+                if(DriverAction.getElement(superAdmin_Locators.Salutation_Label).isDisplayed()) {
+                    GemTestReporter.addTestStep("Verify Salutation Label is present on Salutation screen","Salutation Label is present on Salutation screen",STATUS.PASS,DriverAction.takeSnapShot());
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Verify Salutation Label is present on Salutation screen","Salutation Label is not present on Salutation screen",STATUS.FAIL,DriverAction.takeSnapShot());
+
+                }
+
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify Salutation Card is present on Master Management screen","Salutation card is not visible on Master Management screen",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+            List<String> list1 = new ArrayList<>();
+            list1.add("Code");
+            list1.add("Value");
+            list1.add("Created On ");
+            list1.add("Created By ");
+            list1.add("Action");
+            int c = 0;
+            for (int i = 0; i < list1.size(); i++) {
+                String Columns = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Col.replace("itr", String.valueOf(i + 1)))).getText();
+                if (Columns.equals(list1.get(i))) {
+                    c++;
+                }
+            }
+            if (c == list1.size()) {
+                GemTestReporter.addTestStep("Validating weather all the required columns are present in Salutation Table", "All Columns are there in Salutation Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+            } else {
+                GemTestReporter.addTestStep("Validating weather all the required columns are present in Salutation Table", "All Columns are not there in Salutation Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+
+
+        } catch (Exception e) {
+            logger.info("An exception occurred!", e);
+            GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
+        }
+    }
     @Then("^Navigate to Home$")
     public void navigate_to_home()
     {
