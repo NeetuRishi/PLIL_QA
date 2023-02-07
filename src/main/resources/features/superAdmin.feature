@@ -1,8 +1,7 @@
 Feature: superAdmin
 
-  Scenario: Super Admin Common Screen Elements
+  Scenario: Super Admin Login
     Given Login as superAdmin
-    Then Validate Common UI Elements
 
   Scenario: Partner Product
     Given Login as superAdmin
@@ -30,4 +29,10 @@ Feature: superAdmin
     Examples:
       |Validate_txt|username|password|
       |Home        |shubham.a.kumar@geminisolutions.com|Test@123|
+
+
+    Scenario: Roles
+      Given Login as superAdmin
+      Then Navigate to Roles
+      Then Validate Roles Screen
 

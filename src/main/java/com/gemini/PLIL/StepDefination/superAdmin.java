@@ -6,10 +6,14 @@ import com.gemini.PLIL.Locators.superAdmin_Locators;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.generic.ui.utils.DriverManager;
+import io.cucumber.java.Status;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,25 +21,27 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.sql.Driver;
+import java.time.Duration;
+
 public class superAdmin {
     Logger logger = LoggerFactory.getLogger(StepDefination.class);
 
     // SUPER ADMIN LOGIN
     @Given("^Login as superAdmin$")
-    public void Login_as_superAdmin()
-    {
+    public void Login_as_superAdmin() {
+
         DriverAction.typeText(Locator.Email_Input_Field, "deepak.kumar@geminisolutions.com");
-        DriverAction.waitSec(2);
-        DriverAction.typeText(Locator.Password_Input_Field, "Asdf@1234");
-        DriverAction.waitSec(10);
+        WebElement ele = DriverManager.getWebDriver().findElement(Locator.Password_Input_Field);
+        ele.sendKeys("Asdf@1234");
+        GemTestReporter.addTestStep("Password", "****", STATUS.PASS, DriverAction.takeSnapShot());
+        DriverAction.click(By.xpath("//button[@type='submit']"));
+        WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//mat-error[text()=' Verification required ']"), "Verification required"));
         DriverAction.click(Locator.Login);
-        DriverAction.waitSec(5);
     }
 
-    @Then("^Validate Common UI Elements$")
-    public void validate_ui_elements()
-    {
-    }
+
 
     // PARTNER PRODUCT
     @Then("^Navigate to Partner Product$")
@@ -374,7 +380,7 @@ public class superAdmin {
             }
             if (DriverAction.getElement(superAdmin_Locators.Enter_Partner_Name).isDisplayed())
             {
-                DriverAction.typeText(superAdmin_Locators.Enter_Partner_Name, "Test Partner Name");
+                DriverAction.typeText(superAdmin_Locators.Enter_Partner_Name, "Testing Partner Name");
                 GemTestReporter.addTestStep("Verify Text Field Partner Name", "User is able to enter partner name", STATUS.PASS, DriverAction.takeSnapShot());
             }
             else
@@ -383,7 +389,7 @@ public class superAdmin {
             }
             if (DriverAction.getElement(superAdmin_Locators.Enter_Partner_Prefix).isDisplayed())
             {
-                DriverAction.typeText(superAdmin_Locators.Enter_Partner_Prefix, "TPP");
+                DriverAction.typeText(superAdmin_Locators.Enter_Partner_Prefix, "TTP");
                 GemTestReporter.addTestStep("Verify Text Field Partner Prefix", "User is able to enter partner prefix", STATUS.PASS, DriverAction.takeSnapShot());
             }
             else
@@ -450,7 +456,7 @@ public class superAdmin {
 
         }
 
-    // HOME SCREEN
+    // HOME SCREEN - COVER ALL UI ELEMENTS - LOGOUT, HAMBURGER, SIDE NAV BAR, CARDS
 
     @Then("^Validate Create Button functionality$")
     public void validateCreateFunctionality() {
@@ -878,5 +884,256 @@ public class superAdmin {
         }
 
     }
+
+    // ROLES SCREEN
+
+    @Then("^Navigate to Roles$")
+    public void navigate_to_roles()
+    {
+        DriverAction.getElement(superAdmin_Locators.Roles_Tab).click();
+    }
+    @Then("^Validate Roles Screen$")
+    public void validate_roles_screen()
+    {
+        if(DriverAction.getElement(superAdmin_Locators.Roles_label).isDisplayed())
+        {
+            GemTestReporter.addTestStep("Verify Roles Label","Roles Label is visible",STATUS.PASS,DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Roles Label","Roles Label is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+        }
+        if(DriverAction.getElement(superAdmin_Locators.Role_Name_Label).isDisplayed() &&
+                DriverAction.getElement(superAdmin_Locators.Created_on_Roles_Label).isDisplayed() &&
+                DriverAction.getElement(superAdmin_Locators.Permissions_Roles_Label).isDisplayed() &&
+        DriverAction.getElement(superAdmin_Locators.Created_By_Roles_Label).isDisplayed() &&
+                DriverAction.getElement(superAdmin_Locators.Action_Roles_Label).isDisplayed())
+        {
+            GemTestReporter.addTestStep("Verify Table Columns","Table with following columns (Role Name, Created On, Permissions, Created By, Action) are visible",STATUS.PASS,DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Table Columns","Table with following columns (Role Name, Created On, Permissions, Created By, Action) are not visible",STATUS.PASS,DriverAction.takeSnapShot());
+        }
+        if(DriverAction.getElement(superAdmin_Locators.Create_Role_button).isDisplayed())
+        {
+            DriverAction.getElement(superAdmin_Locators.Create_Role_button).click();
+            DriverAction.waitSec(2);
+            DriverAction.getElement(superAdmin_Locators.Create_Role_Inside_button).click();
+            DriverAction.waitSec(2);
+            String str = DriverAction.getElement(superAdmin_Locators.Role_Name_Validation_Message).getText();
+            GemTestReporter.addTestStep("Verify Error for Empty Role Name","Error : "+str,STATUS.PASS,DriverAction.takeSnapShot());
+            DriverAction.typeText(superAdmin_Locators.Text_Field_Role_Name,"Tesstng Roles");
+            DriverAction.getElement(superAdmin_Locators.Create_Role_Inside_button).click();
+            String str1 = DriverAction.getElement(superAdmin_Locators.Permission_Required_Validation_Message).getText();
+            DriverAction.waitSec(2);
+            GemTestReporter.addTestStep("Verify Error for Permission is required","Error : "+str1,STATUS.PASS,DriverAction.takeSnapShot());
+            DriverAction.getElement(superAdmin_Locators.Reverse_Feed_Permission).click();
+            DriverAction.waitSec(2);
+            DriverAction.getElement(superAdmin_Locators.Create_Role_Inside_button).click();
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Error for Empty Field and Permission","No error occurred",STATUS.FAIL,DriverAction.takeSnapShot());
+        }
+
+        // CREATE ROLE BUTTON
+        if(DriverAction.getElement(superAdmin_Locators.Create_Role_button).isDisplayed())
+        {
+            DriverAction.getElement(superAdmin_Locators.Create_Role_button).click();
+            if(DriverAction.getElement(superAdmin_Locators.Text_Line_Update_Role).isDisplayed()) {
+                GemTestReporter.addTestStep("Verify Text Line : Enter the role details for which role has to be created", "Text Line is visible", STATUS.PASS, DriverAction.takeSnapShot());
+            }
+            else {
+                GemTestReporter.addTestStep("Verify Text Line : Enter the role details for which role has to be created", "Text Line is not visible", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+
+            if(DriverAction.getElement(superAdmin_Locators.Text_Field_Role_Name).isDisplayed())
+            {
+                DriverAction.typeText(superAdmin_Locators.Text_Field_Role_Name, "Test Role");
+                GemTestReporter.addTestStep("Verify Text Field is working","user is able to enter role name",STATUS.PASS,DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify Text Field is working","user is not able to enter role name", STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+            if(DriverAction.getElement(superAdmin_Locators.Text_Line_Select_Role).isDisplayed())
+            {
+                GemTestReporter.addTestStep("Verify Text Line : List of permissions which are to be given to this role.","Text Line is visible", STATUS.PASS,DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify Text Line : List of permissions which are to be given to this role.","Text Line is not visible", STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+            if(DriverAction.getElement(superAdmin_Locators.Generate_Ig_File_Permission).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Enquiry_Permission).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Report_Permission).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Bulk_Upload_Permission).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Bulk_Upload_Report_Permission).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Reverse_Feed_Permission).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Reverse_Feed_Upload_Permission).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Rejected_Case_Permission).isDisplayed())
+            {
+                DriverAction.getElement(superAdmin_Locators.Generate_Ig_File_Permission).click();
+                DriverAction.getElement(superAdmin_Locators.Rejected_Case_Permission).click();
+                DriverAction.getElement(superAdmin_Locators.Bulk_Upload_Report_Permission).click();
+                DriverAction.getElement(superAdmin_Locators.Report_Permission).click();
+                DriverAction.getElement(superAdmin_Locators.Enquiry_Permission).click();
+
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify User is able to select permissions","Not able to select permissions", STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+            if(DriverAction.getElement(superAdmin_Locators.Create_Role_Inside_button).isDisplayed())
+            {
+                String str1 = DriverAction.getCurrentURL();
+                DriverAction.getElement(superAdmin_Locators.Create_Role_Inside_button).click();
+                String str2 = DriverAction.getCurrentURL();
+               // String str = DriverAction.getElement(superAdmin_Locators.Snack_Bar_Create_Role).getText();
+                if(str1.equals(str2))
+                {
+                    GemTestReporter.addTestStep("Verify Role Name is already Taken","Role Name is already taken", STATUS.PASS,DriverAction.takeSnapShot());
+                    DriverAction.navigateBack();
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Verify Role Created Successfully","Role Created Successfully", STATUS.PASS,DriverAction.takeSnapShot());
+                }
+
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify Create Role Button is working or not","Create Role Button Not Working", STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+
+        }
+        DriverAction.getElement(superAdmin_Locators.Create_Role_button).click();
+        DriverAction.waitSec(2);
+        if(DriverAction.getElement(superAdmin_Locators.Discard_Role_Inside_button).isDisplayed())
+        {
+            DriverAction.getElement(superAdmin_Locators.Discard_Role_Inside_button).click();
+            GemTestReporter.addTestStep("Verify Discard button is working","Discard button is visible and working", STATUS.PASS,DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Discard button is working","Discard button is not visible and working", STATUS.FAIL,DriverAction.takeSnapShot());
+        }
+        // EDIT ROLE
+        if(DriverAction.getElement(superAdmin_Locators.Edit_Role_button).isDisplayed())
+        {
+            DriverAction.getElement(superAdmin_Locators.Edit_Role_button).click();
+            DriverAction.waitSec(2);
+            if(DriverAction.getElement(superAdmin_Locators.Text_Line_Update_Role).isDisplayed()) {
+                GemTestReporter.addTestStep("Verify Text Line : Enter the role details for which role has to be created", "Text Line is visible", STATUS.PASS, DriverAction.takeSnapShot());
+            }
+                else {
+                GemTestReporter.addTestStep("Verify Text Line : Enter the role details for which role has to be created", "Text Line is not visible", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+
+            if(DriverAction.getElement(superAdmin_Locators.Text_Field_Role_Name).isDisplayed())
+            {
+                DriverAction.typeText(superAdmin_Locators.Text_Field_Role_Name, "Edit Role");
+                GemTestReporter.addTestStep("Verify Text Field not editable","Text Field is not editable", STATUS.PASS,DriverAction.takeSnapShot());
+            }
+           else
+            {
+                GemTestReporter.addTestStep("Verify Text Field not editable","Text Field is editable", STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+           if(DriverAction.getElement(superAdmin_Locators.Text_Line_Select_Role).isDisplayed())
+           {
+               GemTestReporter.addTestStep("Verify Text Line : List of permissions which are to be given to this role.","Text Line is visible", STATUS.PASS,DriverAction.takeSnapShot());
+           }
+           else
+           {
+               GemTestReporter.addTestStep("Verify Text Line : List of permissions which are to be given to this role.","Text Line is not visible", STATUS.FAIL,DriverAction.takeSnapShot());
+           }
+           if(DriverAction.getElement(superAdmin_Locators.Generate_Ig_File_Permission).isDisplayed() &&
+            DriverAction.getElement(superAdmin_Locators.Enquiry_Permission).isDisplayed() &&
+            DriverAction.getElement(superAdmin_Locators.Report_Permission).isDisplayed() &&
+            DriverAction.getElement(superAdmin_Locators.Bulk_Upload_Permission).isDisplayed() &&
+                   DriverAction.getElement(superAdmin_Locators.Bulk_Upload_Report_Permission).isDisplayed() &&
+            DriverAction.getElement(superAdmin_Locators.Reverse_Feed_Permission).isDisplayed() &&
+            DriverAction.getElement(superAdmin_Locators.Reverse_Feed_Upload_Permission).isDisplayed() &&
+                   DriverAction.getElement(superAdmin_Locators.Rejected_Case_Permission).isDisplayed())
+           {
+             DriverAction.getElement(superAdmin_Locators.Generate_Ig_File_Permission).click();
+             DriverAction.getElement(superAdmin_Locators.Rejected_Case_Permission).click();
+             DriverAction.getElement(superAdmin_Locators.Bulk_Upload_Report_Permission).click();
+             DriverAction.getElement(superAdmin_Locators.Report_Permission).click();
+             DriverAction.getElement(superAdmin_Locators.Enquiry_Permission).click();
+             DriverAction.getElement(superAdmin_Locators.Report_Permission).click();
+             DriverAction.getElement(superAdmin_Locators.Reverse_Feed_Upload_Permission).click();
+           }
+           else
+           {
+               GemTestReporter.addTestStep("Verify User is able to edit permissions","Not able to edit role", STATUS.FAIL,DriverAction.takeSnapShot());
+           }
+           if(DriverAction.getElement(superAdmin_Locators.Update_Role_button).isDisplayed())
+           {
+               DriverAction.getElement(superAdmin_Locators.Update_Role_button).click();
+               DriverAction.waitSec(2);
+               GemTestReporter.addTestStep("Verify Role Updated Successfully","Role Updated Successfully", STATUS.PASS,DriverAction.takeSnapShot());
+           }
+           else
+           {
+               GemTestReporter.addTestStep("Verify Role Updated Successfully","ROle Not Updated", STATUS.FAIL,DriverAction.takeSnapShot());
+           }
+
+        }
+        DriverAction.getElement(superAdmin_Locators.Edit_Role_button).click();
+        DriverAction.waitSec(2);
+        if(DriverAction.getElement(superAdmin_Locators.Discard_button_Roles).isDisplayed())
+        {
+            DriverAction.getElement(superAdmin_Locators.Discard_button_Roles).click();
+            DriverAction.waitSec(2);
+            GemTestReporter.addTestStep("Verify Discard button is working","Discard button is visible and working", STATUS.PASS,DriverAction.takeSnapShot());
+        }
+        else {
+            GemTestReporter.addTestStep("Verify Discard button is working","Discard button is not visible and working", STATUS.PASS,DriverAction.takeSnapShot());
+
+        }
+        DriverAction.waitSec(2);
+        if(DriverAction.getElement(superAdmin_Locators.Delete_Role_button).isDisplayed())
+        {
+            DriverAction.getElement(superAdmin_Locators.Delete_Role_button).click();
+            DriverAction.waitSec(2);
+            GemTestReporter.addTestStep("Verify Delete button is working","Delete button is visible and working", STATUS.PASS,DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Delete button is working","Delete button is not visible and working", STATUS.FAIL,DriverAction.takeSnapShot());
+        }
+        if(DriverAction.getElement(superAdmin_Locators.pagination_roles).isDisplayed())
+        {
+            String str = DriverAction.getElement(superAdmin_Locators.pagination_roles).getText();
+            GemTestReporter.addTestStep("Verify Pagination is working", "Pagination is working"+str, STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Pagination is working", "Pagination is not working", STATUS.FAIL, DriverAction.takeSnapShot());
+
+        }
+        if(DriverAction.getElement(superAdmin_Locators.Pagination_Angle_Right_roles).isDisplayed())
+        {
+            DriverAction.getElement(superAdmin_Locators.Pagination_Angle_Right_roles).click();
+            DriverAction.waitSec(2);
+            String str2 = DriverAction.getElement(superAdmin_Locators.pagination_roles).getText();
+            DriverAction.waitSec(2);
+            GemTestReporter.addTestStep("Verify Right Pagination is working", "Right Pagination is working :"+str2, STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Right Pagination is working", "Right Pagination is not working", STATUS.FAIL, DriverAction.takeSnapShot());
+
+        }
+        if(DriverAction.getElement(superAdmin_Locators.Pagination_Angle_Left_roles).isDisplayed())
+        {
+            DriverAction.getElement(superAdmin_Locators.Pagination_Angle_Left_roles).click();
+            DriverAction.waitSec(2);
+            String str4 = DriverAction.getElement(superAdmin_Locators.pagination_roles).getText();
+            DriverAction.waitSec(2);
+            GemTestReporter.addTestStep("Verify Left Pagination is working", "Left Pagination is working:"+str4, STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Left Pagination is working", "Left Pagination is not working", STATUS.FAIL, DriverAction.takeSnapShot());
+
+        }
+    }
+
 }
 
