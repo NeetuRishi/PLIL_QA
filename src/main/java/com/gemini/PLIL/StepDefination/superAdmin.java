@@ -1,15 +1,20 @@
 package com.gemini.PLIL.StepDefination;
 
+import com.gemini.PLIL.Locators.GopsUser_Locators;
 import com.gemini.PLIL.Locators.Locator;
 import com.gemini.PLIL.Locators.superAdmin_Locators;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
+import com.gemini.generic.ui.utils.DriverManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class superAdmin {
 
@@ -20,7 +25,7 @@ public class superAdmin {
         DriverAction.typeText(Locator.Email_Input_Field, "deepak.kumar@geminisolutions.com");
         DriverAction.waitSec(2);
         DriverAction.typeText(Locator.Password_Input_Field, "Asdf@1234");
-        DriverAction.waitSec(10);
+        DriverAction.waitSec(30);
         DriverAction.click(Locator.Login);
         DriverAction.waitSec(5);
     }
@@ -748,6 +753,119 @@ public class superAdmin {
                 GemTestReporter.addTestStep("Verify Logout Button is visible/clickable","Logout Button is not visible/clickable",STATUS.FAIL,DriverAction.takeSnapShot());
             }
         }
+
+    }
+    @Then("Navigate to Master Management")
+    public void ProductMaster()
+    {
+     DriverAction.getElement(superAdmin_Locators.Master_Management_Card).click();
+     GemTestReporter.addTestStep("Navigated to Master Management Screen","Navigated successfully",STATUS.PASS,DriverAction.takeSnapShot());
+    }
+
+    @Then("Navigate to Product Masters")
+    public void navigateToProductMasters() {
+
+        DriverAction.getElement(GopsUser_Locators.selectValue("Product Masters")).click();
+        GemTestReporter.addTestStep("Navigate to Product Master Screen","Navigated Successfully",STATUS.PASS,DriverAction.takeSnapShot());
+    }
+
+    @Then("Check Product Masters Label is present and back arrow < should be visible and clickable")
+    public void checkProductMastersLabelIsPresentAndBackArrowShouldBeVisibleAndClickable() {
+        if(DriverAction.getElement(GopsUser_Locators.selectValue("Product Master")).isDisplayed())
+            GemTestReporter.addTestStep("Check Whether Product Master label is present or not","Label Found Successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check Whether Product Master label is present or not","Label was not Found",STATUS.FAIL,DriverAction.takeSnapShot());
+if(DriverAction.getElement(superAdmin_Locators.backButton).isDisplayed())
+    GemTestReporter.addTestStep("Check whether Back Button < is present or not","Found Successfully",STATUS.PASS,DriverAction.takeSnapShot());
+else
+    GemTestReporter.addTestStep("Check whether Back Button < is present or not","Not Found",STATUS.FAIL,DriverAction.takeSnapShot());
+
+    }
+
+    @Then("Check the Create Product Master Functionality")
+    public void checkTheCreateProductMasterFunctionality() {
+        if(DriverAction.getElement(GopsUser_Locators.selectValue(" Create Product Master ")).isDisplayed())
+            GemTestReporter.addTestStep("Check whether Create Product Master button is present or not","Button Found Successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check whether Create Product Master button is present or not","Button was not found",STATUS.FAIL,DriverAction.takeSnapShot());
+        DriverAction.getElement(GopsUser_Locators.selectValue(" Create Product Master ")).click();
+        GemTestReporter.addTestStep("Click on the Create Product Master Button","Clicked successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        DriverAction.getElement(superAdmin_Locators.inputBoxes("Product Name")).sendKeys("Demo Product");
+        GemTestReporter.addTestStep("Add a product name to the input box","Product name 'Demo Product' added successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        DriverAction.getElement(superAdmin_Locators.inputBoxes("Plan Number")).sendKeys("1234");
+        GemTestReporter.addTestStep("Add a Plan Number to the input box","Plan Number '1234' added successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        DriverAction.getElement(superAdmin_Locators.inputBoxes("Moratorium")).sendKeys("D1");
+        GemTestReporter.addTestStep("Add Moratorium to the input box","Moratorium 'D1' added successfully",STATUS.PASS,DriverAction.takeSnapShot());
+DriverAction.getElement(superAdmin_Locators.loanTypeDropdown).click();
+GemTestReporter.addTestStep("Click on the Select loan Type dropdown","Clicked Successfully",STATUS.PASS,DriverAction.takeSnapShot());
+DriverAction.getElement(GopsUser_Locators.dropdownMenu("2")).click();
+
+GemTestReporter.addTestStep("Select any value from the loan type dropdown","'Business Loan' Selected successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        DriverAction.getElement(superAdmin_Locators.inputBoxes("Policy Number")).sendKeys("1234");
+        GemTestReporter.addTestStep("Add Policy Number to the input box","Policy '1234' added successfully",STATUS.PASS,DriverAction.takeSnapShot());
+DriverAction.getElement(superAdmin_Locators.createProductMaster).click();
+GemTestReporter.addTestStep("Click on create product master","Clicked successfully",STATUS.PASS,DriverAction.takeSnapShot());
+    }
+    @Then("Check the Edit functionality")
+    public void edit()
+    {
+String before=DriverAction.getElement(superAdmin_Locators.productName1).getText();
+DriverAction.getElement(superAdmin_Locators.edit).click();
+GemTestReporter.addTestStep("Click on edit button to edit the Product Master","Cliked successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        DriverAction.getElement(superAdmin_Locators.inputBoxes("Product Name")).sendKeys("Demo change");
+        GemTestReporter.addTestStep("Edit the Product name","Product name edited successfully",STATUS.PASS,DriverAction.takeSnapShot());
+
+        DriverAction.getElement(superAdmin_Locators.updateProductMaster).click();
+        GemTestReporter.addTestStep("Click on the update product master button","Clicked successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        WebDriverWait wait=new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(superAdmin_Locators.edit));
+        String after=DriverAction.getElement(superAdmin_Locators.productName1).getText();
+        if(before.equals(after)!=true)
+            GemTestReporter.addTestStep("Check whether edit button works properly or not","Product Name updated successfully i.e edit button works properly",STATUS.PASS,DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check whether edit button works properly or not","Product Name was not updated i.e edit button does not works properly",STATUS.FAIL,DriverAction.takeSnapShot());
+
+
+    }
+
+    @Then("check whether All the column names are displayed")
+    public void checkWhetherAllTheColumnNamesAreDisplayed() {
+        if(DriverAction.getElement(GopsUser_Locators.selectValue("Policy Number")).isDisplayed())
+            GemTestReporter.addTestStep("Check whether Policy Number was displayed or not","Found Successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check whether Policy Number was displayed or not","Not Found",STATUS.FAIL,DriverAction.takeSnapShot());
+        if(DriverAction.getElement(GopsUser_Locators.selectValue("Product Name ")).isDisplayed())
+            GemTestReporter.addTestStep("Check whether Product Name was displayed or not","Found Successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check whether Product Name was displayed or not","Not Found",STATUS.FAIL,DriverAction.takeSnapShot());
+        if(DriverAction.getElement(GopsUser_Locators.selectValue("Plan Number ")).isDisplayed())
+            GemTestReporter.addTestStep("Check whether Plan Number was displayed or not","Found Successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check whether Plan Number was displayed or not","Not Found",STATUS.FAIL,DriverAction.takeSnapShot());
+        if(DriverAction.getElement(GopsUser_Locators.selectValue("Moratorium ")).isDisplayed())
+            GemTestReporter.addTestStep("Check whether Moratorium was displayed or not","Found Successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check whether Moratorium was displayed or not","Not Found",STATUS.FAIL,DriverAction.takeSnapShot());
+        if(DriverAction.getElement(GopsUser_Locators.selectValue("Type ")).isDisplayed())
+            GemTestReporter.addTestStep("Check whether Type was displayed or not","Found Successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check whether Type was displayed or not","Not Found",STATUS.FAIL,DriverAction.takeSnapShot());
+        if(DriverAction.getElement(GopsUser_Locators.selectValue("Action")).isDisplayed())
+            GemTestReporter.addTestStep("Check whether Action was displayed or not","Found Successfully",STATUS.PASS,DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check whether Action was displayed or not","Not Found",STATUS.FAIL,DriverAction.takeSnapShot());
+    }
+
+    @Then("Check the Delete Functionality")
+    public void checkTheDeleteFunctionality() {
+       String firstRowBeforeDelete=DriverAction.getElement(superAdmin_Locators.deleteRow).getText();
+       DriverAction.getElement(superAdmin_Locators.deleteButton).click();
+       String firstRowAfterDelete=DriverAction.getElement(superAdmin_Locators.deleteRow).getText();
+       if(firstRowAfterDelete.equals(firstRowBeforeDelete))
+           GemTestReporter.addTestStep("Check whether row got deleted or not","Row was not deleted ",STATUS.FAIL,DriverAction.takeSnapShot());
+       else
+           GemTestReporter.addTestStep("Check whether row got deleted or not","Row was deleted successfully",STATUS.PASS,DriverAction.takeSnapShot());
+
 
     }
 }

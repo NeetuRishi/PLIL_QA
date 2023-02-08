@@ -1,5 +1,5 @@
 {
-  "environment": "dev",
+  "environment": "prod",
   "projectName": "PLIL",
   "reportName": "PLIL Report",
   "gemjarSubID": "test_id",

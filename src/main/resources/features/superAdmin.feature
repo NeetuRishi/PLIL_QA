@@ -19,3 +19,14 @@ Feature: superAdmin
     Given Login as superAdmin
     Then Navigate to Home
     Then Validate Home UI Elements
+
+    Scenario: Master Management
+      Given Login as superAdmin
+      Then Navigate to Master Management
+      Then Navigate to Product Masters
+      Then Check Product Masters Label is present and back arrow < should be visible and clickable
+      Then check whether All the column names are displayed
+      Then Check the Create Product Master Functionality
+      Then Check the Edit functionality
+      Then Check the Delete Functionality
+      Then Check the pagination functionality

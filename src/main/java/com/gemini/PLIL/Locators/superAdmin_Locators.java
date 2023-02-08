@@ -6,7 +6,7 @@ public class superAdmin_Locators {
 
 
     // Home Screen Locators
-    public static By Home_Label =By.xpath("//h2[@class='header']");
+    public static By Home_Label = By.xpath("//h2[@class='header']");
     public static By Name_Label = By.xpath("//label[contains(text(),'Name')]");
     public static By Name_Value = By.xpath("//div[1]/h3");
     public static By Email_Label = By.xpath("//label[contains(text(),'Email')]");
@@ -18,7 +18,7 @@ public class superAdmin_Locators {
     public static By Logout_btn = By.xpath("//span[contains(text(),'Logout')]");
     public static By Navigate_to_Label = By.xpath("//div/h4[text()='Navigate to']");
 
-    public static By Roles_Card= By.xpath("//div/span[contains(text(),'Roles')]");
+    public static By Roles_Card = By.xpath("//div/span[contains(text(),'Roles')]");
     public static By Roles_Card_Img = By.xpath("//div[@class='row user-navigate']/div[1]/div/span[1]");
     public static By Roles_Card_Angle = By.xpath("//div[@class='row user-navigate']/div[1]/div/i");
 
@@ -69,7 +69,7 @@ public class superAdmin_Locators {
     // Partner Product Screen Locators
 
     public static By Partner_Product_Tab_Highlighted = By.xpath("//a[@class='nav-link active']");
-    public static By Label_Partner_Product =By.xpath("//h2[contains(text(),'Partner Product')]");
+    public static By Label_Partner_Product = By.xpath("//h2[contains(text(),'Partner Product')]");
     public static By Partner_Name = By.xpath("//table[@class='mat-table cdk-table']/thead/tr/th[1]");
     public static By Product_Name = By.xpath("//table[@class='mat-table cdk-table']/thead/tr/th[2]");
     public static By Policy_No = By.xpath("//table[@class='mat-table cdk-table']/thead/tr/th[3]");
@@ -83,7 +83,7 @@ public class superAdmin_Locators {
     public static By Create_Partner_Product_Button = By.xpath("//button[contains(text(),'Partner Product')]");
     public static By eye_button = By.xpath("//table/tbody/tr[1]/td[7]/div/i");
     public static By edit_button = By.xpath("//table/tbody/tr[4]/td[7]/div/span");
-    public  static By update_partner_product_btn = By.xpath("//button[contains(text(),'Update Partner Product')]");
+    public static By update_partner_product_btn = By.xpath("//button[contains(text(),'Update Partner Product')]");
 
     // Create Partner Product Locators
 
@@ -104,7 +104,7 @@ public class superAdmin_Locators {
     // Partner Management Locators
 
     public static By Hamburger_Partner_Management = By.xpath("//i[@class = 'fa fa-bars']");
-    public static By Label_Partner_Management =By.xpath("//h2[contains(text(),'Partner Management')]");
+    public static By Label_Partner_Management = By.xpath("//h2[contains(text(),'Partner Management')]");
     public static By Name_Partner_Management = By.xpath("//table[@class='mat-table cdk-table mat-sort']/thead/tr/th[1]");
     public static By Prefix_Partner_Management = By.xpath("//table[@class='mat-table cdk-table mat-sort']/thead/tr/th[2]");
     public static By Created_On_Partner_Management = By.xpath("//table[@class='mat-table cdk-table mat-sort']/thead/tr/th[3]");
@@ -126,7 +126,7 @@ public class superAdmin_Locators {
 
     public static By Label_Create_Partner = By.xpath("//h2[contains(text(),'Create Partner')]");
     public static By Text_Line_Create_Partner = By.xpath("//p[contains(text(),'partner details')]");
-    public static By Enter_Partner_Name= By.xpath("//*[@placeholder='Partner Name']");
+    public static By Enter_Partner_Name = By.xpath("//*[@placeholder='Partner Name']");
     public static By Enter_Partner_Prefix = By.xpath("//*[@placeholder='Prefix']");
     public static By Discard_Create_Partner_Button = By.xpath("//button[text()='Discard']");
     public static By Create_Partner_Btn = By.xpath("//button[text()='Create Partner']");
@@ -155,7 +155,7 @@ public class superAdmin_Locators {
 
     public static By statusSearch = By.xpath("//mat-form-field[2]/div/div[1]");
 
-    public static By gopsTableElement=By.xpath("//table/tbody/tr[10]/td[2]");
+    public static By gopsTableElement = By.xpath("//table/tbody/tr[10]/td[2]");
 
     public static By gopsTableHeader = By.xpath("//table/thead/tr/th");
     public static By paginationText = By.xpath("//div[@class='paginator']//span[1]");
@@ -190,5 +190,21 @@ public class superAdmin_Locators {
     public static By reversefeedsearchbar = By.xpath("//table/tbody/tr[1]/td[3]");
 
     public static By reversefeedsearch = By.xpath("//input[@placeholder='Search']");
+
+
+    //Product masters
+    public static By backButton = By.xpath("//i[@class='fa fa-angle-left arrow']");
+    public static By createProductMaster = By.xpath("//button[text()='Create Product Master']");
+
+    public static By inputBoxes(String placeholder) {
+        return By.xpath("//input[@placeholder='" + placeholder + "']");
+    }
+
+    public static By loanTypeDropdown = By.xpath("//div/mat-select[@formcontrolname='loanTypeId']");
+public static By updateProductMaster=By.xpath("//button[text()='Update Product Master']");
+    public static By productName1 = By.xpath("//table/tbody/tr[1]/td[2]");
+public static By edit=By.xpath("//i[@class='fa-light fa-pen-to-square mx-2'][1]");
+public static By deleteRow=By.xpath("//table/tbody/tr[1]/td[1]");
+public static By deleteButton=By.xpath("//i[@class='fa-light fa-trash-can'][1]");
 
 }

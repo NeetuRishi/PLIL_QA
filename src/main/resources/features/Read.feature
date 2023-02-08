@@ -9,7 +9,7 @@ Feature: Read_User
     Then validate Enquiry and Report card on Home Screen
     Then Logout and verify
 
-    Examples:
+    Examples:![](../../../../../../../../TRA643~1.SAH/AppData/Local/Temp/download.jpg)
       |Validate_txt|Home|Enquiry|Report|
       |Home        |Home|Enquiry|Report|
 
