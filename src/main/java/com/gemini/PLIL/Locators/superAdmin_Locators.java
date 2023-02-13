@@ -242,6 +242,98 @@ public class superAdmin_Locators {
 
 
     public static By Medical_Questions_Card = By.xpath("//div[@class='row user-navigate ml-4 mt-2']/div/div[13]");
+    
+    public static By Salutation_Label = By.xpath("//h2[text()='Salutation']");
+
+    public static String Salutation_Col = "(//table[@class='mat-table cdk-table mat-sort']/thead/tr/th/div)[itr]";
+
+
+    public static By Salutation_Card = By.xpath("//span[text()='Salutation']");
+
+    public static By Create_btn = By.xpath("//button[text()=' Create ']");
+
+    public static By value_inp = By.xpath("//div[contains(@class,'mat-form-field-infix ng-tns')]//input");
+    public static By code_inp = By.xpath("(//div[contains(@class,'mat-form-field-infix ng-tns')]//input)[2]");
+
+    //div[contains(@class,'mat-form-field-infix ng-tns')]//input
+    public static String Salutation_Column = "(//table[@class='mat-table cdk-table mat-sort']/tbody/tr/td)[itr]";
+
+
+
+    //button[text()=' Create ']
+
+
+
+    //gops locators
+    public static By gopshomeButton = By.xpath("//span[text()='Home']");
+
+    public static By roleshomeButton = By.xpath("//span[text()='Roles']");
+    public static By mastermgtButton = By.xpath("//span[text()='Master Management']");
+
+    public static By partnerproduct = By.xpath("//span[text()='Partner Product']");
+
+    public static By usmgt = By.xpath("//span[text()='User Management']");
+
+    public static By patmgt = By.xpath("//span[text()='Partner Management']");
+
+    public static By gopsenquirybtn = By.xpath("//span[text()='Gops Enquiry']");
+
+    public static By gopsEnquiry = By.xpath("(//span[contains(text(),'Gops Enquiry')])[1]");
+
+    public static By gopsEnquiryHm = By.xpath("(//span[contains(text(),'Gops Enquiry')])[2]");
+
+    public static By hamBurgerBtn = By.xpath("//i[@class='fa fa-bars']");
+
+    public static By partnerSearch = By.xpath("/html/body/app-root/app-admin/div/div/div/app-group-ops/div/div[2]/div/div/div[1]/div/form/div[1]/div/mat-form-field[1]/div/div[1]/div[3]");
+
+    public static By statusSearch = By.xpath("//mat-form-field[2]/div/div[1]");
+
+    public static By gopsTableElement=By.xpath("//table/tbody/tr[10]/td[2]");
+
+    public static By gopsTableHeader = By.xpath("//table/thead/tr/th");
+    public static By paginationText = By.xpath("//div[@class='paginator']//span[1]");
+
+    public static By paginationRightButton = By.xpath("//div[@class='paginator']//span[3]");
+
+    public static By dateButton = By.xpath("//mat-datepicker-toggle/button");
+
+    public static By yearDropDown = By.xpath("(//span[@class='mat-button-wrapper'])[2]");
+
+    public static By reverseFeedHm = By.xpath("(//span[contains(text(),'Reverse Feed')])[2]");
+
+    public static By customerheader = By.xpath(("//table/tbody/tr[2]/td[3]"));
+
+    public static By customerHeaderdetails = By.xpath(("//div/h4[1]"));
+
+    public static By searchdata = By.xpath(("//table/tbody/tr[1]/td[4]"));
+
+    public static By searchfield = By.xpath("//input[@placeholder='Search']");
+
+    public static By gopsExcelButton = By.xpath(" //button[@class='btn btn-outline excel']");
+
+    public static By reverseFeedBtn = By.xpath("//span[contains(text(),'Reverse Feed')]");
+
+    public static By filtersearch = By.xpath("//label[contains(text(),'Filter by')]");
+    public static By reversefeedExcelButton = By.xpath("//button[@class='export-bt']");
+
+    public static By statusfield = By.xpath("//*[@id='mat-select-4']/div/div[2]");
+
+    public static By statusfieldslct = By.xpath("//span[contains(text(),'Medical Pending')]");
+
+    public static By reversefeedsearchbar = By.xpath("//table/tbody/tr[1]/td[3]");
+
+    public static By reversefeedsearch = By.xpath("//input[@placeholder='Search']");
+
+
+
+    //usermanagement
+
+    public static By usermgtHm = By.xpath("(//span[text()='User Management'])[2]");
+
+    public static By createuser = By.xpath("//button[text(),' Create User ']");
+
+
+    public static By usermgtSearch = By.xpath("//input[@placeholder='Search']");
 
 
 }
