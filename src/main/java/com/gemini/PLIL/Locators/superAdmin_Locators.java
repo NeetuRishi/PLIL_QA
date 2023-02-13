@@ -206,4 +206,42 @@ public class superAdmin_Locators {
     public static By createuser = By.xpath("//button[text(),' Create User ']");
     public static By usermgtSearch = By.xpath("//input[@placeholder='Search']");
 
+    // Generate Ig File
+
+    public static By Generate_Ig_File_Label = By.xpath("//h2[text()='Generate IG File']");
+    public static By Generate_Ig_File_Text_Line = By.xpath("//p[contains(text(),'IG file is share')]");
+    public static By Generate_Ig_file_Button = By.xpath("//button[text()=' Generate IG File ']");
+    public static By IG_File_Generated_Successfully_Snack_Bar = By.xpath("//simple-snack-bar/span[text()='IG report generated successfully']");
+    public static By IG_File_Generated_Successfully_Snack_Bar_Cancel_Btn = By.xpath("//simple-snack-bar/div/button/span[text()='Cancel']");
+
+    // MASTER MANAGEMENT
+
+    public static By Covid_Questions_Card = By.xpath("//div[@class='row user-navigate ml-4 mt-2']/div/div[12]");
+    public static By BreadCrumb_Covid_Questions = By.xpath("//ol[@class='breadcrumb']");
+    public static By Left_Angle_Covid_Questions_Label = By.xpath("//h2[@class='header']/i");
+    public static By Covid_Questions_Label = By.xpath("//h2[text()=' Covid Questions']");
+
+    public static By Covid_Questions_Update_Label = By.xpath("//h2[text()='Update Covid Questions']");
+    public static By Back_Edit_Covid_Questions = By.xpath("//i[@class='fa fa-angle-left arrow']");
+    public static By Label_Edit_Covid_Questions = By.xpath("//p[contains(text(),'Enter the code')]");
+    public static By Value_Update_Covid_Questions = By.xpath("//div/input[@placeholder='Value']");
+    public static By Code_Update_Covid_Questions = By.xpath("//div/input[@placeholder='Code']");
+    public static By Discard_btn_Update_Covid_Questions = By.xpath("//button[text()=' Discard ']");
+    public static By Update_btn_Update_Covid_Questions = By.xpath("//button[text()='Update']");
+
+    public static By Code_Column_Covid_Questions = By.xpath("//thead/tr/th[1]");
+    public static By Value_Column_Covid_Questions = By.xpath("//thead/tr/th[2]");
+    public static By Created_On_Column_Covid_Questions = By.xpath("//thead/tr/th[3]");
+    public static By Created_By_Column_Covid_Questions = By.xpath("//thead/tr/th[4]");
+    public static By Action_Column_Covid_Questions = By.xpath("//thead/tr/th[5]");
+    public static By Edit_Action_Button_Covid_Questions = By.xpath("//tbody/tr/td[5]/div/i");
+    public static By Delete_Action_Button_Covid_Questions = By.xpath("//tbody/tr/td[5]/div/span");
+    public static By Pagination_Covid_Questions = By.xpath("//div[@class='pageOf']");
+    public static By Covid_Questions_Angle_Left_Partner_Management = By.xpath("//span[@class='angle-left']");
+    public static By Covid_Questions_Angle_Right_Partner_Management = By.xpath("//span[@class='angle-right']");
+
+
+    public static By Medical_Questions_Card = By.xpath("//div[@class='row user-navigate ml-4 mt-2']/div/div[13]");
+
+
 }
