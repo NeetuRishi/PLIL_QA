@@ -29,8 +29,8 @@ public class superAdmin {
 
     // SUPER ADMIN LOGIN
     @Given("^Login as superAdmin$")
-    public void Login_as_superAdmin() {
-
+    public void Login_as_superAdmin()
+    {
         DriverAction.typeText(Locator.Email_Input_Field, "deepak.kumar@geminisolutions.com");
         WebElement ele = DriverManager.getWebDriver().findElement(Locator.Password_Input_Field);
         ele.sendKeys("Asdf@1234");
@@ -40,8 +40,6 @@ public class superAdmin {
         wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//mat-error[text()=' Verification required ']"), "Verification required"));
         DriverAction.click(Locator.Login);
     }
-
-
 
     // PARTNER PRODUCT
     @Then("^Navigate to Partner Product$")
@@ -428,6 +426,10 @@ public class superAdmin {
         {
             String str1 = DriverAction.getElement(superAdmin_Locators.Pagination_Partner_Management).getText();
             GemTestReporter.addTestStep("Verify Pagination of Partner Management", "Pagination is visible : "+str1, STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Pagination of Partner Management", "Pagination is not visible", STATUS.FAIL, DriverAction.takeSnapShot());
         }
         if(DriverAction.getElement(superAdmin_Locators.Pagination_Angle_Right_Partner_Management).isDisplayed())
         {
@@ -1003,9 +1005,12 @@ public class superAdmin {
         }
         DriverAction.getElement(superAdmin_Locators.Create_Role_button).click();
         DriverAction.waitSec(2);
+        WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(),Duration.ofSeconds(5));
+        WebElement discard_btn = wait.until(ExpectedConditions.visibilityOfElementLocated(superAdmin_Locators.Discard_Role_Inside_button));
+
         if(DriverAction.getElement(superAdmin_Locators.Discard_Role_Inside_button).isDisplayed())
         {
-            DriverAction.getElement(superAdmin_Locators.Discard_Role_Inside_button).click();
+            discard_btn.click();
             GemTestReporter.addTestStep("Verify Discard button is working","Discard button is visible and working", STATUS.PASS,DriverAction.takeSnapShot());
         }
         else
@@ -1135,5 +1140,262 @@ public class superAdmin {
         }
     }
 
-}
+    @Then("^Navigate to Generate Ig File$")
+    public void navigate_to_generate_ig_file()
+    {
+        WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(superAdmin_Locators.Generate_IG_File_Tab));
 
+        DriverAction.getElement(superAdmin_Locators.Generate_IG_File_Tab).click();
+    }
+    @Then("^Validate Generate Ig File Screen$")
+    public void validate_generate_ig_file()
+    {
+       if(DriverAction.getElement(superAdmin_Locators.Generate_Ig_File_Label).isDisplayed())
+       {
+           GemTestReporter.addTestStep("Verify Generate IG file label","Generate Ig File label is displayed",STATUS.PASS,DriverAction.takeSnapShot());
+       }
+       else
+       {
+           GemTestReporter.addTestStep("Verify Generate IG file label","Generate Ig File label is not displayed",STATUS.FAIL,DriverAction.takeSnapShot());
+       }
+       if(DriverAction.getElement(superAdmin_Locators.Generate_Ig_File_Text_Line).isDisplayed())
+       {
+           GemTestReporter.addTestStep("Verify Generate IG file Text Line","Generate Ig File Text Line is displayed",STATUS.PASS,DriverAction.takeSnapShot());
+       }
+       else
+       {
+           GemTestReporter.addTestStep("Verify Generate IG file Text Line","Generate Ig File Text Line is not displayed",STATUS.FAIL,DriverAction.takeSnapShot());
+       }
+       if(DriverAction.getElement(superAdmin_Locators.Generate_Ig_file_Button).isDisplayed())
+       {
+           DriverAction.getElement(superAdmin_Locators.Generate_Ig_file_Button).click();
+           GemTestReporter.addTestStep("Verify Generate IG file Button is clickable","Generate Ig File Button is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+           if(DriverAction.getElement(superAdmin_Locators.IG_File_Generated_Successfully_Snack_Bar).isDisplayed() && DriverAction.getElement(superAdmin_Locators.IG_File_Generated_Successfully_Snack_Bar_Cancel_Btn).isDisplayed())
+           {
+               String str = DriverAction.getElement(superAdmin_Locators.IG_File_Generated_Successfully_Snack_Bar).getText();
+               GemTestReporter.addTestStep("Verify Generate IG file Snack bar is visible","Generate Ig File Snack bar is visible with message : "+str,STATUS.PASS,DriverAction.takeSnapShot());
+               DriverAction.getElement(superAdmin_Locators.IG_File_Generated_Successfully_Snack_Bar_Cancel_Btn).click();
+               GemTestReporter.addTestStep("Verify Generate IG file Snack bar Cancel button is visible","Generate Ig File Snack bar Cancel button is visible and clickable with message : "+str,STATUS.PASS,DriverAction.takeSnapShot());
+           }
+           else
+           {
+               GemTestReporter.addTestStep("Verify Generate IG file Snack bar is visible","Generate Ig File Snack bar is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+           }
+       }
+       else
+       {
+           GemTestReporter.addTestStep("Verify Generate IG file Button is clickable","Generate Ig File Button is not clickable",STATUS.FAIL,DriverAction.takeSnapShot());
+
+       }
+    }
+
+   // MASTER MANAGEMENT
+
+    @Then("^Navigate to Master Management$")
+    public void navigate_to_master_management()
+    {
+        DriverAction.getElement(superAdmin_Locators.Master_Management_Tab).click();
+    }
+    @Then("^Click on Covid Questions and Validate$")
+    public void covid_questions()
+    {
+     if(DriverAction.getElement(superAdmin_Locators.Covid_Questions_Card).isDisplayed())
+     {
+         GemTestReporter.addTestStep("Verify Covid Question Card is visible","Covid Questions Card is visible",STATUS.PASS,DriverAction.takeSnapShot());
+         DriverAction.getElement(superAdmin_Locators.Covid_Questions_Card).click();
+         GemTestReporter.addTestStep("Verify Covid Question Card is clickable","Covid Questions Card is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+
+         if(DriverAction.getElement(superAdmin_Locators.BreadCrumb_Covid_Questions).isDisplayed())
+         {
+             String str = DriverAction.getElement(superAdmin_Locators.BreadCrumb_Covid_Questions).getText();
+             GemTestReporter.addTestStep("Verify Breadcrumb is visible","Bread Crumb is visible with value : "+str,STATUS.PASS,DriverAction.takeSnapShot());
+         }
+         else
+         {
+             GemTestReporter.addTestStep("Verify Breadcrumb is visible","Bread Crumb is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+         }
+         if(DriverAction.getElement(superAdmin_Locators.Left_Angle_Covid_Questions_Label).isDisplayed())
+         {
+             GemTestReporter.addTestStep("Verify Back button is visible","Back button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+             DriverAction.getElement(superAdmin_Locators.Left_Angle_Covid_Questions_Label).click();
+             GemTestReporter.addTestStep("Verify Back button is clickable","Back button is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+         }
+         else
+         {
+             GemTestReporter.addTestStep("Verify Back button is visible","Back button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+         }
+         DriverAction.getElement(superAdmin_Locators.Covid_Questions_Card).click();
+         if(DriverAction.getElement(superAdmin_Locators.Covid_Questions_Label).isDisplayed())
+         {
+             GemTestReporter.addTestStep("Verify Covid Questions Label is visible", "Covid Question Label is visible", STATUS.PASS, DriverAction.takeSnapShot());
+         }
+         else
+         {
+             GemTestReporter.addTestStep("Verify Covid Questions Label is visible","Covid Question Label is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+         }
+         if(DriverAction.getElement(superAdmin_Locators.Code_Column_Covid_Questions).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Value_Column_Covid_Questions).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Created_On_Column_Covid_Questions).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Created_By_Column_Covid_Questions).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Action_Column_Covid_Questions).isDisplayed())
+         {
+            GemTestReporter.addTestStep("Verify Columns : Code,Value,Created On,Created By and Action","Following column should be visible : Code,Value,Created On,Created By,Action",STATUS.PASS,DriverAction.takeSnapShot());
+         }
+         else
+         {
+             GemTestReporter.addTestStep("Verify Columns : Code,Value,Created On,Created By and Action","Following columns are not visible : Code,Value,Created On,Created By,Action",STATUS.FAIL,DriverAction.takeSnapShot());
+         }
+         if(DriverAction.getElement(superAdmin_Locators.Edit_Action_Button_Covid_Questions).isDisplayed())
+         {
+             GemTestReporter.addTestStep("Verify Edit Button is visible", "Edit button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+
+             DriverAction.getElement(superAdmin_Locators.Edit_Action_Button_Covid_Questions).click();
+             GemTestReporter.addTestStep("Verify Edit Button is clickable", "Edit button is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+             if(DriverAction.getElement(superAdmin_Locators.BreadCrumb_Covid_Questions).isDisplayed())
+             {
+                 String str = DriverAction.getElement(superAdmin_Locators.BreadCrumb_Covid_Questions).getText();
+                 GemTestReporter.addTestStep("Verify Breadcrumb is visible","Bread Crumb is visible with value : "+str,STATUS.PASS,DriverAction.takeSnapShot());
+             }
+             else
+             {
+                 GemTestReporter.addTestStep("Verify Breadcrumb is visible","Bread Crumb is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+             }
+             if(DriverAction.getElement(superAdmin_Locators.Covid_Questions_Update_Label).isDisplayed())
+             {
+                 GemTestReporter.addTestStep("Verify Update Label","Update Label is visible",STATUS.PASS,DriverAction.takeSnapShot());
+             }
+             else
+             {
+                 GemTestReporter.addTestStep("Verify Update Label","Update Label is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+             }
+             if(DriverAction.getElement(superAdmin_Locators.Label_Edit_Covid_Questions).isDisplayed())
+             {
+                 GemTestReporter.addTestStep("Verify Covid Questions Update Label is visible","Covid Questions Update Label is visible",STATUS.PASS,DriverAction.takeSnapShot());
+             }
+             else
+             {
+                 GemTestReporter.addTestStep("Verify Covid Questions Update Label is not visible","Covid Questions Update Label is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+             }
+             if(DriverAction.getElement(superAdmin_Locators.Value_Update_Covid_Questions).isDisplayed())
+             {
+                 GemTestReporter.addTestStep("Verify Value Text Field is visible","Value Text Field is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                 DriverAction.typeText(superAdmin_Locators.Value_Update_Covid_Questions,"Have you/ or any of your immediate family members travelled outside India in the last 45 days or do you plan to travel outside India during the next 6 months?");
+             }
+             else
+             {
+                 GemTestReporter.addTestStep("Verify Value Text Field is visible","Value Text Field is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+             }
+             if(DriverAction.getElement(superAdmin_Locators.Code_Update_Covid_Questions).isDisplayed())
+             {
+                 GemTestReporter.addTestStep("Verify Code Text Field is visible","Code Text Field is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                 DriverAction.typeText(superAdmin_Locators.Code_Update_Covid_Questions,"CQ-1");
+             }
+             else
+             {
+                 GemTestReporter.addTestStep("Verify Code Text Field is visible","Code Text Field is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+             }
+             if(DriverAction.getElement(superAdmin_Locators.Update_btn_Update_Covid_Questions).isDisplayed())
+             {
+                 String str1 = DriverAction.getCurrentURL();
+                 GemTestReporter.addTestStep("Verify Update Button is visible","Update Button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                 DriverAction.getElement(superAdmin_Locators.Update_btn_Update_Covid_Questions).click();
+                 String str2 = DriverAction.getCurrentURL();
+                 if(str1.equals(str2))
+                 {
+                     GemTestReporter.addTestStep("Verify Code Already Taken","Code Already taken is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                     DriverAction.typeText(superAdmin_Locators.Code_Update_Covid_Questions,"CQ-5");
+                     DriverAction.getElement(superAdmin_Locators.Update_btn_Update_Covid_Questions).click();
+                 }
+                 else
+                 {
+                     GemTestReporter.addTestStep("Verify Update Button is clickable","Update Button is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+                 }
+             }
+             else
+             {
+                 GemTestReporter.addTestStep("Verify Update Button is visible","Update Button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+             }
+
+             DriverAction.getElement(superAdmin_Locators.Edit_Action_Button_Covid_Questions).click();
+             if(DriverAction.getElement(superAdmin_Locators.Discard_btn_Update_Covid_Questions).isDisplayed())
+             {
+
+                 GemTestReporter.addTestStep("Verify Discard Button is visible","Discard button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                 DriverAction.getElement(superAdmin_Locators.Discard_btn_Update_Covid_Questions).click();
+             }
+             else
+             {
+                 GemTestReporter.addTestStep("Verify Discard Button is visible","Discard button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+             }
+             if(DriverAction.getElement(superAdmin_Locators.Back_Edit_Covid_Questions).isDisplayed())
+             {
+                 GemTestReporter.addTestStep("Verify Back button is visible","Back button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+             }
+             else
+             {
+                 GemTestReporter.addTestStep("Verify Back button is visible","Back button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+
+             }
+
+         }
+         else
+         {
+             GemTestReporter.addTestStep("Verify Edit Button is visible", "Edit button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+         }
+         if(DriverAction.getElement(superAdmin_Locators.Delete_Action_Button_Covid_Questions).isDisplayed())
+         {
+             GemTestReporter.addTestStep("Verify Delete Button is visible", "Delete button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+
+             //DriverAction.getElement(superAdmin_Locators.Delete_Action_Button_Covid_Questions).click();
+             GemTestReporter.addTestStep("Verify Delete Button is clickable", "Delete button is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+         }
+         else
+         {
+             GemTestReporter.addTestStep("Verify Delete Button is visible", "Delete button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+         }
+
+     }
+     else
+     {
+         GemTestReporter.addTestStep("Verify Covid Question Card is visible","Covid Questions Card is not  visible",STATUS.FAIL,DriverAction.takeSnapShot());
+     }
+
+        if(DriverAction.getElement(superAdmin_Locators.Pagination_Covid_Questions).isDisplayed())
+        {
+            String str1 = DriverAction.getElement(superAdmin_Locators.Pagination_Covid_Questions).getText();
+            GemTestReporter.addTestStep("Verify Pagination of Partner Management", "Pagination is visible : "+str1, STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Pagination of Partner Management", "Pagination is not visible", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+        if(DriverAction.getElement(superAdmin_Locators.Covid_Questions_Angle_Right_Partner_Management).isDisplayed())
+        {
+            DriverAction.getElement(superAdmin_Locators.Covid_Questions_Angle_Right_Partner_Management).click();
+            DriverAction.waitSec(2);
+            String pag_text = DriverAction.getElement(superAdmin_Locators.Pagination_Covid_Questions).getText();
+            DriverAction.waitSec(2);
+            GemTestReporter.addTestStep("Verify Next Page Navigation", "Navigate to Next Page is working : "+pag_text, STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Next Page Pagination", "Next Page Pagination is not working", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+        if(DriverAction.getElement(superAdmin_Locators.Covid_Questions_Angle_Left_Partner_Management).isDisplayed())
+        {
+            DriverAction.getElement(superAdmin_Locators.Covid_Questions_Angle_Left_Partner_Management).click();
+            DriverAction.waitSec(2);
+            String pag_text = DriverAction.getElement(superAdmin_Locators.Pagination_Covid_Questions).getText();
+            DriverAction.waitSec(2);
+            GemTestReporter.addTestStep("Verify Previous Page Navigation", "Navigate to Previous Page is working : "+pag_text, STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Previous Page Pagination", "Previous Page Pagination is not working", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+
+        //
+    }
+    @Then("^Click on Medical Questions and Validate$")
+    public void medical_questions()
+    {
+
+    }
+}
