@@ -40,6 +40,7 @@ public class GopsUser {
         WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(50));
         wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//mat-error[text()=' Verification required ']"), "Verification required"));
         DriverAction.click(Locator.Login);
+        DriverAction.waitSec(15);
     }
 
     @Then("^Validate that Home page opens and logo is visible$")
@@ -260,9 +261,18 @@ public class GopsUser {
         if (tab.equals("Reverse Feed Upload")) {
             text = "1";
             href = "//a[@href='/dashboard/reverse-feed-upload']";
-        } else {
+        } else if (tab.equals("Gops Enquiry")){
             text = "2";
             href = "//a[@href='/admin/groupOps']";
+        }
+        else if(tab.equals("User Management"))
+        {
+
+            href="//a[@href='/admin/manage-user']";
+        }
+        else if(tab.equals("Bulk Upload"))
+        {
+            href="//a[@href='/dashboard/bulk-upload']";
         }
         if (DriverAction.getElement(By.xpath(href)).isDisplayed())
             GemTestReporter.addTestStep("Check whether " + tab + " is present or not", tab + " tab found successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -308,7 +318,7 @@ public class GopsUser {
             GemTestReporter.addTestStep("Check whether partner name dropdown is present or not", " Partner Name dropdown is not found", STATUS.FAIL, DriverAction.takeSnapShot());
         DriverAction.getElement(GopsUser_Locators.partnerNameDropdown).click();
         GemTestReporter.addTestStep("Click on the dropdown to open the context menu", "Dropdown opned successfully", STATUS.PASS, DriverAction.takeSnapShot());
-        DriverAction.getElement(GopsUser_Locators.dropdownMenu("15")).click();
+        DriverAction.getElement(GopsUser_Locators.dropdownMenu("4")).click();
         GemTestReporter.addTestStep("Select the first option 'Piramal Capital and Housing Finance ' from the context menu", "Selected Successfully", STATUS.PASS, DriverAction.takeSnapShot());
         if (DriverAction.getElement(By.xpath("//span[text()=' Piramal Capital and Housing Finance ']")) != null)
             GemTestReporter.addTestStep("Check whether filter got applied successfully or not", "Filter was applied successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -347,7 +357,8 @@ public class GopsUser {
 
     @Then("^click on Click here and check whether excel got downloaded or not$")
     public void checkClickFunctionality() {
-        DriverAction.click(GopsUser_Locators.selectValue(" Click here"));
+        DriverAction.waitSec(5);
+        DriverAction.getElement(GopsUser_Locators.clickHere).click();
         DriverAction.waitSec(10);
 
         Month month=java.time.LocalDate.now().getMonth();

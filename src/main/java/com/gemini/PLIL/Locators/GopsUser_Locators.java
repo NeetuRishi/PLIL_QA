@@ -7,6 +7,7 @@ public static By homeTab= By.xpath("//h2[text()='Home']");
 public static By PLIL_logo=By.xpath("//*[@class='expandLogo']");
 public static By hamburgerButton=By.xpath("//*[@class='fa fa-bars']");
 public static By UploadButton=By.xpath("//button[text()=' Upload ']");
+public static By clickHere=By.xpath("//p/button[text()=' Click here']");
     public static By selectValue(String text){
 
         return By.xpath("//*[text()='"+text+"']");

@@ -50,9 +50,7 @@ public class superAdmin_Locators {
     public static By Generate_Ig_File_Card_Img = By.xpath("//div[@class='row user-navigate']/div[8]/div/span[1]");
     public static By Generate_Ig_File_Card_Angle = By.xpath("//div[@class='row user-navigate']/div[8]/div/i");
 
-
     // Side Navigation Super Admin Locators
-
     public static By SideBar_Logo = By.xpath("//img[@class='expandLogo']");
     public static By Home_Tab = By.xpath("//div[@class='sideBar']/ul/li[1]");
     public static By Roles_Tab = By.xpath("//div[@class='sideBar']/ul/li[2]");
@@ -66,8 +64,47 @@ public class superAdmin_Locators {
     public static By Hamburger = By.xpath("//i[@class = 'fa fa-bars']");
     public static By Logout_Btn = By.xpath("//span[text()='Logout']");
 
-    // Partner Product Screen Locators
+    // Roles Screen Locator
 
+    public static By Roles_label = By.xpath("//h2[text()='Roles']");
+    public static By Role_Name_Label = By.xpath("//thead/tr/th[1]");
+    public static By Created_on_Roles_Label = By.xpath("//thead/tr/th[2]");
+    public static By Permissions_Roles_Label = By.xpath("//thead/tr/th[3]");
+    public static By Created_By_Roles_Label = By.xpath("//thead/tr/th[4]");
+    public static By Action_Roles_Label = By.xpath("//thead/tr/th[5]");
+    public static By pagination_roles = By.xpath("//div[@class='paginator']/div");
+    public static By Pagination_Angle_Left_roles = By.xpath("//span[@class='angle-left']");
+    public static By Pagination_Angle_Right_roles = By.xpath("//span[@class='angle-right']");
+    public static By Create_Role_button = By.xpath("//button[text()=' Create Role ']");
+    public static By Role_Name_Validation_Message = By.xpath("//mat-error[text()=' Role Name is required ']");
+    public static By Permission_Required_Validation_Message = By.xpath("//mat-error[text()= ' Permissions is required '] ");
+    public static By Create_Role_Inside_button = By.xpath("//div[@class='row btnDiv']/div/button[2]");
+
+    public static By Snack_Bar_Create_Role = By.xpath("div[@class='cdk-overlay-container']/div/div/snack-bar-container");
+    public static By Discard_Role_Inside_button = By.xpath("//div[@class='row btnDiv']/div/button[1]");
+
+    public static By Update_Role_button = By.xpath("//button[@type='submit']");
+    public static By Discard_button_Roles = By.xpath("//button[text()='Discard']");
+    public static By Edit_Role_button = By.xpath("//tbody/tr/td[5]/div/i");
+    public static By Update_Role_label = By.xpath("//h2[text()='Update Role']");
+    public static By Text_Line_Update_Role = By.xpath("//div/span");
+
+    public static By Delete_Role_button = By.xpath("//tbody/tr/td[5]/div/span");
+    public static By Create_Role_Label = By.xpath("//h2['text()=Create Role']");
+    public static By Create_Role_Text_Line = By.xpath("//span[@class='paragraph']");
+    public static By Text_Field_Role_Name = By.xpath("//input[@placeholder='Role Name']");
+    public static By Text_Line_Select_Role = By.xpath("//div/label");
+    public static By Generate_Ig_File_Permission = By.xpath("//div[@formarrayname='permission']/div[1]/div[1]/span");
+    public static By Enquiry_Permission = By.xpath("//div[@formarrayname='permission']/div[2]/div[1]/span");
+    public static By Report_Permission = By.xpath("//div[@formarrayname='permission']/div[3]/div[1]/span");
+    public static By Bulk_Upload_Permission = By.xpath("//div[@formarrayname='permission']/div[4]/div[1]/span");
+    public static By Bulk_Upload_Report_Permission = By.xpath("//div[@formarrayname='permission']/div[5]/div[1]/span");
+    public static By Reverse_Feed_Permission = By.xpath("//div[@formarrayname='permission']/div[6]/div[1]/span");
+    public static By Reverse_Feed_Upload_Permission = By.xpath("//div[@formarrayname='permission']/div[7]/div[1]/span");
+    public static By  Rejected_Case_Permission = By.xpath("//div[@formarrayname='permission']/div[8]/div[1]/span");
+
+
+    // Partner Product Screen Locators
     public static By Partner_Product_Tab_Highlighted = By.xpath("//a[@class='nav-link active']");
     public static By Label_Partner_Product = By.xpath("//h2[contains(text(),'Partner Product')]");
     public static By Partner_Name = By.xpath("//table[@class='mat-table cdk-table']/thead/tr/th[1]");
@@ -123,13 +160,33 @@ public class superAdmin_Locators {
     public static By Discard_Update_Partner_Button = By.xpath("//button[text()='Discard']");
 
     // Create Partner Locators
-
     public static By Label_Create_Partner = By.xpath("//h2[contains(text(),'Create Partner')]");
     public static By Text_Line_Create_Partner = By.xpath("//p[contains(text(),'partner details')]");
     public static By Enter_Partner_Name = By.xpath("//*[@placeholder='Partner Name']");
     public static By Enter_Partner_Prefix = By.xpath("//*[@placeholder='Prefix']");
     public static By Discard_Create_Partner_Button = By.xpath("//button[text()='Discard']");
     public static By Create_Partner_Btn = By.xpath("//button[text()='Create Partner']");
+
+    public static By Salutation_Label = By.xpath("//h2[text()='Salutation']");
+
+    public static String Salutation_Col = "(//table[@class='mat-table cdk-table mat-sort']/thead/tr/th/div)[itr]";
+
+
+    public static By Salutation_Card = By.xpath("//span[text()='Salutation']");
+
+    public static By Create_btn = By.xpath("//button[text()=' Create ']");
+
+    public static By value_inp = By.xpath("//div[contains(@class,'mat-form-field-infix ng-tns')]//input");
+    public static By code_inp = By.xpath("(//div[contains(@class,'mat-form-field-infix ng-tns')]//input)[2]");
+
+    //div[contains(@class,'mat-form-field-infix ng-tns')]//input
+    public static String Salutation_Column = "(//table[@class='mat-table cdk-table mat-sort']/tbody/tr/td)[itr]";
+
+
+
+    //button[text()=' Create ']
+
+
 
     //gops locators
     public static By gopshomeButton = By.xpath("//span[text()='Home']");
@@ -192,6 +249,7 @@ public class superAdmin_Locators {
     public static By reversefeedsearch = By.xpath("//input[@placeholder='Search']");
 
 
+
     //Product masters
     public static By backButton = By.xpath("//i[@class='fa fa-angle-left arrow']");
     public static By createProductMaster = By.xpath("//button[text()='Create Product Master']");
@@ -205,6 +263,21 @@ public static By updateProductMaster=By.xpath("//button[text()='Update Product M
     public static By productName1 = By.xpath("//table/tbody/tr[1]/td[2]");
 public static By edit=By.xpath("//i[@class='fa-light fa-pen-to-square mx-2'][1]");
 public static By deleteRow=By.xpath("//table/tbody/tr[1]/td[1]");
+
 public static By deleteButton=By.xpath("//i[@class='fa-light fa-trash-can'][1]");
 
+
+
+
+    //usermanagement
+
+    public static By usermgtHm = By.xpath("(//span[text()='User Management'])[2]");
+
+    public static By createuser = By.xpath("//button[text(),' Create User ']");
+
+
+    public static By usermgtSearch = By.xpath("//input[@placeholder='Search']");
+
+
 }
+

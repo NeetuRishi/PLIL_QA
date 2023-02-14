@@ -1,5 +1,5 @@
 {
-  "environment": "prod",
+  "environment": "dev",
   "projectName": "PLIL",
   "reportName": "PLIL Report",
   "gemjarSubID": "test_id",
@@ -7,7 +7,7 @@
   "gemjarToken": "b1ac2749-8aa1-43b4-a0e4-d41580f664631673942898710",
   "jewelEntryUrl": "https://apis.gemecosystem.com/enter-point",
   "reportingLocation": "",
-  "tagName": "@beta",
+  "tagName": "@beta1",
   "glueCode":"com.gemini.PLIL.StepDefination",
   "dev": {
     "browserName": "chrome",
