@@ -167,15 +167,36 @@ public class superAdmin_Locators {
     public static By Discard_Create_Partner_Button = By.xpath("//button[text()='Discard']");
     public static By Create_Partner_Btn = By.xpath("//button[text()='Create Partner']");
 
-    public static By Salutation_Label = By.xpath("//h2[text()='Salutation']");
+    public static String Salutation_Label = "//h2[text()='itr']";
 
+    //h2[text()='Loan Type']
+    public static By LoanType = By.xpath(" //h2[text()='Loan Type']");
+    //h2[text()='Loan Type']
     public static String Salutation_Col = "(//table[@class='mat-table cdk-table mat-sort']/thead/tr/th/div)[itr]";
+    public static By navigate_Back = By.xpath("//i[@class='fa fa-angle-left arrow']");
 
+    //i[@class='fa fa-angle-left arrow']
+    public static String Salutation_Card = "//span[text()='itr']";
 
-    public static By Salutation_Card = By.xpath("//span[text()='Salutation']");
+    public static String Relationship_Card = "//div[text()='itr']";
 
+    //h2[text()='Appointee Relation with Nominee']
+    public static By Appointee_Nominee_Lable = By.xpath("//h2[text()='Appointee Relation with Nominee']");
+    public static By Nominee_Relation_Lable = By.xpath("//h2[text()='Nominee Relation with Applicant']");
+
+    public static By Appointee_Relation_Lable = By.xpath("//h2[text()='Appointee Relation with Applicant']");
+    public static By Cover_Basis_Lable = By.xpath("//h2[text()='Cover Basis']");
+    //h2[text()='Cover Basis']
+
+    //h2[text()='Appointee Relation with Applicant']
+
+    //h2[text()='Nominee Relation with Applicant']
     public static By Create_btn = By.xpath("//button[text()=' Create ']");
+    public static By Create_btn1 = By.xpath("//button[text()='Create ']");
+    public static By Appointee_Relation = By.xpath("//h2[text()='Appointee Relation with Nominee']");
 
+    //div[text()='Appointee-Nominee ']
+    public static By Appointee_Nominee_Card = By.xpath("//div[text()='Appointee-Nominee ']");
     public static By value_inp = By.xpath("//div[contains(@class,'mat-form-field-infix ng-tns')]//input");
     public static By code_inp = By.xpath("(//div[contains(@class,'mat-form-field-infix ng-tns')]//input)[2]");
 
@@ -183,9 +204,26 @@ public class superAdmin_Locators {
     public static String Salutation_Column = "(//table[@class='mat-table cdk-table mat-sort']/tbody/tr/td)[itr]";
 
 
+    public static By edit_icon = By.xpath("//i[@class='fa-light fa-pen-to-square mx-2']");
+    public static By edit_icon1 = By.xpath("//i[@class='fa-light fa-pen-to-square mx-2 cursor']");
+    //i[@class='fa-light fa-pen-to-square mx-2 cursor']
+
+//i[@class='fa-light fa-trash-can']
 
     //button[text()=' Create ']
+    public static By update_button = By.xpath("//button[text()=' Update ']");
+    public static By update_button1 = By.xpath("//button[text()='Update']");
+    public static By update_button2 = By.xpath("//button[text()='Update ']");
+    public static By deleteRow=By.xpath("//table/tbody/tr[1]/td[1]");
+    public static By deleteButton=By.xpath("//i[@class='fa-light fa-trash-can'][1]");
+    public static By deleteButton2=By.xpath("//i[@class='fa-light fa-trash-can cursor']");
 
+    //i[@class='fa-light fa-trash-can cursor']
+    //button[text()='Update ']
+
+    public static By Pagination1 = By.xpath("//div[@class='pageOf']");
+    public static By Pagination_Angle_Right1 = By.xpath("(//div[@class='paginator']//span)[2]");
+    public static By Pagination_Angle_Left1 = By.xpath("//div[@class='paginator']//span");
 
 
     //gops locators

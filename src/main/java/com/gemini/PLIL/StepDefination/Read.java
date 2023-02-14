@@ -46,7 +46,7 @@ public class Read {
             ele.sendKeys(Password);
             GemTestReporter.addTestStep("Password", "****", STATUS.PASS, DriverAction.takeSnapShot());
             DriverAction.click(Locator.LoginBtn);
-            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(20));
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(30));
             wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//mat-error[text()=' Verification required ']"), "Verification required"));
             DriverAction.click(Locator.LoginBtn);
             DriverAction.setImplicitTimeOut(15);
