@@ -79,11 +79,11 @@ public class Read {
         }
     }
 
-    @Then("^validate weather the (.+),(.+),(.+) tab are present and are clickable$")
-    public void validatetab(String home, String enquiry, String report) throws IOException {
+    @Then("^validate weather the (.+),(.+),(.+),(.+),(.+) tab are present and are clickable$")
+    public void validatetab(String home, String enquiry, String report,String reverse,String rejected) throws IOException {
         try {
             DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(3))));
-            for (int i = 1; i <= 3; i++) {
+            for (int i = 1; i <= 5; i++) {
                 String tab = DriverAction.getElement(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(i)))).getText();
                 if (tab.equals(home)) {
                     GemTestReporter.addTestStep("Validating weather Home tab is present on side bar of Home page", "Home tab is present on Screen", STATUS.PASS, DriverAction.takeSnapShot());
@@ -115,8 +115,30 @@ public class Read {
 
                     }
                 }
+                else if (tab.equals(reverse)) {
+                    GemTestReporter.addTestStep("Validating weather Reverse tab is present on side bar of Home page", "Reverse tab is present on Screen", STATUS.PASS, DriverAction.takeSnapShot());
+                    DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(i))));
+                    if (DriverAction.getElement(By.xpath(Read_Locators.Read_tab.replace("tab", "Reverse Feed Enquiry"))).isDisplayed()) {
+                        GemTestReporter.addTestStep("Validating weather Reverse tab is Clickable on side bar of Home page", "Reverse tab is clickable and navigate to Reverse subscreen", STATUS.PASS, DriverAction.takeSnapShot());
+                    } else {
+                        GemTestReporter.addTestStep("Validating weather Reverse tab is Clickable on side bar of Home page", "Reverse tab is not clickable and not able to navigate to Reverse subscreen", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                    }
+                }
+                else if (tab.equals(rejected)) {
+                    GemTestReporter.addTestStep("Validating weather Rejected tab is present on side bar of Home page", "Enquiry tab is present on Screen", STATUS.PASS, DriverAction.takeSnapShot());
+                    DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(i))));
+                    if (DriverAction.getElement(By.xpath(Read_Locators.Read_tab.replace("tab", "Rejected Case"))).isDisplayed()) {
+                        GemTestReporter.addTestStep("Validating weather Rejected tab is Clickable on side bar of Home page", "Rejected tab is clickable and navigate to Rejected subscreen", STATUS.PASS, DriverAction.takeSnapShot());
+                    } else {
+                        GemTestReporter.addTestStep("Validating weather Rejected tab is Clickable on side bar of Home page", "Rejected tab is not clickable and not able to navigate to Rejected subscreen", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                    }
+                }
 
             }
+
+
         } catch (Exception e) {
             logger.info("An exception occurred!", e);
             GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
@@ -185,13 +207,13 @@ public class Read {
     public void ValidateExcelbutton(String filepath) throws IOException {
         try {
             if (DriverAction.getElement(Read_Locators.Exportbtn).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Export Button is present on Enquiry page", "Export Button is present on Enquiry page", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validating weather Export Button is present on page", "Export Button is present on  page", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Validating weather Export Button is present on Enquiry page", "Export Button is not present on Enquiry page", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validating weather Export Button is present on page", "Export Button is not present on  page", STATUS.FAIL, DriverAction.takeSnapShot());
 
             }
             DriverAction.click(Read_Locators.Exportbtn);
-            DriverAction.setImplicitTimeOut(10);
+            DriverAction.waitSec(15);
 
             File file = new File(filepath);
             File file1 = getLastModified(filepath);
@@ -232,6 +254,66 @@ public class Read {
         }
         return chosenFile;
     }
+    @Then("^validate Rejected Tab Columns$")
+    public void ValidateRejectedColumns() throws IOException {
+        DriverManager.getWebDriver().navigate().refresh();
+        DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(5))));
+
+        List<String> list1 = new ArrayList<>();
+        list1.add("Product Name");
+        list1.add("Application No.");
+        list1.add("Loan No.");
+        list1.add("PAN No.");
+        list1.add("Mobile No.");
+        list1.add("Policy No.");
+        list1.add("Premium");
+        list1.add("Customer Name");
+
+        int c = 0;
+        for (int i = 0; i < list1.size(); i++) {
+            String Columns = DriverAction.getElement(By.xpath(Read_Locators.Enquiry_Tab_Col.replace("itr", String.valueOf(i + 1)))).getText();
+            if (Columns.equals(list1.get(i))) {
+                c++;
+            }
+        }
+        if (c == list1.size()) {
+            GemTestReporter.addTestStep("Validating weather all the required columns are present in Rejected Table", "All Columns are there in Rejected Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+        } else {
+            GemTestReporter.addTestStep("Validating weather all the required columns are present in Rejected Table", "All Columns are not there in Rejected Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+        }
+    }
+    @Then("^validate Reversed Feed Tab Columns$")
+    public void ValidateReversedFeedColumns() throws IOException {
+        DriverManager.getWebDriver().navigate().refresh();
+        DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(4))));
+
+        List<String> list1 = new ArrayList<>();
+        list1.add("Policy No.");
+        list1.add("Partner Name");
+        list1.add("Application No.");
+        list1.add("Loan Account No.");
+        list1.add("COI Number");
+        list1.add("Application Status");
+        list1.add("Description");
+        list1.add("View");
+
+        int c = 0;
+        for (int i = 0; i < list1.size(); i++) {
+            String Columns = DriverAction.getElement(By.xpath(Read_Locators.Enquiry_Tab_Col.replace("itr", String.valueOf(i + 1)))).getText();
+            if (Columns.equals(list1.get(i))) {
+                c++;
+            }
+        }
+        if (c == list1.size()) {
+            GemTestReporter.addTestStep("Validating weather all the required columns are present in Reversed Feed Table", "All Columns are there in Reversed Feed Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+        } else {
+            GemTestReporter.addTestStep("Validating weather all the required columns are present in Reversed Feed Table", "All Columns are not there in Reversed Feed Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+        }
+    }
 
     @Then("^validate Enquiry Tab Columns$")
     public void ValidateEnquiryColumns() throws IOException {
@@ -265,11 +347,11 @@ public class Read {
         }
     }
 
-    @Then("^validate Date Field and user able to select date$")
-    public void ValidateDateField() throws IOException {
+    @Then("^validate Date Field and user able to select date (.+)$")
+    public void ValidateDateField(int index) throws IOException {
         try {
             DriverManager.getWebDriver().navigate().refresh();
-            DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(2))));
+            DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(index))));
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             Date date = new Date();
             String str = formatter.format(date);
@@ -308,10 +390,13 @@ public class Read {
             DriverAction.click(Read_Locators.yearDropDown);
             DriverAction.click(By.xpath("//div[contains(text(),\'" + year + "\')]"));
             DriverAction.click(By.xpath("//div[contains(text(),\'" + mD + "\')]"));
+            DriverAction.getElement(Read_Locators.SampleDate1).click();
+            DriverAction.setImplicitTimeOut(3);
             DriverAction.click(By.xpath("//div[contains(text(),\'" + mdate + "\')]"));
-            Actions act = new Actions(DriverManager.getWebDriver());
-            act.sendKeys(Keys.ENTER).build().perform();
-            // WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(20));
+//            Actions act = new Actions(DriverManager.getWebDriver());
+//            act.sendKeys(Keys.ENTER).build().perform();
+//            act.sendKeys(Keys.ENTER).build().perform();
+//             WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(20));
             //  wait.until(ExpectedConditions.textToBe(Read_Locators.Startdate,"27-01-2023"));
             DriverAction.setImplicitTimeOut(10);
             String Startdate = DriverManager.getWebDriver().findElement(By.xpath("//div[@class='mat-date-range-input-container']")).getAttribute("text");
@@ -343,10 +428,114 @@ public class Read {
 
     }
 
-    @Then("^validate Pagination functionality in Enquiry Tab")
-    public void validatePagination() {
+    @Then("^validate Application Status Table Data")
+    public void ValidateApplicationStatusTable() {
+        try {
+            String FetchedApplicationNo = DriverAction.getElement(Read_Locators.SampleLoanNo).getText();
+            DriverAction.click(Read_Locators.ApplicationStatusIcon);
+            if (DriverAction.getElement(By.xpath(Read_Locators.ApplicationStatusNo.replace("@status",FetchedApplicationNo))).isDisplayed()) {
+                GemTestReporter.addTestStep("Verify Application Status Number is visible on Application Status Table", "Application Status Number is visible on Application Status Table" , STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Verify Application Status Number is visible on Application Status Table", "Application Status Number is not visible on Application Status Table", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+            List<String> list1 = new ArrayList<>();
+            list1.add("Date");
+            list1.add("Status");
+            list1.add("Updated By");
+            list1.add("Description");
+            int c = 0;
+            for (int i = 0; i < list1.size(); i++) {
+                String Columns = DriverAction.getElement(By.xpath(Read_Locators.ApplicationStatusCol.replace("itr", String.valueOf(i + 1)))).getText();
+                if (Columns.equals(list1.get(i))) {
+                    c++;
+                }
+            }
+            if (c == list1.size()) {
+                GemTestReporter.addTestStep("Validating weather all the required columns are present in Application Status Table", "All Columns are there in Application Status Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+            } else {
+                GemTestReporter.addTestStep("Validating weather all the required columns are present in Application Status Table", "All Columns are not there in Application Status Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("An exception occurred!", e);
+            GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
+        }
+    }
+    @Then("^validate Search Field on Reversed Feed Screen")
+    public void ValidateSearchInput1() {
+        try{
+            if (DriverAction.getElement(Read_Locators.SearchInput).isDisplayed()) {
+                GemTestReporter.addTestStep("Verify Search Input is visible on Reversed Feed Screen", "Search Input is visible on Reversed Feed Screen" , STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Verify Search Input is visible on Reversed Feed Screen", "Search Input is not visible on Reversed Feed Screen", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+            String FetchedApplicationNo = DriverAction.getElement(Read_Locators.SampleLoanNo).getText();
+            DriverAction.typeText(Read_Locators.SearchInput, FetchedApplicationNo);
+            Actions act = new Actions(DriverManager.getWebDriver());
+            act.sendKeys(Keys.ENTER).build().perform();
+            String FilteredApplicationNo = DriverAction.getElement(Read_Locators.SampleLoanNo).getText();
+            if(FetchedApplicationNo.equals(FilteredApplicationNo))
+            {
+                GemTestReporter.addTestStep("Validate Data is Filtered Properly", "Data is Filtered successfully" , STATUS.PASS, DriverAction.takeSnapShot());
+
+            }
+            else {
+                GemTestReporter.addTestStep("Validate Data is Filtered Properly", "Data is not Filtered successfully", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+            DriverManager.getWebDriver().navigate().refresh();
+            DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(4))));
+
+
+
+        }
+        catch (Exception e) {
+            logger.info("An exception occurred!", e);
+            GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
+        }
+    }
+
+
+    @Then("^validate Search Field on Rejected Screen")
+    public void ValidateSearchInput() {
+    try{
+        if (DriverAction.getElement(Read_Locators.SearchInput).isDisplayed()) {
+             GemTestReporter.addTestStep("Verify Search Input is visible on Rejected Screen", "Search Input is visible on Rejected Screen" , STATUS.PASS, DriverAction.takeSnapShot());
+        } else {
+            GemTestReporter.addTestStep("Verify Search Input is visible on Rejected Screen", "Search Input is not visible on Rejected Screen", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+        String FetchedLoanNo = DriverAction.getElement(Read_Locators.SampleLoanNo).getText();
+        DriverAction.typeText(Read_Locators.SearchInput, FetchedLoanNo);
+        Actions act = new Actions(DriverManager.getWebDriver());
+        act.sendKeys(Keys.ENTER).build().perform();
+        String FilteredLoanNo = DriverAction.getElement(Read_Locators.SampleLoanNo).getText();
+        if(FetchedLoanNo.equals(FilteredLoanNo))
+        {
+            GemTestReporter.addTestStep("Validate Data is Filtered Properly", "Data is Filtered successfully" , STATUS.PASS, DriverAction.takeSnapShot());
+
+        }
+        else {
+            GemTestReporter.addTestStep("Validate Data is Filtered Properly", "Data is not Filtered successfully", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
         DriverManager.getWebDriver().navigate().refresh();
-        DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(2))));
+        DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(5))));
+
+
+
+    }
+    catch (Exception e) {
+        logger.info("An exception occurred!", e);
+        GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
+    }
+    }
+
+
+        @Then("^validate Pagination functionality in Enquiry Tab (.+)")
+    public void validatePagination(int index) {
+        DriverManager.getWebDriver().navigate().refresh();
+        DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(index))));
 
         //JavascriptExecutor js = (JavascriptExecutor) DriverManager.getWebDriver();
         // js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -525,7 +714,7 @@ public class Read {
             if (DriverAction.getElement(Read_Locators.Cross_Icon_Application_Popup).isDisplayed()) {
                 GemTestReporter.addTestStep("Validating weather Cross icon is present  on Application Popup", "Cross icon is  present  on Application Popup", STATUS.PASS, DriverAction.takeSnapShot());
                 DriverAction.click(Read_Locators.Cross_Icon_Application_Popup);
-                GemTestReporter.addTestStep("Validating weather Application Popup Exit successfully", " Application Pop is not exit successfully", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validating weather Application Popup Exit successfully", " Application Pop exit successfully", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
                 GemTestReporter.addTestStep("Validating weather Cross icon is present  on Application Popup", "Cross icon is not present  on Application Popup", STATUS.FAIL, DriverAction.takeSnapShot());
 
@@ -716,9 +905,101 @@ public class Read {
             GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
         }
     }
-    @Then("^validate Report page ui$")
+
+    @Then("^validate Rejected page ui$")
+    public void validateRejectedpageui() throws IOException {
+        try {
+            DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(5))));
+            if (DriverAction.getElement(Read_Locators.RejectedLabel).isDisplayed()) {
+                GemTestReporter.addTestStep("Validating weather Rejected Label  is Present on Rejected screen", "Rejected Label is present on Rejected Screen", STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validating weather Rejected Label  is Present on Rejected screen", "Rejected Label is not present on Rejected Screen", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+            if (DriverAction.getElement(Read_Locators.FilterByLable).isDisplayed()) {
+                GemTestReporter.addTestStep("Validating weather FilterBy Label  is Present on Rejected screen", "FilterBy Label is present on Rejected Screen", STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validating weather FilterBy Label  is Present on Rejected screen", "FilterBy Label is not present on Rejected Screen", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+            if(DriverAction.getElement(superAdmin_Locators.Hamburger).isDisplayed())
+            {
+                GemTestReporter.addTestStep("Verify Hamburger is visible"," Hamburger button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                DriverAction.getElement(superAdmin_Locators.Hamburger).click();
+                GemTestReporter.addTestStep("Verify Hamburger is clickable"," Hamburger button is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify Hamburger is visible"," Hamburger button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("An exception occurred!", e);
+            GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
+        }
+    }
+    @Then("^validate Reversed Feed page ui$")
+    public void validateReversedFeedpageui() throws IOException {
+        try {
+            DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(4))));
+            if (DriverAction.getElement(Read_Locators.ReversedFeedLabel).isDisplayed()) {
+                GemTestReporter.addTestStep("Validating weather Reversed Feed Label  is Present on Reversed Feed screen", "Reversed Feed Label is present on Rejected Screen", STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validating weather Reversed Feed Label  is Present on Reversed Feed screen", "Reversed Feed Label is not present on Rejected Screen", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+            if (DriverAction.getElement(Read_Locators.FilterByLable).isDisplayed()) {
+                GemTestReporter.addTestStep("Validating weather FilterBy Label  is Present on Reversed Feed screen", "FilterBy Label is present on Reversed Feed Screen", STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validating weather FilterBy Label  is Present on Reversed Feed screen", "FilterBy Label is not present on Reversed Feed Screen", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+
+            if (DriverAction.getElement(Read_Locators.Clearbtn).isDisplayed()) {
+                GemTestReporter.addTestStep("Validating weather Create Button is Present on Reversed Feed screen", "Create Button is present on Reversed Feed Screen", STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validating weather Create Button is Present on Reversed Feed screen", "Create Button is not present on Reversed Feed Screen", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+            if (DriverAction.getElement(Read_Locators.StatusLabel).isDisplayed()) {
+                GemTestReporter.addTestStep("Validating weather Status Label  is Present on Reversed Feed screen", "Status Label is present on Reversed Feed Screen", STATUS.PASS, DriverAction.takeSnapShot());
+                DriverAction.getElement(Read_Locators.Status_Dropdown).click();
+                if (DriverAction.getElement(Read_Locators.StatusDropdownDiv).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Status Dropdown is working fine on Reversed Feed screen", "Status Dropdown is working fine on Reversed Feed screen", STATUS.PASS, DriverAction.takeSnapShot());
+                }
+                else {
+                    GemTestReporter.addTestStep("Validating weather Status Dropdown is working fine on Reversed Feed screen", "Status Dropdown is not working fine on Reversed Feed screen", STATUS.FAIL, DriverAction.takeSnapShot());
+                }
+                Actions act = new Actions(DriverManager.getWebDriver());
+                act.sendKeys(Keys.ENTER).build().perform();
+
+            } else {
+                GemTestReporter.addTestStep("Validating weather Status Label  is Present on Reversed Feed screen", "Status Label is not present on Reversed Feed Screen", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+
+            if(DriverAction.getElement(superAdmin_Locators.Hamburger).isDisplayed())
+            {
+                GemTestReporter.addTestStep("Verify Hamburger is visible"," Hamburger button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                DriverAction.getElement(superAdmin_Locators.Hamburger).click();
+                GemTestReporter.addTestStep("Verify Hamburger is clickable"," Hamburger button is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify Hamburger is visible"," Hamburger button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("An exception occurred!", e);
+            GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
+        }
+    }
+            @Then("^validate Report page ui$")
     public void validateReportpageui() throws IOException {
         try {
+            DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(3))));
             if (DriverAction.getElement(Read_Locators.Generate_Label).isDisplayed()) {
                 GemTestReporter.addTestStep("Validating weather Generate Label  is Present on Report screen", "Generate Label is present on Report Screen", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
@@ -760,6 +1041,54 @@ public class Read {
                 GemTestReporter.addTestStep("Verify Hamburger is visible"," Hamburger button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
             }
         } catch (Exception e) {
+            logger.info("An exception occurred!", e);
+            GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
+        }
+    }
+    @Then("^Navigate to ReverseFeed tab and validate logo$")
+    public void Navigate_ReverseFeed_Validate() throws IOException {
+        try {
+            DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(4))));
+            if (DriverAction.getElement(Locator.Logo).isDisplayed()) {
+                GemTestReporter.addTestStep("Validating weather Logo is Visible on Revered Feed tab", "Logo is visible on Reversed Feed tab", STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validating weather Logo is Visible on Revered Feed tab", "Logo is not visible on Reversed Feed tab", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+            String tab = DriverAction.getElement(Read_Locators.ReversedFeedTab).getAttribute("class");
+            if (tab.contains("active")) {
+                GemTestReporter.addTestStep("Validating weather Reversed Feed tab is highlighted", "Reversed Feed tab is highlighted", STATUS.PASS, DriverAction.takeSnapShot());
+
+            } else {
+                GemTestReporter.addTestStep("Validating weather Rejected tab is highlighted", "Reversed Feed tab is not highlighted", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+
+        }
+        catch (Exception e) {
+            logger.info("An exception occurred!", e);
+            GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
+        }
+    }
+    @Then("^Navigate to Rejected tab and validate logo$")
+    public void Navigate_Rejected_Validate() throws IOException {
+        try {
+            DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(5))));
+            if (DriverAction.getElement(Locator.Logo).isDisplayed()) {
+                GemTestReporter.addTestStep("Validating weather Logo is Visible on Rejected tab", "Logo is visible on Rejected tab", STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Validating weather Logo is Visible on Rejected tab", "Logo is not visible on Rejected tab", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+            String tab = DriverAction.getElement(Read_Locators.RejectedTab).getAttribute("class");
+            if (tab.contains("active")) {
+                GemTestReporter.addTestStep("Validating weather Rejected tab is highlighted", "Rejected tab is highlighted", STATUS.PASS, DriverAction.takeSnapShot());
+
+            } else {
+                GemTestReporter.addTestStep("Validating weather Rejected tab is highlighted", "Rejected tab is not highlighted", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
+
+        }
+        catch (Exception e) {
             logger.info("An exception occurred!", e);
             GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
         }

@@ -56,6 +56,10 @@ public static By FilterByDropdownValues = By.xpath("//div[@class='cdk-overlay-pa
     public static By Policy_Term  = By.xpath("//span[text()='Policy Term']");
     public static By Policy_Terms  = By.xpath("//span[text()='Payment Terms']");
     public static String Enquiry_Tab_Col = "//table[@class='mat-table cdk-table mat-sort custom']/thead/tr/th[itr]";
+
+    public static String ApplicationStatusCol = "(//table[@class='mat-table cdk-table']/thead/tr/th)[itr]";
+
+
     public static By Pagination = By.xpath("//div[@class='paginator']//span");
 
     public static By Cross_Icon_Application_Popup= By.xpath("//button[@class='close']//img");
@@ -63,6 +67,12 @@ public static By FilterByDropdownValues = By.xpath("//div[@class='cdk-overlay-pa
     public static By Action_Download_icon = By.xpath("(//img[@class='download ng-star-inserted'])[7]");
 
     public static By Application_No = By.xpath("(//table[@class='mat-table cdk-table mat-sort custom']/tbody/tr/td)[2]");
+    public static By SampleLoanNo  = By.xpath("(//table[@class='mat-table cdk-table mat-sort custom']/tbody/tr/td)[3]");
+
+    public static By ApplicationStatusIcon  = By.xpath("(//table[@class='mat-table cdk-table mat-sort custom']/tbody/tr/td)//img");
+    public static String ApplicationStatusNo = "//h2[text()='Application Status - @status']";
+
+//h2[text()='Application Status - @status']
 
     public static String Application_Label = "//h2[text()='Application Details - no']";
     public static By Gender  = By.xpath("//span[text()='Gender']");
@@ -71,6 +81,34 @@ public static By FilterByDropdownValues = By.xpath("//div[@class='cdk-overlay-pa
     public static By Insured_Name  = By.xpath("//span[text()='Insured Name']");
 
     public static By ReportTab = By.xpath("//span[text()='Report']//parent::a[contains(@class,'nav-link')]");
+
+    //span[text()='Rejected Case']//parent::a[contains(@class,'nav-link')]
+    public static By RejectedTab = By.xpath("//span[text()='Rejected Case']//parent::a[contains(@class,'nav-link')]");
+    public static By ReversedFeedTab = By.xpath("//span[text()='Reverse Feed']//parent::a[contains(@class,'nav-link')]");
+
+    //label[text()='Filter by']
+    public static By SampleDate1  = By.xpath("//div[text()=' 8 ']");
+    public static By SearchInput  = By.xpath("//input[@placeholder='Search']");
+
+    //input[@placeholder='Search']
+
+
+    public static By FilterByLable  = By.xpath("//label[text()='Filter by']");
+    public static By RejectedLabel  = By.xpath("//h2[text()='Rejected Case']");
+
+    public static By ReversedFeedLabel  = By.xpath("//h2[text()='Reverse Feed Enquiry']");
+
+    public static By Status_Dropdown  = By.xpath("//div[contains(@class,'mat-select-arrow-wrapper')]");
+    //div[contains(@class,'mat-select-arrow-wrapper')]
+
+    //h2[text()='Reverse Feed Enquiry']
+    public static By StatusLabel  = By.xpath("//mat-label[text()='Status']");
+
+    public static By Clearbtn  = By.xpath("//button[text()='Clear']");
+
+    //button[text()='Clear']
+    public static By StatusDropdownDiv  = By.xpath("//div[@class='cdk-overlay-pane']");
+    //div[@class='cdk-overlay-pane']
 
     public static By Generate_Label  = By.xpath("//h2[text()='Generate']");
 
