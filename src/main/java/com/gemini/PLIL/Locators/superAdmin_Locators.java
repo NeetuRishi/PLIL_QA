@@ -167,15 +167,116 @@ public class superAdmin_Locators {
     public static By Discard_Create_Partner_Button = By.xpath("//button[text()='Discard']");
     public static By Create_Partner_Btn = By.xpath("//button[text()='Create Partner']");
 
+
+    public static String Salutation_Label = "//h2[text()='itr']";
+
+    //gops locators
+    public static By gopshomeButton = By.xpath("//span[text()='Home']");
+    public static By roleshomeButton = By.xpath("//span[text()='Roles']");
+    public static By mastermgtButton = By.xpath("//span[text()='Master Management']");
+    public static By partnerproduct = By.xpath("//span[text()='Partner Product']");
+    public static By usmgt = By.xpath("//span[text()='User Management']");
+    public static By patmgt = By.xpath("//span[text()='Partner Management']");
+    public static By gopsenquirybtn = By.xpath("//span[text()='Gops Enquiry']");
+    public static By gopsEnquiry = By.xpath("(//span[contains(text(),'Gops Enquiry')])[1]");
+    public static By gopsEnquiryHm = By.xpath("(//span[contains(text(),'Gops Enquiry')])[2]");
+    public static By hamBurgerBtn = By.xpath("//i[@class='fa fa-bars']");
+    public static By partnerSearch = By.xpath("/html/body/app-root/app-admin/div/div/div/app-group-ops/div/div[2]/div/div/div[1]/div/form/div[1]/div/mat-form-field[1]/div/div[1]/div[3]");
+    public static By statusSearch = By.xpath("//mat-form-field[2]/div/div[1]");
+    public static By gopsTableElement=By.xpath("//table/tbody/tr[10]/td[2]");
+    public static By gopsTableHeader = By.xpath("//table/thead/tr/th");
+    public static By paginationText = By.xpath("//div[@class='paginator']//span[1]");
+    public static By paginationRightButton = By.xpath("//div[@class='paginator']//span[3]");
+    public static By dateButton = By.xpath("//mat-datepicker-toggle/button");
+    public static By yearDropDown = By.xpath("(//span[@class='mat-button-wrapper'])[2]");
+    public static By reverseFeedHm = By.xpath("(//span[contains(text(),'Reverse Feed')])[2]");
+    public static By customerheader = By.xpath(("//table/tbody/tr[2]/td[3]"));
+    public static By customerHeaderdetails = By.xpath(("//div/h4[1]"));
+    public static By searchdata = By.xpath(("//table/tbody/tr[1]/td[4]"));
+    public static By searchfield = By.xpath("//input[@placeholder='Search']");
+    public static By gopsExcelButton = By.xpath(" //button[@class='btn btn-outline excel']");
+    public static By reverseFeedBtn = By.xpath("//span[contains(text(),'Reverse Feed')]");
+    public static By filtersearch = By.xpath("//label[contains(text(),'Filter by')]");
+    public static By reversefeedExcelButton = By.xpath("//button[@class='export-bt']");
+    public static By statusfield = By.xpath("//*[@id='mat-select-4']/div/div[2]");
+    public static By statusfieldslct = By.xpath("//span[contains(text(),'Medical Pending')]");
+    public static By reversefeedsearchbar = By.xpath("//table/tbody/tr[1]/td[3]");
+    public static By reversefeedsearch = By.xpath("//input[@placeholder='Search']");
+
+    //usermanagement
+
+    public static By usermgtHm = By.xpath("(//span[text()='User Management'])[2]");
+    public static By createuser = By.xpath("//button[text(),' Create User ']");
+    public static By usermgtSearch = By.xpath("//input[@placeholder='Search']");
+
+    // Generate Ig File
+
+    public static By Generate_Ig_File_Label = By.xpath("//h2[text()='Generate IG File']");
+    public static By Generate_Ig_File_Text_Line = By.xpath("//p[contains(text(),'IG file is share')]");
+    public static By Generate_Ig_file_Button = By.xpath("//button[text()=' Generate IG File ']");
+    public static By IG_File_Generated_Successfully_Snack_Bar = By.xpath("//simple-snack-bar/span[text()='IG report generated successfully']");
+    public static By IG_File_Generated_Successfully_Snack_Bar_Cancel_Btn = By.xpath("//simple-snack-bar/div/button/span[text()='Cancel']");
+
+    // MASTER MANAGEMENT
+
+    public static By Covid_Questions_Card = By.xpath("//div[@class='row user-navigate ml-4 mt-2']/div/div[12]");
+    public static By BreadCrumb_Covid_Questions = By.xpath("//ol[@class='breadcrumb']");
+    public static By Left_Angle_Covid_Questions_Label = By.xpath("//h2[@class='header']/i");
+    public static By Covid_Questions_Label = By.xpath("//h2[text()=' Covid Questions']");
+
+    public static By Covid_Questions_Update_Label = By.xpath("//h2[text()='Update Covid Questions']");
+    public static By Back_Edit_Covid_Questions = By.xpath("//i[@class='fa fa-angle-left arrow']");
+    public static By Label_Edit_Covid_Questions = By.xpath("//p[contains(text(),'Enter the code')]");
+    public static By Value_Update_Covid_Questions = By.xpath("//div/input[@placeholder='Value']");
+    public static By Code_Update_Covid_Questions = By.xpath("//div/input[@placeholder='Code']");
+    public static By Discard_btn_Update_Covid_Questions = By.xpath("//button[text()=' Discard ']");
+    public static By Update_btn_Update_Covid_Questions = By.xpath("//button[text()='Update']");
+
+    public static By Code_Column_Covid_Questions = By.xpath("//thead/tr/th[1]");
+    public static By Value_Column_Covid_Questions = By.xpath("//thead/tr/th[2]");
+    public static By Created_On_Column_Covid_Questions = By.xpath("//thead/tr/th[3]");
+    public static By Created_By_Column_Covid_Questions = By.xpath("//thead/tr/th[4]");
+    public static By Action_Column_Covid_Questions = By.xpath("//thead/tr/th[5]");
+    public static By Edit_Action_Button_Covid_Questions = By.xpath("//tbody/tr/td[5]/div/i");
+    public static By Delete_Action_Button_Covid_Questions = By.xpath("//tbody/tr/td[5]/div/span");
+    public static By Pagination_Covid_Questions = By.xpath("//div[@class='pageOf']");
+    public static By Covid_Questions_Angle_Left_Partner_Management = By.xpath("//span[@class='angle-left']");
+    public static By Covid_Questions_Angle_Right_Partner_Management = By.xpath("//span[@class='angle-right']");
+
+
+    public static By Medical_Questions_Card = By.xpath("//div[@class='row user-navigate ml-4 mt-2']/div/div[13]");
+    
     public static By Salutation_Label = By.xpath("//h2[text()='Salutation']");
 
+
+    //h2[text()='Loan Type']
+    public static By LoanType = By.xpath(" //h2[text()='Loan Type']");
+    //h2[text()='Loan Type']
     public static String Salutation_Col = "(//table[@class='mat-table cdk-table mat-sort']/thead/tr/th/div)[itr]";
+    public static By navigate_Back = By.xpath("//i[@class='fa fa-angle-left arrow']");
 
+    //i[@class='fa fa-angle-left arrow']
+    public static String Salutation_Card = "//span[text()='itr']";
 
-    public static By Salutation_Card = By.xpath("//span[text()='Salutation']");
+    public static String Relationship_Card = "//div[text()='itr']";
 
+    //h2[text()='Appointee Relation with Nominee']
+    public static By Appointee_Nominee_Lable = By.xpath("//h2[text()='Appointee Relation with Nominee']");
+    public static By Nominee_Relation_Lable = By.xpath("//h2[text()='Nominee Relation with Applicant']");
+
+    public static By Appointee_Relation_Lable = By.xpath("//h2[text()='Appointee Relation with Applicant']");
+    public static By Cover_Basis_Lable = By.xpath("//h2[text()='Cover Basis']");
+    //h2[text()='Cover Basis']
+
+    //h2[text()='Appointee Relation with Applicant']
+
+    //h2[text()='Nominee Relation with Applicant']
     public static By Create_btn = By.xpath("//button[text()=' Create ']");
+    public static By Create_btn1 = By.xpath("//button[text()='Create ']");
+    public static By Appointee_Relation = By.xpath("//h2[text()='Appointee Relation with Nominee']");
 
+    //div[text()='Appointee-Nominee ']
+    public static By Appointee_Nominee_Card = By.xpath("//div[text()='Appointee-Nominee ']");
     public static By value_inp = By.xpath("//div[contains(@class,'mat-form-field-infix ng-tns')]//input");
     public static By code_inp = By.xpath("(//div[contains(@class,'mat-form-field-infix ng-tns')]//input)[2]");
 
@@ -183,9 +284,26 @@ public class superAdmin_Locators {
     public static String Salutation_Column = "(//table[@class='mat-table cdk-table mat-sort']/tbody/tr/td)[itr]";
 
 
+    public static By edit_icon = By.xpath("//i[@class='fa-light fa-pen-to-square mx-2']");
+    public static By edit_icon1 = By.xpath("//i[@class='fa-light fa-pen-to-square mx-2 cursor']");
+    //i[@class='fa-light fa-pen-to-square mx-2 cursor']
+
+//i[@class='fa-light fa-trash-can']
 
     //button[text()=' Create ']
+    public static By update_button = By.xpath("//button[text()=' Update ']");
+    public static By update_button1 = By.xpath("//button[text()='Update']");
+    public static By update_button2 = By.xpath("//button[text()='Update ']");
+    public static By deleteRow=By.xpath("//table/tbody/tr[1]/td[1]");
+    public static By deleteButton=By.xpath("//i[@class='fa-light fa-trash-can'][1]");
+    public static By deleteButton2=By.xpath("//i[@class='fa-light fa-trash-can cursor']");
 
+    //i[@class='fa-light fa-trash-can cursor']
+    //button[text()='Update ']
+
+    public static By Pagination1 = By.xpath("//div[@class='pageOf']");
+    public static By Pagination_Angle_Right1 = By.xpath("(//div[@class='paginator']//span)[2]");
+    public static By Pagination_Angle_Left1 = By.xpath("//div[@class='paginator']//span");
 
 
     //gops locators
