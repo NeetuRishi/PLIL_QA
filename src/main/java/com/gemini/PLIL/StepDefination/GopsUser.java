@@ -40,7 +40,7 @@ public class GopsUser {
         WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(50));
         wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//mat-error[text()=' Verification required ']"), "Verification required"));
         DriverAction.click(Locator.Login);
-        DriverAction.waitSec(15);
+//        DriverAction.waitSec(15);
     }
 
     @Then("^Validate that Home page opens and logo is visible$")
