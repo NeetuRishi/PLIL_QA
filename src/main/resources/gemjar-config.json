@@ -1,10 +1,13 @@
 {
+
+
   "environment": "dev",
+
   "projectName": "PLIL",
   "reportName": "PLIL Report",
   "gemjarSubID": "test_id",
-  "gemjarUserName": "radhikari",
-  "gemjarToken": "b1ac2749-8aa1-43b4-a0e4-d41580f664631673942898710",
+  "gemjarUserName": "tripta.sahni",
+  "gemjarToken": "42aec73f-39c3-4b5e-816c-8518e46ad61c1676543546409",
   "jewelEntryUrl": "https://apis.gemecosystem.com/enter-point",
   "reportingLocation": "",
   "tagName": "@beta1",
@@ -18,5 +21,10 @@
     "browserName": "chrome",
     "launchUrl": "https://groupdev.pramericalife.in/",
     "browserTimeout": 100
+  },
+  "consent": {
+    "browserName": "chrome",
+    "launchUrl": "https://uatconsent.pramericalife.in/user-consent/GCSPCH000003397?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImFwcGxpY2F0aW9uTnVtYmVyIjoiR0NTUENIMDAwMDAzMzk3In0sImlhdCI6MTY3NjM2Mjg3NSwiZXhwIjoxNzA3ODk4ODc1fQ.N8oOnkXE4RFnf4nR0t-x0jwjx_bpntwaJnGVWrjWn04",
+    "browserTimeout": 200
   }
 }

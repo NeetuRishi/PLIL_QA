@@ -9,9 +9,15 @@ Feature: Read_User
     Then validate Enquiry and Report card on Home Screen
     Then Logout and verify
 
-    Examples:
+
+    Examples:![](../../../../../../../../TRA643~1.SAH/AppData/Local/Temp/download.jpg)
+      |Validate_txt|Home|Enquiry|Report|
+      |Home        |Home|Enquiry|Report|
+
+   
       |Validate_txt|Home|Enquiry|Report|username|password|Reverse Feed|Rejected|
       |Home        |Home|Enquiry|Report|shubham.a.kumar@geminisolutions.com|Test@123|Reverse Feed|Rejected Case|
+
 
   @Login-User-Enquiry
   Scenario Outline: Launch->PLIL->EnquiryTab->Validation

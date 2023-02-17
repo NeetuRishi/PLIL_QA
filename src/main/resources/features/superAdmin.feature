@@ -21,6 +21,18 @@ Feature: superAdmin
     Then Validate Home UI Elements
 
 
+    Scenario: Master Management
+      Given Login as superAdmin
+      Then Navigate to Master Management
+      Then Navigate to Product Masters
+      Then Check Product Masters Label is present and back arrow < should be visible and clickable
+      Then check whether All the column names are displayed
+      Then Check the Create Product Master Functionality
+      Then Check the Edit functionality
+      Then Check the Delete Functionality
+      Then Check the pagination functionality
+
+
   Scenario Outline: Master Management Card Validation->Salutation->Gender->Occupation->Age_Proof->Marital_Status->Type_Of_Loan
 
   Scenario: Roles
@@ -39,6 +51,7 @@ Feature: superAdmin
       Then Navigate to Master Management
       Then Click on Covid Questions and Validate
       Then Click on Medical Questions and Validate
+
 
   Scenario Outline: Master Management
 
