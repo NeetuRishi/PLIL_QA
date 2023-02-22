@@ -58,6 +58,13 @@ public static By FilterByDropdownValues = By.xpath("//div[@class='cdk-overlay-pa
     public static String Enquiry_Tab_Col = "//table[@class='mat-table cdk-table mat-sort custom']/thead/tr/th[itr]";
 
     public static String ApplicationStatusCol = "(//table[@class='mat-table cdk-table']/thead/tr/th)[itr]";
+    public static String rows = "(//table[@class='mat-table cdk-table mat-sort custom']/tbody/tr)";
+
+    public static String StatusCol = "(//table[@class='mat-table cdk-table mat-sort custom']/tbody/tr)[itr]//td[9]";
+    public static String Action = "(//table[@class='mat-table cdk-table mat-sort custom']/tbody/tr)[itr]//td[10]//img";
+ //   (//table[@class='mat-table cdk-table mat-sort custom']/tbody/tr)[10]//td[10]
+
+    //(//table[@class='mat-table cdk-table mat-sort custom']/tbody/tr)[10]//td[9]
 
 
     public static By Pagination = By.xpath("//div[@class='paginator']//span");

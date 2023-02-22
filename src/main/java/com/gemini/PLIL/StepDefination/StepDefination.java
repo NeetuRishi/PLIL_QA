@@ -10,13 +10,19 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.checkerframework.common.value.qual.StringVal;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
+
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,6 +83,9 @@ public class StepDefination {
               GemTestReporter.addTestStep("Password", "****", STATUS.PASS, DriverAction.takeSnapShot());
               DriverAction.waitSec(10);
               DriverAction.click(Locator.LoginBtn);
+              WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(30));
+              wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//span[text()='Incorrect email or password']"), "Verification required"));
+
               if (DriverAction.isExist(Locator.InvalidPassword_msg)) {
                   GemTestReporter.addTestStep("Validating  entering wrong password the required error mesaage pop up", "Required error of invalid password appear on screen", STATUS.PASS, DriverAction.takeSnapShot());
               } else {
@@ -183,7 +192,31 @@ catch (Exception e) {
         try {
             DriverAction.typeText(Locator.Email_Input_Field, New_User);
             DriverAction.waitSec(65);
+           /* Actions act =new Actions(DriverManager.getWebDriver());
+            act.sendKeys(Keys.CONTROL+"t").build().perform();
+            String str=DriverAction.getWindowHandle();
+            DriverAction.switchToWindow(str);
+
+            DriverAction.launchUrl("https://outlook.office365.com");
+            DriverManager.getWebDriver().findElement(By.xpath("//input[@name='loginfmt']")).sendKeys("rahul.adhikari@geminisolutions.com"+ Keys.ENTER);
+            Thread.sleep(5000);
+            DriverManager.getWebDriver().findElement(By.xpath("//input[@name='passwd']")).sendKeys("Panchkula@123"+ Keys.ENTER);
+            Thread.sleep(5000);
+            DriverManager.getWebDriver().findElement(By.xpath("//input[@id='idBtn_Back']")).click();
+            Thread.sleep(5000);
+            DriverManager.getWebDriver().findElement(By.xpath("(//div[@role='region'])[3]/div/div/div/div[1]")).click();
+            Thread.sleep(10000);
+            String newPassword=DriverManager.getWebDriver().findElement(By.xpath("//h1")).getText();
+            System.out.println(DriverManager.getWebDriver().findElement(By.xpath("//h1")).getText());
+            WebElement ele = DriverManager.getWebDriver().findElement(Locator.Password_Input_Field);
+            ele.sendKeys(newPassword);
+            GemTestReporter.addTestStep("Password", "****", STATUS.PASS, DriverAction.takeSnapShot());
+            act.sendKeys(Keys.CONTROL+"w").build().perform();
             DriverAction.click(Locator.LoginBtn);
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//mat-error[text()=' Verification required ']"), "Verification required"));*/
+            DriverAction.click(Locator.LoginBtn);
+
         }
         catch (Exception e) {
             logger.info("An exception occurred!", e);
@@ -359,12 +392,17 @@ catch (Exception e) {
                 String str_before_login = DriverAction.getCurrentURL();
                 DriverAction.typeText(Locator.Email_Input_Field, "deepak.kumar@geminisolutions.com");
                 DriverAction.setImplicitTimeOut(2);
-                DriverAction.typeText(Locator.Password_Input_Field, "Asdf@1234");
+                WebElement ele = DriverManager.getWebDriver().findElement(Locator.Password_Input_Field);
+                ele.sendKeys("Asdf@1234");
+                GemTestReporter.addTestStep("Password", "****", STATUS.PASS, DriverAction.takeSnapShot());
+
+              //  DriverAction.typeText(Locator.Password_Input_Field, "Asdf@1234");
                 DriverAction.waitSec(15);
                 String str_after_login = "";
                 System.out.print("Before Login Click ->:" + str_before_login);
                 DriverAction.doubleClick(Locator.Login);
-                DriverAction.setImplicitTimeOut(10);
+                WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(30));
+                wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//h2[text()='Home']"), "Verification required"));
                 str_after_login = DriverAction.getCurrentURL();
                 System.out.print("After Login Click -> " + str_after_login);
                 if (!str_after_login.equals(str_before_login)) {
@@ -397,8 +435,10 @@ catch (Exception e) {
             } else {
                 GemTestReporter.addTestStep("Validating the presence of ClicK Here Link on Login Screen", "Here Link is not present on Login screen", STATUS.FAIL, DriverAction.takeSnapShot());
             }
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//h3[text()='Forgot Password']"), "Verification required"));
 
-            DriverAction.waitSec(3);
+          //  DriverAction.waitSec(3);
             if (DriverAction.getElement(Locator.ForgotPassword_Text).isDisplayed()) {
 
                 GemTestReporter.addTestStep("Validating weather Forgot Password Label present  on Forgot Password screen", "Forgot Password Label is present on Forgot Password Screen", STATUS.PASS, DriverAction.takeSnapShot());
@@ -417,7 +457,10 @@ catch (Exception e) {
     public void VerifyForgotPasswordUi(String Username) throws IOException {
 try {
     Boolean isPassed = false;
-    DriverAction.waitSec(4);
+    WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(30));
+    wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("//img"), "Verification required"));
+
+   // DriverAction.waitSec(4);
     if (DriverAction.getElement(Locator.Logo).isDisplayed()) {
 
         GemTestReporter.addTestStep("Validating weather Required Logo is present on Forgot password screen", "Required Logo is present on Forgot password screen", STATUS.PASS, DriverAction.takeSnapShot());
