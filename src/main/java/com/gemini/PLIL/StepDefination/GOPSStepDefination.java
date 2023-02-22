@@ -500,6 +500,7 @@ import java.util.List;
             WebElement excelbutton = wait.until(ExpectedConditions.elementToBeClickable(superAdmin_Locators.gopsExcelButton));
             excelbutton.click();
             DriverAction.waitSec(10);
+            GemTestReporter.addTestStep("Click on the export to excel button","Clicked successfully",STATUS.PASS,DriverAction.takeSnapShot());
 
 
 
