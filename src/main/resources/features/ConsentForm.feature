@@ -8,12 +8,12 @@ Feature: Consent Form
     Then Check whether Next button is present and click on it
     Then Check whether <Page2> got opened or not
     Then Check that on clicking Proceed without filling the mandatory fields,error is thrown for <Page2>
-    Then Check whether height and weight input boxes are present
+    Then Check whether user has opted for Primary Insured or Joint Life,Then check whether height and weight input boxes are present
     Then Check whether user is able to type into the input boxes or not
     Then Check whether all medical history questions are present or not
     Then Check that when user clicks on Yes radio button of any medical question,few input boxes start appearing below the question
     Then Check that user when clicks on the check box to enable all No Radio buttons for <Page2>
-#    Then Check that user clicks on each Yes radio button one by one and few input boxes get added to the DOM and check that user is able to type text into the input box
+    Then Check that user clicks on each Yes radio button one by one and few input boxes get added to the DOM and check that user is able to type text into the input box
 
     Then Click on Proceed button
     Then Check whether <Page3> got opened or not

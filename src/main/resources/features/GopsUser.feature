@@ -21,10 +21,32 @@ Feature: GopsUser
 #    Then Check whether clear button is present or not and is working fine
 #    Then Check whether search button is present and is working properly or not
 #    Then Check whether export button is present and is working fine or not
+Scenario Outline: Gops Enquiry (Gops User)
+Given Enter Username and Password and validate <Validate_txt>,<username>,<password>
+#    Then click on Captcha,Login and GOPS Enquiry
+Then validate the Logo
+#Then validate tabs
+Then validate GOPS tab
+Then To validate Hamburger button
+Then validate GOPS Enquiry Tab is highlighted and displayed
+Then enter text to validate GOPS Filter
+Then validate filter with inplace text partner
+Then validate status filter with inplace text
+Then validate Date field
+Then validate search field
+Then validate Table Columns
+#    Then validate pagination of GoPS table
+Then validate Scroll bar
+Then Verify Customer Details Label and Fields.
+Then Verify LOAN DETAILS Label and Fields
+Then Verify POLICY DETAILS Label and Fields.
+Then verify export to excel button is present.
+Examples:
+|Validate_txt|username|password|
+|Home        | skmr9896@gmail.com|Test@123|
 
-
-    Scenario Outline: Login through GOPS user--->Reverse Feed Upload
-      Given Enter the Username and password for GOPS User and login
+    Scenario Outline: Reverse Feed Upload (Gops User)
+      Given Enter Username and Password and validate <Validate_txt>,<username>,<password>
       Then Validate that Home page opens and logo is visible
       Then Click on <tab> and check that it got highlighted
       Then Check whether hamburgher button is present or not and clicking it minimizes the side bar
@@ -37,5 +59,5 @@ Feature: GopsUser
 
       Then Click on Upload File button and check if file got uploaded successfully and message got displayed
       Examples:
-      |tab|
-      |Reverse Feed Upload|
+      |tab| Validate_txt| username| password|
+      |Reverse Feed Upload|Home|skmr9896@gmail.com|Test@123|

@@ -9,7 +9,7 @@ Feature: PLILHomepage
 
 
   @Login/Logout
-  Scenario Outline: Login->PILI
+  Scenario Outline: Login->PLIL
     Given Enter username and password
     Then Click on Login button and Validate <Validate_text>
     Then Logout and verify

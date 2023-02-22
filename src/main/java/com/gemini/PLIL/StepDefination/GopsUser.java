@@ -274,6 +274,10 @@ public class GopsUser {
         {
             href="//a[@href='/dashboard/bulk-upload']";
         }
+        else if(tab.equals("Master Management"))
+        {
+            href="//a[@href='/admin/master-managment']";
+        }
         if (DriverAction.getElement(By.xpath(href)).isDisplayed())
             GemTestReporter.addTestStep("Check whether " + tab + " is present or not", tab + " tab found successfully", STATUS.PASS, DriverAction.takeSnapShot());
         DriverAction.getElement(By.xpath(href)).click();

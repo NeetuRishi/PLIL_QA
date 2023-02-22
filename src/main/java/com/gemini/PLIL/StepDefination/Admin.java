@@ -47,14 +47,14 @@ public class Admin {
     public void validateWhetherSearchButtonIsPresentAndWorkingProperly() {
         if (DriverAction.getElement(AdminLocators.input("Search")).isDisplayed()) {
             GemTestReporter.addTestStep("Validate whether Search button is present or not", "Search Button is visible", STATUS.PASS, DriverAction.takeSnapShot());
-
+            DriverAction.getElement(AdminLocators.input("Search")).sendKeys("ABCD"+ Keys.ENTER);
+            GemTestReporter.addTestStep("Type in the user ABCD in the search box and hit enter","Action performed successfully",STATUS.PASS,DriverAction.takeSnapShot());
+            WebDriverWait wait=new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table/tbody/tr[1]")));
+            GemTestReporter.addTestStep("Validate whether Search was successful or not","Search was successful",STATUS.PASS,DriverAction.takeSnapShot());
         } else
             GemTestReporter.addTestStep("Validate whether Search button is present or not", "Could not find Search button", STATUS.FAIL, DriverAction.takeSnapShot());
-     DriverAction.getElement(AdminLocators.input("Search")).sendKeys("ABCD"+ Keys.ENTER);
-     GemTestReporter.addTestStep("Type in the user ABCD in the search box and hit enter","Action performed successfully",STATUS.PASS,DriverAction.takeSnapShot());
-        WebDriverWait wait=new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table/tbody/tr[1]")));
-    GemTestReporter.addTestStep("Validate whether Search was successful or not","Search was successful",STATUS.PASS,DriverAction.takeSnapShot());
+
     }
 
     @Then("^Verify whether new user cannot be created or not with name (.+) , email (.+),mobile No (.+)$")

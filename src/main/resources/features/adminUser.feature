@@ -1,6 +1,6 @@
 Feature: Admin User
-  Scenario Outline: Admin User-->User Management
-    Given Enter the Username and password for GOPS User and login
+  Scenario Outline: User Management screen (Admin User)
+    Given Enter Username and Password and validate <Validate_txt>,<username>,<password>
     Then Validate that Home page opens and logo is visible
     Then Click on <tab> and check that it got highlighted
     Then Check whether hamburgher button is present or not and clicking it minimizes the side bar
@@ -19,5 +19,5 @@ Feature: Admin User
 
 
     Examples:
-    |tab| name1| email| mobile1| name2| mobile2 |
-    |User Management| ABCD | tripta.sahni@geminisolutions.com|  9999999999  | BCDF | 8888888888|
+    |tab| name1| email| mobile1| name2| mobile2 |Validate_txt|username|password|
+    |User Management| ABCD | tripta.sahni@geminisolutions.com|  9999999999  | BCDF | 8888888888|Home|deepakmalhotra2070@gmail.com|Asdf@1234|

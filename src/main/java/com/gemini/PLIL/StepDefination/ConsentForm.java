@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 public class ConsentForm {
+    Boolean checkUser=false;
     @Then("^Hit the given URL (.+) to open the login form$")
     public void consent(String url) {
 
@@ -110,24 +111,51 @@ public class ConsentForm {
 
     }
 
-    @Then("Check whether height and weight input boxes are present")
+    @Then("Check whether user has opted for Primary Insured or Joint Life,Then check whether height and weight input boxes are present")
     public void checkWhetherHeightAndWeightInputBoxesArePresent() {
-        if (DriverAction.getElement(ConsentLocators.primaryIssuedHeight).isDisplayed())
-            GemTestReporter.addTestStep("Check whether Primay Issued Height input box is present or not", "Primary Issued Height Input box is present", STATUS.PASS, DriverAction.takeSnapShot());
+        List<WebElement> title=DriverAction.getElements(ConsentLocators.title);
+
+        for(int i=0;i<title.size();i++)
+        {
+            if(title.get(i).getText().equals(" Joint Life ")) {
+                checkUser = true;
+            }
+        }
+        if(checkUser==false)
+            GemTestReporter.addTestStep("Check whether user has opted for Joint Life or Primary Insured","User has opted for Primary Insured",STATUS.PASS,DriverAction.takeSnapShot());
         else
-            GemTestReporter.addTestStep("Check whether Primay Issued Height input box is present or not", "Primary Issued Height Input box is not present", STATUS.FAIL, DriverAction.takeSnapShot());
-        if (DriverAction.getElement(ConsentLocators.primaryIssuedWeight).isDisplayed())
-            GemTestReporter.addTestStep("Check whether Primay Issued Weight input box is present or not", "Primary Issued Weight Input box is present", STATUS.PASS, DriverAction.takeSnapShot());
-        else
-            GemTestReporter.addTestStep("Check whether Primay Issued Weight input box is present or not", "Primary Issued Weight Input box is not present", STATUS.FAIL, DriverAction.takeSnapShot());
-        if (DriverAction.getElement(ConsentLocators.jointLifeHeight).isDisplayed())
-            GemTestReporter.addTestStep("Check whether joint Life Height input box is present or not", "Joint Life Height Input box is present", STATUS.PASS, DriverAction.takeSnapShot());
-        else
-            GemTestReporter.addTestStep("Check whether joint Life Height input box is present or not", "Joint Life Height Input box is not present", STATUS.FAIL, DriverAction.takeSnapShot());
-        if (DriverAction.getElement(ConsentLocators.jointLifeWeight).isDisplayed())
-            GemTestReporter.addTestStep("Check whether joint Life Weight input box is present or not", "Joint Life Weight Input box is present", STATUS.PASS, DriverAction.takeSnapShot());
-        else
-            GemTestReporter.addTestStep("Check whether joint Life Weight  input box is present or not", "Joint Life Weight Input box is not present", STATUS.FAIL, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Check whether user has opted for Joint Life or Primary Insured","User has opted for Joint Life",STATUS.PASS,DriverAction.takeSnapShot());
+      if(checkUser==true) {
+          if (DriverAction.getElement(ConsentLocators.primaryIssuedHeight).isDisplayed())
+              GemTestReporter.addTestStep("Check whether Primary Issued Height input box is present or not", "Primary Issued Height Input box is present", STATUS.PASS, DriverAction.takeSnapShot());
+          else
+              GemTestReporter.addTestStep("Check whether Primary Issued Height input box is present or not", "Primary Issued Height Input box is not present", STATUS.FAIL, DriverAction.takeSnapShot());
+          if (DriverAction.getElement(ConsentLocators.primaryIssuedWeight).isDisplayed())
+              GemTestReporter.addTestStep("Check whether Primary Issued Weight input box is present or not", "Primary Issued Weight Input box is present", STATUS.PASS, DriverAction.takeSnapShot());
+          else
+              GemTestReporter.addTestStep("Check whether Primary Issued Weight input box is present or not", "Primary Issued Weight Input box is not present", STATUS.FAIL, DriverAction.takeSnapShot());
+          if (DriverAction.getElement(ConsentLocators.jointLifeHeight).isDisplayed()) {
+//            GemTestReporter.addTestStep("Check whether user has opted for Single Life or Joint Life","User has opted for Joint life",STATUS.PASS,DriverAction.takeSnapShot());
+              GemTestReporter.addTestStep("Check whether joint Life Height input box is present or not", "Joint Life Height Input box is present", STATUS.PASS, DriverAction.takeSnapShot());
+          } else
+              GemTestReporter.addTestStep("Check whether joint Life Height input box is present or not", "Joint Life Height Input box is not present", STATUS.FAIL, DriverAction.takeSnapShot());
+          if (DriverAction.getElement(ConsentLocators.jointLifeWeight).isDisplayed())
+              GemTestReporter.addTestStep("Check whether joint Life Weight input box is present or not", "Joint Life Weight Input box is present", STATUS.PASS, DriverAction.takeSnapShot());
+          else
+              GemTestReporter.addTestStep("Check whether joint Life Weight  input box is present or not", "Joint Life Weight Input box is not present", STATUS.FAIL, DriverAction.takeSnapShot());
+      }
+      else
+      {
+          if (DriverAction.getElement(ConsentLocators.primaryIssuedHeight).isDisplayed())
+              GemTestReporter.addTestStep("Check whether Primary Issued Height input box is present or not", "Primary Issued Height Input box is present", STATUS.PASS, DriverAction.takeSnapShot());
+          else
+              GemTestReporter.addTestStep("Check whether Primary Issued Height input box is present or not", "Primary Issued Height Input box is not present", STATUS.FAIL, DriverAction.takeSnapShot());
+          if (DriverAction.getElement(ConsentLocators.primaryIssuedWeight).isDisplayed())
+              GemTestReporter.addTestStep("Check whether Primary Issued Weight input box is present or not", "Primary Issued Weight Input box is present", STATUS.PASS, DriverAction.takeSnapShot());
+          else
+              GemTestReporter.addTestStep("Check whether Primary Issued Weight input box is present or not", "Primary Issued Weight Input box is not present", STATUS.FAIL, DriverAction.takeSnapShot());
+
+      }
 
     }
 
@@ -136,8 +164,10 @@ public class ConsentForm {
         DriverAction.getElement(ConsentLocators.primaryIssuedHeight).sendKeys("120");
 //        DriverAction.getElement(ConsentLocators.primaryIssuedHeight).getText();
         DriverAction.getElement(ConsentLocators.primaryIssuedWeight).sendKeys("70");
-        DriverAction.getElement(ConsentLocators.jointLifeHeight).sendKeys("130");
-        DriverAction.getElement(ConsentLocators.jointLifeWeight).sendKeys("80");
+        if(checkUser==true) {
+            DriverAction.getElement(ConsentLocators.jointLifeHeight).sendKeys("130");
+            DriverAction.getElement(ConsentLocators.jointLifeWeight).sendKeys("80");
+        }
         GemTestReporter.addTestStep("Check whether user is able to type into the Primary issued and Joint Life Input boxes or not", "Typed into the input boxes successfully", STATUS.PASS, DriverAction.takeSnapShot());
     }
 
@@ -352,23 +382,41 @@ public class ConsentForm {
     @Then("Check that two reason input boxes start appearing")
     public void checkReason()
     {
-        if(DriverAction.getElement(ConsentLocators.reasonsPI).isDisplayed())
-            GemTestReporter.addTestStep("Validate whether Primary Insured's Reason input box appeared or not","Input box starts appearing",STATUS.PASS,DriverAction.takeSnapShot());
-        if(DriverAction.getElement(ConsentLocators.reasonsJL).isDisplayed())
-            GemTestReporter.addTestStep("Validate whether Joint Life's Reason input box appeared or not","Input box starts appearing",STATUS.PASS,DriverAction.takeSnapShot());
+        if(checkUser==true) {
+            if (DriverAction.getElement(ConsentLocators.reasonsPI).isDisplayed())
+                GemTestReporter.addTestStep("Validate whether Primary Insured's Reason input box appeared or not", "Input box starts appearing", STATUS.PASS, DriverAction.takeSnapShot());
+            if (DriverAction.getElement(ConsentLocators.reasonsJL).isDisplayed())
+                GemTestReporter.addTestStep("Validate whether Joint Life's Reason input box appeared or not", "Input box starts appearing", STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            if(DriverAction.getElement(By.xpath("//input[@placeholder='Reason']")).isDisplayed())
+                GemTestReporter.addTestStep("Validate whether Primary Insured's Reason input box appeared or not", "Input box starts appearing", STATUS.PASS, DriverAction.takeSnapShot());
+
+        }
 
 
     }
     @Then("Type in some value in the input boxes and click on proceed")
     public void type()
     {
-        DriverAction.getElement(ConsentLocators.reasonsPI).sendKeys("abcd");
-        GemTestReporter.addTestStep("Type in the Primary Insured's Reason Input Box","Typed in successfully",STATUS.PASS,DriverAction.takeSnapShot());
-        DriverAction.getElement(ConsentLocators.reasonsJL).sendKeys("abcd");
-        GemTestReporter.addTestStep("Type in the Joint Life's Reason Input Box","Typed in successfully",STATUS.PASS,DriverAction.takeSnapShot());
-        DriverAction.getElement(ConsentLocators.proceed2).click();
-        GemTestReporter.addTestStep("Click on the proceed button","Clicked successfully",STATUS.PASS,DriverAction.takeSnapShot());
-    }
+        if(checkUser==true) {
+            DriverAction.getElement(ConsentLocators.reasonsPI).sendKeys("abcd");
+            GemTestReporter.addTestStep("Type in the Primary Insured's Reason Input Box", "Typed in successfully", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.getElement(ConsentLocators.reasonsJL).sendKeys("abcd");
+            GemTestReporter.addTestStep("Type in the Joint Life's Reason Input Box", "Typed in successfully", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.getElement(ConsentLocators.proceed2).click();
+            GemTestReporter.addTestStep("Click on the proceed button", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            DriverAction.getElement(By.xpath("//input[@placeholder='Reason']")).sendKeys("ABCD");
+            GemTestReporter.addTestStep("Type in the Primary Insured's Reason Input Box", "Typed in successfully", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.getElement(ConsentLocators.proceed2).click();
+            GemTestReporter.addTestStep("Click on the proceed button", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+        }
+        }
     @Then("Check that on clicking Proceed without Checking the mandatory fields,The text adjacent to the input box turns red")
     public void error()
     {

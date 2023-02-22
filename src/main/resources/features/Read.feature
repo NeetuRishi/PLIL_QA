@@ -2,19 +2,19 @@ Feature: Read_User
 
 
   @Login-User-Home @beta
-  Scenario Outline: Launch->PLIL
+  Scenario Outline: Launch PLIL
     Given Enter Username and Password and validate <Validate_txt>,<username>,<password>
     Then validate weather the <Home>,<Enquiry>,<Report>,<Reverse Feed>,<Rejected> tab are present and are clickable
     Then validate Home screen ui
     Then validate Enquiry and Report card on Home Screen
     Then Logout and verify
 
+#
+#    Examples:![](../../../../../../../../TRA643~1.SAH/AppData/Local/Temp/download.jpg)
+#      |Validate_txt|Home|Enquiry|Report|
+#      |Home        |Home|Enquiry|Report|
 
-    Examples:![](../../../../../../../../TRA643~1.SAH/AppData/Local/Temp/download.jpg)
-      |Validate_txt|Home|Enquiry|Report|
-      |Home        |Home|Enquiry|Report|
-
-   
+   Examples:
       |Validate_txt|Home|Enquiry|Report|username|password|Reverse Feed|Rejected|
       |Home        |Home|Enquiry|Report|shubham.a.kumar@geminisolutions.com|Test@123|Reverse Feed|Rejected Case|
 
