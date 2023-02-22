@@ -411,8 +411,25 @@ public class Read {
 
     @Then("^Download PDF and validate (.+)$")
     public void validatepdfdownload(String filepath) {
-        DriverAction.click(Read_Locators.Action_Download_icon);
-        DriverAction.waitSec(10);
+
+        List<WebElement> l1=DriverManager.getWebDriver().findElements(By.xpath("(//table[@class='mat-table cdk-table mat-sort custom']/tbody/tr)"));
+        Boolean flag=false;
+        while(flag!=true) {
+            for (int i = 1; i <= l1.size(); i++) {
+                String Status = DriverAction.getElement(By.xpath(Read_Locators.StatusCol.replace("itr", String.valueOf(i)))).getText();
+                if (Status.equals(" Uploaded To System")) {
+                    DriverAction.doubleClick(By.xpath(Read_Locators.Action.replace("itr", String.valueOf(i))));
+                    flag=true;
+                    break;
+                }
+
+            }
+            if(flag==false) {
+                DriverAction.getElement(superAdmin_Locators.Pagination_Angle_Right).click();
+            }
+        }
+      //  DriverAction.click(Read_Locators.Action_Download_icon);
+        DriverAction.waitSec(15);
 
         File file = new File(filepath);
         File file1 = getLastModified(filepath);
@@ -464,7 +481,7 @@ public class Read {
             GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
         }
     }
-    @Then("^validate Search Field on Reversed Feed Screen")
+   /* @Then("^validate Search Field on Reversed Feed Screen")
     public void ValidateSearchInput1() {
         try{
             if (DriverAction.getElement(Read_Locators.SearchInput).isDisplayed()) {
@@ -495,16 +512,16 @@ public class Read {
             logger.info("An exception occurred!", e);
             GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
         }
-    }
+    }*/
 
 
-    @Then("^validate Search Field on Rejected Screen")
-    public void ValidateSearchInput() {
+    @Then("^validate Search Field on Screen (.+)$")
+    public void ValidateSearchInput(int index) {
     try{
         if (DriverAction.getElement(Read_Locators.SearchInput).isDisplayed()) {
-             GemTestReporter.addTestStep("Verify Search Input is visible on Rejected Screen", "Search Input is visible on Rejected Screen" , STATUS.PASS, DriverAction.takeSnapShot());
+             GemTestReporter.addTestStep("Verify Search Input is visible on Screen", "Search Input is visible on Screen" , STATUS.PASS, DriverAction.takeSnapShot());
         } else {
-            GemTestReporter.addTestStep("Verify Search Input is visible on Rejected Screen", "Search Input is not visible on Rejected Screen", STATUS.FAIL, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify Search Input is visible on Screen", "Search Input is not visible on Screen", STATUS.FAIL, DriverAction.takeSnapShot());
         }
         String FetchedLoanNo = DriverAction.getElement(Read_Locators.SampleLoanNo).getText();
         DriverAction.typeText(Read_Locators.SearchInput, FetchedLoanNo);
@@ -520,7 +537,7 @@ public class Read {
             GemTestReporter.addTestStep("Validate Data is Filtered Properly", "Data is not Filtered successfully", STATUS.FAIL, DriverAction.takeSnapShot());
         }
         DriverManager.getWebDriver().navigate().refresh();
-        DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(5))));
+        DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(index))));
 
 
 
