@@ -36,6 +36,7 @@ public static By reasonsPI=By.xpath("//input[@id='mat-input-15']");
     {
         return By.xpath("(//input[@placeholder=\"Quantity\"])["+(i)+"]");
     }
+    public static By title=By.xpath("//div[@class='title pt-1']");
      public static By otpInputBox=By.xpath("//mat-dialog-container//input");
     public static By typeOfTreatment(int i){return By.xpath("(//input[@placeholder=\"Type Of Treatment\"])["+(i)+"]");}
     public static By datedCommenced(int i){return By.xpath("(//input[@placeholder=\"DD/MM/YYYY\"])["+(i)+"]");}

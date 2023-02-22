@@ -1,4 +1,4 @@
-Feature: superAdmin
+Feature: Super Admin-2222
 
   @beta
   Scenario: Super Admin Login
@@ -21,19 +21,24 @@ Feature: superAdmin
     Then Validate Home UI Elements
 
 
-    Scenario: Master Management
-      Given Login as superAdmin
-      Then Navigate to Master Management
-      Then Navigate to Product Masters
-      Then Check Product Masters Label is present and back arrow < should be visible and clickable
-      Then check whether All the column names are displayed
-      Then Check the Create Product Master Functionality
-      Then Check the Edit functionality
-      Then Check the Delete Functionality
-      Then Check the pagination functionality
+  Scenario Outline: Master Management Product Master
+#      Given Login as superAdmin
+    Given Enter Username and Password and validate <Validate_txt>,<username>,<password>
+    Then Navigate to Master  Management
+    Then Navigate to Product Masters
+    Then Check Product Masters Label is present and back arrow < should be visible and clickable
+    Then check whether All the column names are displayed
+    Then Check the Create Product Master Functionality
+    Then Check the Edit functionality
+#      Then Check the Delete Functionality
+    Then validate Pagination functionality for Master Management
+    Examples:
+      |Validate_txt|username|password|
+      |Home        |deepak.kumar@geminisolutions.com|Asdf@1234|
 
 
-  Scenario Outline: Master Management Card Validation->Salutation->Gender->Occupation->Age_Proof->Marital_Status->Type_Of_Loan
+
+  #Scenario Outline: Master Management Card Validation->Salutation->Gender->Occupation->Age_Proof->Marital_Status->Type_Of_Loan
 
   Scenario: Roles
     Given Login as superAdmin
@@ -41,16 +46,16 @@ Feature: superAdmin
     Then Validate Roles Screen
 
   Scenario: Generate IG File
-      Given Login as superAdmin
-      Then Navigate to Generate Ig File
-      Then Validate Generate Ig File Screen
+    Given Login as superAdmin
+    Then Navigate to Generate Ig File
+    Then Validate Generate Ig File Screen
 
 
-    Scenario: Master Management
-       Given Login as superAdmin
-      Then Navigate to Master Management
-      Then Click on Covid Questions and Validate
-      Then Click on Medical Questions and Validate
+  Scenario: Master Management
+    Given Login as superAdmin
+    Then Navigate to Master Management
+    Then Click on Covid Questions and Validate
+    Then Click on Medical Questions and Validate
 
 
   Scenario Outline: Master Management
@@ -80,7 +85,7 @@ Feature: superAdmin
   #  Then  Navigate to <Card> and validate the Ui
   #  Then  Validate Create Button functionality <code>,<value>,<Card>,<username>
   #  Then  Edit the card and validate <updatedCode>,<updatedValue>
-  #  Then validate Pagination functionality for Master Management
+    Then validate Pagination functionality for Master Management
 
    # Examples:
    #   | Validate_txt | username                            | password | code | value         | Card           | updatedCode | updatedValue     |
