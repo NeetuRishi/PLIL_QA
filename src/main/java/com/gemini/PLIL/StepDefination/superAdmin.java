@@ -495,17 +495,17 @@ public class superAdmin {
         try {
             DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(3))));
             if (DriverAction.getElement(Locator.Logo).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Logo is Visible on Master Management Tab", "Logo is visible on Master Management Tab", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validating wether Logo is Visible on Master Management Tab", "Logo is visible on Master Management Tab", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Validating weather Logo is Visible on Master Management Tab", "Logo is not visible on Master Management Tab", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validating wether Logo is Visible on Master Management Tab", "Logo is not visible on Master Management Tab", STATUS.FAIL, DriverAction.takeSnapShot());
             }
 
             String tab = DriverAction.getElement(Read_Locators.MasterManagementtab).getAttribute("class");
             if (tab.contains("active")) {
-                GemTestReporter.addTestStep("Validating weather Master Management Tab is highlighted", "Master Management Tab is highlighted", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validating wether Master Management Tab is highlighted", "Master Management Tab is highlighted", STATUS.PASS, DriverAction.takeSnapShot());
 
             } else {
-                GemTestReporter.addTestStep("Validating weather Master Management Tab is highlighted", "Master Management Tab is not highlighted", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validating wether Master Management Tab is highlighted", "Master Management Tab is not highlighted", STATUS.FAIL, DriverAction.takeSnapShot());
 
             }
         } catch (Exception e) {
@@ -562,10 +562,10 @@ public class superAdmin {
                     }
                 }
                 if (c == list1.size()) {
-                    GemTestReporter.addTestStep("Validating weather all the required columns are present in" + map.get(i).get(0) + "Table", "All Columns are there in" + map.get(i).get(0) + "Table", STATUS.PASS, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Validating wether all the required columns are present in" + map.get(i).get(0) + "Table", "All Columns are there in" + map.get(i).get(0) + "Table", STATUS.PASS, DriverAction.takeSnapShot());
 
                 } else {
-                    GemTestReporter.addTestStep("Validating weather all the required columns are present in" + map.get(i).get(0) + "Table", "All Columns are not there in" + map.get(i).get(0) + "Table", STATUS.FAIL, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Validating wether all the required columns are present in" + map.get(i).get(0) + "Table", "All Columns are not there in" + map.get(i).get(0) + "Table", STATUS.FAIL, DriverAction.takeSnapShot());
 
                 }
                 //create
@@ -573,8 +573,16 @@ public class superAdmin {
                     if (DriverAction.getElement(superAdmin_Locators.Create_btn).isDisplayed()) {
                         GemTestReporter.addTestStep("Validate Create Button is visible on Salutation Screen", "Create button is visible on Salutation Screen", STATUS.PASS, DriverAction.takeSnapShot());
                         DriverAction.getElement(superAdmin_Locators.Create_btn).click();
-                        DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
-                        DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
+                        WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
+                        ele.sendKeys(map.get(i).get(2));
+                        GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(2)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+                       // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
+                        ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
+                        ele.sendKeys(map.get(i).get(1));
+                        GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(1)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+                       // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
                         DriverAction.getElement(superAdmin_Locators.Create_btn).click();
                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date();
@@ -585,25 +593,25 @@ public class superAdmin {
                             c++;
                             String Columns = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(j)))).getText();
                             if (Columns.equals("demo_value")) {
-                                GemTestReporter.addTestStep("Validating value after Creating" + map.get(i).get(0), "Required Value -> " + " Actual value-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                                GemTestReporter.addTestStep("Validating value after Creating" + map.get(i).get(0), " Required Value -> " + " Actual value-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                             }
                             if (Columns.equals("demo")) {
-                                GemTestReporter.addTestStep("Validating code after Creating" + map.get(i).get(0), "Required code -> " + " Actual code-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                                GemTestReporter.addTestStep("Validating code after Creating" + map.get(i).get(0), " Required code -> " + " Actual code-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                             }
                             if (Columns.equals(str)) {
-                                GemTestReporter.addTestStep("Validating Created Date after Creating" + map.get(i).get(0), "Required Date -> " + str + " Actual date-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                                GemTestReporter.addTestStep("Validating Created Date after Creating" + map.get(i).get(0), " Required Date -> " + str + " Actual date-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                             }
                             if (Columns.equals(username)) {
-                                GemTestReporter.addTestStep("Validating Created by after Creating" + map.get(i).get(0), "Required user -> " + username + " Actual user-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                                GemTestReporter.addTestStep("Validating Created by after Creating" + map.get(i).get(0), " Required user -> " + username + " Actual user-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                             }
 
                         }
                         if (c != 4) {
-                            GemTestReporter.addTestStep("Validating weather" + map.get(i).get(0) + " is created successfully", map.get(i).get(0) + "is not created successfully", STATUS.FAIL, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating weather" + map.get(i).get(0) + " is created successfully", map.get(i).get(0) + " is not created successfully", STATUS.FAIL, DriverAction.takeSnapShot());
 
                         }
 
@@ -616,13 +624,21 @@ public class superAdmin {
                     Actions act = new Actions(DriverManager.getWebDriver());
                     act.sendKeys(Keys.CONTROL + "a").build().perform();
                     act.sendKeys(Keys.BACK_SPACE).build().perform();
-                    DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(4));
+                   // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(4));
+                    WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
+                    ele.sendKeys(map.get(i).get(4));
+                    GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(4)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
                     act.sendKeys(Keys.TAB).build().perform();
                     DriverAction.waitSec(5);
                     DriverAction.getElement(superAdmin_Locators.code_inp).click();
                     act.sendKeys(Keys.CONTROL + "a").build().perform();
                     act.sendKeys(Keys.BACK_SPACE).build().perform();
-                    DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(3));
+                    ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
+                    ele.sendKeys(map.get(i).get(3));
+                    GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(3)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+                   // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(3));
                     DriverAction.getElement(superAdmin_Locators.update_button).click();
                     DriverAction.waitSec(5);
                     String UpdatedCode = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(1)))).getText();
@@ -637,8 +653,16 @@ public class superAdmin {
                     if (DriverAction.getElement(superAdmin_Locators.Create_btn1).isDisplayed()) {
                         GemTestReporter.addTestStep("Validate Create Button is visible on Salutation Screen", "Create button is visible on Salutation Screen", STATUS.PASS, DriverAction.takeSnapShot());
                         DriverAction.getElement(superAdmin_Locators.Create_btn1).click();
-                        DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
-                        DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
+                       // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
+                        WebElement  ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
+                        ele.sendKeys(map.get(i).get(2));
+                        GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(2)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+                       // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
+                        ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
+                        ele.sendKeys(map.get(i).get(1));
+                        GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(1)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
                         DriverAction.getElement(superAdmin_Locators.Create_btn).click();
                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date();
@@ -649,25 +673,25 @@ public class superAdmin {
                             c++;
                             String Columns = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(j)))).getText();
                             if (Columns.equals("demo_value")) {
-                                GemTestReporter.addTestStep("Validating value after Creating" + map.get(i).get(0), "Required Value -> " + " Actual value-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                                GemTestReporter.addTestStep("Validating value after Creating" + map.get(i).get(0), " Required Value -> " + " Actual value-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                             }
                             if (Columns.equals("demo")) {
-                                GemTestReporter.addTestStep("Validating code after Creating" + map.get(i).get(0), "Required code -> " + " Actual code-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                                GemTestReporter.addTestStep("Validating code after Creating" + map.get(i).get(0), " Required code -> " + " Actual code-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                             }
                             if (Columns.equals(str)) {
-                                GemTestReporter.addTestStep("Validating Created Date after Creating" + map.get(i).get(0), "Required Date -> " + str + " Actual date-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                                GemTestReporter.addTestStep("Validating Created Date after Creating" + map.get(i).get(0), " Required Date -> " + str + " Actual date-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                             }
                             if (Columns.equals(username)) {
-                                GemTestReporter.addTestStep("Validating Created by after Creating" + map.get(i).get(0), "Required user -> " + username + " Actual user-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                                GemTestReporter.addTestStep("Validating Created by after Creating" + map.get(i).get(0), " Required user -> " + username + " Actual user-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                             }
 
                         }
                         if (c != 4) {
-                            GemTestReporter.addTestStep("Validating weather" + map.get(i).get(0) + " is created successfully", map.get(i).get(0) + "is not created successfully", STATUS.FAIL, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating weather" + map.get(i).get(0) + " is created successfully", map.get(i).get(0) + " is not created successfully", STATUS.FAIL, DriverAction.takeSnapShot());
 
                         }
 
@@ -742,9 +766,9 @@ public class superAdmin {
                 DriverAction.waitSec(10);
                 String firstRowAfterDelete = DriverAction.getElement(superAdmin_Locators.deleteRow).getText();
                 if (firstRowAfterDelete.equals(firstRowBeforeDelete))
-                    GemTestReporter.addTestStep("Check whether row got deleted or not", "Row was not deleted ", STATUS.FAIL, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Check wether row got deleted or not", "Row was not deleted ", STATUS.FAIL, DriverAction.takeSnapShot());
                 else
-                    GemTestReporter.addTestStep("Check whether row got deleted or not", "Row was deleted successfully", STATUS.PASS, DriverAction.takeSnapShot());
+                    GemTestReporter.addTestStep("Check wether row got deleted or not", "Row was deleted successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
                 DriverAction.getElement(superAdmin_Locators.navigate_Back).click();
 
@@ -756,9 +780,105 @@ public class superAdmin {
         }
 
     }
+    @Then("^Validate Product Master Card and its functionality (.+)$")
+    public void ValidateProductMaster(String username) {
+        DriverManager.getWebDriver().navigate().refresh();
+        DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(3))));
+        DriverAction.click(superAdmin_Locators.ProductMasterCard);
 
+        //product master label
+        if (DriverAction.getElement(GopsUser_Locators.selectValue("Product Master")).isDisplayed())
+            GemTestReporter.addTestStep("Check Wether Product Master label is present or not", "Label Found Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check Wether Product Master label is present or not", "Label was not Found", STATUS.FAIL, DriverAction.takeSnapShot());
+        if (DriverAction.getElement(superAdmin_Locators.backButton).isDisplayed())
+            GemTestReporter.addTestStep("Check wether Back Button < is present or not", "Found Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check wether Back Button < is present or not", "Not Found", STATUS.FAIL, DriverAction.takeSnapShot());
+//columns are display
+
+        if (DriverAction.getElement(GopsUser_Locators.selectValue("Policy Number")).isDisplayed())
+            GemTestReporter.addTestStep("Check wether Policy Number was displayed or not", "Found Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check wether Policy Number was displayed or not", "Not Found", STATUS.FAIL, DriverAction.takeSnapShot());
+        if (DriverAction.getElement(GopsUser_Locators.selectValue("Product Name ")).isDisplayed())
+            GemTestReporter.addTestStep("Check wether Product Name was displayed or not", "Found Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check wether Product Name was displayed or not", "Not Found", STATUS.FAIL, DriverAction.takeSnapShot());
+        if (DriverAction.getElement(GopsUser_Locators.selectValue("Plan Number ")).isDisplayed())
+            GemTestReporter.addTestStep("Check wether Plan Number was displayed or not", "Found Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check wether Plan Number was displayed or not", "Not Found", STATUS.FAIL, DriverAction.takeSnapShot());
+        if (DriverAction.getElement(GopsUser_Locators.selectValue("Moratorium ")).isDisplayed())
+            GemTestReporter.addTestStep("Check whether Moratorium was displayed or not", "Found Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check wether Moratorium was displayed or not", "Not Found", STATUS.FAIL, DriverAction.takeSnapShot());
+        if (DriverAction.getElement(GopsUser_Locators.selectValue("Type ")).isDisplayed())
+            GemTestReporter.addTestStep("Check wether Type was displayed or not", "Found Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check wether Type was displayed or not", "Not Found", STATUS.FAIL, DriverAction.takeSnapShot());
+        if (DriverAction.getElement(GopsUser_Locators.selectValue("Action")).isDisplayed())
+            GemTestReporter.addTestStep("Check wether Action was displayed or not", "Found Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check wether Action was displayed or not", "Not Found", STATUS.FAIL, DriverAction.takeSnapShot());
+
+//create
+        if (DriverAction.getElement(GopsUser_Locators.selectValue(" Create Product Master ")).isDisplayed())
+            GemTestReporter.addTestStep("Check wether Create Product Master button is present or not", "Button Found Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check wether Create Product Master button is present or not", "Button was not found", STATUS.FAIL, DriverAction.takeSnapShot());
+        DriverAction.getElement(GopsUser_Locators.selectValue(" Create Product Master ")).click();
+        GemTestReporter.addTestStep("Click on the Create Product Master Button", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        DriverAction.getElement(superAdmin_Locators.inputBoxes("Product Name")).sendKeys("Demo Product");
+        GemTestReporter.addTestStep("Add a product name to the input box", "Product name 'Demo Product' added successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        DriverAction.getElement(superAdmin_Locators.inputBoxes("Plan Number")).sendKeys("1234");
+        GemTestReporter.addTestStep("Add a Plan Number to the input box", "Plan Number '1234' added successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        DriverAction.getElement(superAdmin_Locators.inputBoxes("Moratorium")).sendKeys("D1");
+        GemTestReporter.addTestStep("Add Moratorium to the input box", "Moratorium 'D1' added successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        DriverAction.getElement(superAdmin_Locators.loanTypeDropdown).click();
+        GemTestReporter.addTestStep("Click on the Select loan Type dropdown", "Clicked Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        DriverAction.getElement(GopsUser_Locators.dropdownMenu("2")).click();
+
+        GemTestReporter.addTestStep("Select any value from the loan type dropdown", "'Business Loan' Selected successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        DriverAction.getElement(superAdmin_Locators.inputBoxes("Policy Number")).sendKeys("1234");
+        GemTestReporter.addTestStep("Add Policy Number to the input box", "Policy '1234' added successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        DriverAction.getElement(superAdmin_Locators.createProductMaster).click();
+        GemTestReporter.addTestStep("Click on create product master", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+
+        //edit
+        String before = DriverAction.getElement(superAdmin_Locators.productName1).getText();
+        DriverAction.getElement(superAdmin_Locators.edit).click();
+        GemTestReporter.addTestStep("Click on edit button to edit the Product Master", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        DriverAction.getElement(superAdmin_Locators.inputBoxes("Product Name")).sendKeys("Demo change");
+        GemTestReporter.addTestStep("Edit the Product name", "Product name edited successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+        DriverAction.getElement(superAdmin_Locators.updateProductMaster).click();
+        GemTestReporter.addTestStep("Click on the update product master button", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(superAdmin_Locators.edit));
+        String after = DriverAction.getElement(superAdmin_Locators.productName1).getText();
+        if (before.equals(after) != true)
+            GemTestReporter.addTestStep("Check wether edit button works properly or not", "Product Name updated successfully i.e edit button works properly", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check wether edit button works properly or not", "Product Name was not updated i.e edit button does not works properly", STATUS.FAIL, DriverAction.takeSnapShot());
+//delete
+        DriverAction.waitSec(10);
+        String elem1=DriverAction.getElement(superAdmin_Locators.totalRecords).getText();
+        DriverAction.getElement(superAdmin_Locators.deleteButton).click();
+        DriverAction.waitSec(4);
+        String elem2=DriverAction.getElement(superAdmin_Locators.totalRecords).getText();
+        if(elem1.equals(elem2))
+            GemTestReporter.addTestStep("Check wether Record got deleted or not","Record was not deleted",STATUS.FAIL,DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check wether Record got deleted or not","Record was deleted",STATUS.PASS,DriverAction.takeSnapShot());
+
+    }
     @Then("^Validate Relationship card and its functionality (.+)$")
     public void ValidateRelationship(String username) {
+        DriverManager.getWebDriver().navigate().refresh();
+        DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(3))));
+
         Map<Integer, List<String>> map = new HashMap<>();
         map.put(1, Arrays.asList("Appointee-Nominee ", "demo", "demo_value", " DFFR", "UpdatedDemo"));
         map.put(2, Arrays.asList("Nominee-Applicant ", "N", "Newly", "N1", "Newly1"));
@@ -811,10 +931,10 @@ public class superAdmin {
                 }
             }
             if (c == list1.size()) {
-                GemTestReporter.addTestStep("Validating weather all the required columns are present in" + map.get(i).get(0) + "Table", "All Columns are there in" + map.get(i).get(0) + "Table", STATUS.PASS, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validating wether all the required columns are present in" + map.get(i).get(0) + "Table", "All Columns are there in" + map.get(i).get(0) + "Table", STATUS.PASS, DriverAction.takeSnapShot());
 
             } else {
-                GemTestReporter.addTestStep("Validating weather all the required columns are present in" + map.get(i).get(0) + "Table", "All Columns are not there in" + map.get(i).get(0) + "Table", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Validating wether all the required columns are present in" + map.get(i).get(0) + "Table", "All Columns are not there in" + map.get(i).get(0) + "Table", STATUS.FAIL, DriverAction.takeSnapShot());
 
             }
             //create
@@ -822,8 +942,15 @@ public class superAdmin {
                 if (DriverAction.getElement(superAdmin_Locators.Create_btn1).isDisplayed()) {
                     GemTestReporter.addTestStep("Validate Create Button is visible on Salutation Screen", "Create button is visible on Salutation Screen", STATUS.PASS, DriverAction.takeSnapShot());
                     DriverAction.getElement(superAdmin_Locators.Create_btn1).click();
-                    DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
-                    DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
+                   // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
+                    WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
+                    ele.sendKeys(map.get(i).get(2));
+                    GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(2)+"Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+                   // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
+                    ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
+                    ele.sendKeys(map.get(i).get(1));
+                    GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(1)+"Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
                     DriverAction.getElement(superAdmin_Locators.Create_btn).click();
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     Date date = new Date();
@@ -834,19 +961,19 @@ public class superAdmin {
                         c++;
                         String Columns = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(j)))).getText();
                         if (Columns.equals("demo_value")) {
-                            GemTestReporter.addTestStep("Validating value after Creating" + map.get(i).get(0), "Required Value -> " + " Actual value-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating value after Creating" + map.get(i).get(0), " Required Value -> " + " Actual value-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
                         if (Columns.equals("demo")) {
-                            GemTestReporter.addTestStep("Validating code after Creating" + map.get(i).get(0), "Required code -> " + " Actual code-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating code after Creating" + map.get(i).get(0), " Required code -> " + " Actual code-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
                         if (Columns.equals(str)) {
-                            GemTestReporter.addTestStep("Validating Created Date after Creating" + map.get(i).get(0), "Required Date -> " + str + " Actual date-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating Created Date after Creating" + map.get(i).get(0), " Required Date -> " + str + " Actual date-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
                         if (Columns.equals(username)) {
-                            GemTestReporter.addTestStep("Validating Created by after Creating" + map.get(i).get(0), "Required user -> " + username + " Actual user-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating Created by after Creating" + map.get(i).get(0), " Required user -> " + username + " Actual user-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
 
@@ -862,8 +989,15 @@ public class superAdmin {
                 if (DriverAction.getElement(superAdmin_Locators.Create_btn).isDisplayed()) {
                     GemTestReporter.addTestStep("Validate Create Button is visible on Salutation Screen", "Create button is visible on Salutation Screen", STATUS.PASS, DriverAction.takeSnapShot());
                     DriverAction.getElement(superAdmin_Locators.Create_btn).click();
-                    DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
-                    DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
+                   // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
+                    WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
+                    ele.sendKeys(map.get(i).get(2));
+                    GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(2)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+                   // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
+                    ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
+                    ele.sendKeys(map.get(i).get(1));
+                    GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(1)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
                     DriverAction.getElement(superAdmin_Locators.Create_btn).click();
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     Date date = new Date();
@@ -874,19 +1008,19 @@ public class superAdmin {
                         c++;
                         String Columns = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(j)))).getText();
                         if (Columns.equals("demo_value")) {
-                            GemTestReporter.addTestStep("Validating value after Creating" + map.get(i).get(0), "Required Value -> " + " Actual value-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating value after Creating" + map.get(i).get(0), " Required Value -> " + " Actual value-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
                         if (Columns.equals("demo")) {
-                            GemTestReporter.addTestStep("Validating code after Creating" + map.get(i).get(0), "Required code -> " + " Actual code-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating code after Creating" + map.get(i).get(0), " Required code -> " + " Actual code-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
                         if (Columns.equals(str)) {
-                            GemTestReporter.addTestStep("Validating Created Date after Creating" + map.get(i).get(0), "Required Date -> " + str + " Actual date-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating Created Date after Creating" + map.get(i).get(0), " Required Date -> " + str + " Actual date-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
                         if (Columns.equals(username)) {
-                            GemTestReporter.addTestStep("Validating Created by after Creating" + map.get(i).get(0), "Required user -> " + username + " Actual user-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating Created by after Creating" + map.get(i).get(0), " Required user -> " + username + " Actual user-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
 
@@ -900,8 +1034,16 @@ public class superAdmin {
                 if (DriverAction.getElement(superAdmin_Locators.Create_btn1).isDisplayed()) {
                     GemTestReporter.addTestStep("Validate Create Button is visible on Salutation Screen", "Create button is visible on Salutation Screen", STATUS.PASS, DriverAction.takeSnapShot());
                     DriverAction.getElement(superAdmin_Locators.Create_btn1).click();
-                    DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
-                    DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
+                   // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
+                    WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
+                    ele.sendKeys(map.get(i).get(2));
+                    GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(2)+"Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+                   // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
+                    ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
+                    ele.sendKeys(map.get(i).get(1));
+                    GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(1)+"Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
                     DriverAction.getElement(superAdmin_Locators.Create_btn).click();
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     Date date = new Date();
@@ -912,19 +1054,19 @@ public class superAdmin {
                         c++;
                         String Columns = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(j)))).getText();
                         if (Columns.equals("demo_value")) {
-                            GemTestReporter.addTestStep("Validating value after Creating" + map.get(i).get(0), "Required Value -> " + " Actual value-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating value after Creating" + map.get(i).get(0), " Required Value -> " + " Actual value-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
                         if (Columns.equals("demo")) {
-                            GemTestReporter.addTestStep("Validating code after Creating" + map.get(i).get(0), "Required code -> " + " Actual code-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating code after Creating" + map.get(i).get(0), " Required code -> " + " Actual code-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
                         if (Columns.equals(str)) {
-                            GemTestReporter.addTestStep("Validating Created Date after Creating" + map.get(i).get(0), "Required Date -> " + str + " Actual date-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating Created Date after Creating" + map.get(i).get(0), " Required Date -> " + str + " Actual date-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
                         if (Columns.equals(username)) {
-                            GemTestReporter.addTestStep("Validating Created by after Creating" + map.get(i).get(0), "Required user -> " + username + " Actual user-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating Created by after Creating" + map.get(i).get(0), " Required user -> " + username + " Actual user-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
 
@@ -938,8 +1080,16 @@ public class superAdmin {
                 if (DriverAction.getElement(superAdmin_Locators.Create_btn1).isDisplayed()) {
                     GemTestReporter.addTestStep("Validate Create Button is visible on Salutation Screen", "Create button is visible on Salutation Screen", STATUS.PASS, DriverAction.takeSnapShot());
                     DriverAction.getElement(superAdmin_Locators.Create_btn1).click();
-                    DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
-                    DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
+                   // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
+                    WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
+                    ele.sendKeys(map.get(i).get(2));
+                    GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(2)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+                    //DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
+                    ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
+                    ele.sendKeys(map.get(i).get(1));
+                    GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(1)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
                     DriverAction.getElement(superAdmin_Locators.Create_btn).click();
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     Date date = new Date();
@@ -950,19 +1100,19 @@ public class superAdmin {
                         c++;
                         String Columns = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(j)))).getText();
                         if (Columns.equals("demo_value")) {
-                            GemTestReporter.addTestStep("Validating value after Creating" + map.get(i).get(0), "Required Value -> " + " Actual value-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating value after Creating" + map.get(i).get(0), " Required Value -> " + " Actual value-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
                         if (Columns.equals("demo")) {
-                            GemTestReporter.addTestStep("Validating code after Creating" + map.get(i).get(0), "Required code -> " + " Actual code-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating code after Creating" + map.get(i).get(0), " Required code -> " + " Actual code-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
                         if (Columns.equals(str)) {
-                            GemTestReporter.addTestStep("Validating Created Date after Creating" + map.get(i).get(0), "Required Date -> " + str + " Actual date-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating Created Date after Creating" + map.get(i).get(0), " Required Date -> " + str + " Actual date-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
                         if (Columns.equals(username)) {
-                            GemTestReporter.addTestStep("Validating Created by after Creating" + map.get(i).get(0), "Required user -> " + username + " Actual user-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
+                            GemTestReporter.addTestStep("Validating Created by after Creating" + map.get(i).get(0), " Required user -> " + username + " Actual user-> " + Columns, STATUS.PASS, DriverAction.takeSnapShot());
 
                         }
 
@@ -985,13 +1135,22 @@ public class superAdmin {
             Actions act = new Actions(DriverManager.getWebDriver());
             act.sendKeys(Keys.CONTROL + "a").build().perform();
             act.sendKeys(Keys.BACK_SPACE).build().perform();
-            DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(4));
+           // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(4));
+            WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
+            ele.sendKeys(map.get(i).get(4));
+            GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(4)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
             act.sendKeys(Keys.TAB).build().perform();
             DriverAction.waitSec(5);
             DriverAction.getElement(superAdmin_Locators.code_inp).click();
             act.sendKeys(Keys.CONTROL + "a").build().perform();
             act.sendKeys(Keys.BACK_SPACE).build().perform();
-            DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(3));
+           // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(3));
+             ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
+            ele.sendKeys(map.get(i).get(3));
+            GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(3)+"  Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+
             if (String.valueOf(map.get(i).get(0)).equals("Nominee-Applicant ")) {
                 DriverAction.getElement(superAdmin_Locators.update_button).click();
             } else if (map.get(i).get(0) == "Cover basis ") {
@@ -1667,6 +1826,8 @@ public class superAdmin {
     @Then("^Click on Covid Questions and Validate$")
     public void covid_questions()
     {
+        DriverManager.getWebDriver().navigate().refresh();
+        DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(3))));
      if(DriverAction.getElement(superAdmin_Locators.Covid_Questions_Card).isDisplayed())
      {
          GemTestReporter.addTestStep("Verify Covid Question Card is visible","Covid Questions Card is visible",STATUS.PASS,DriverAction.takeSnapShot());
@@ -1779,13 +1940,19 @@ public class superAdmin {
              {
                  GemTestReporter.addTestStep("Verify Update Button is visible","Update Button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
              }
+             if(DriverAction.getElement(superAdmin_Locators.CodeAlreadyTakenError).isDisplayed()) {
+                 GemTestReporter.addTestStep("Verify Code Alraedy Taken Error message dispaly when the covid question with same code is updated","Error Message successfully appears",STATUS.PASS,DriverAction.takeSnapShot());
+             }
+             else
+             {
+                 DriverAction.getElement(superAdmin_Locators.Edit_Action_Button_Covid_Questions).click();
+             }
 
-             DriverAction.getElement(superAdmin_Locators.Edit_Action_Button_Covid_Questions).click();
              if(DriverAction.getElement(superAdmin_Locators.Discard_btn_Update_Covid_Questions).isDisplayed())
              {
 
                  GemTestReporter.addTestStep("Verify Discard Button is visible","Discard button is visible",STATUS.PASS,DriverAction.takeSnapShot());
-                 DriverAction.getElement(superAdmin_Locators.Discard_btn_Update_Covid_Questions).click();
+                // DriverAction.getElement(superAdmin_Locators.Discard_btn_Update_Covid_Questions).click();
              }
              else
              {
@@ -1794,6 +1961,7 @@ public class superAdmin {
              if(DriverAction.getElement(superAdmin_Locators.Back_Edit_Covid_Questions).isDisplayed())
              {
                  GemTestReporter.addTestStep("Verify Back button is visible","Back button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                 DriverAction.getElement(superAdmin_Locators.Back_Edit_Covid_Questions).click();
              }
              else
              {
@@ -1863,6 +2031,205 @@ public class superAdmin {
     @Then("^Click on Medical Questions and Validate$")
     public void medical_questions()
     {
+        DriverManager.getWebDriver().navigate().refresh();
+        DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(3))));
+        if(DriverAction.getElement(superAdmin_Locators.Medical_Questions_Card).isDisplayed())
+        {
+            GemTestReporter.addTestStep("Verify Medical Question Card is visible","Medical Questions Card is visible",STATUS.PASS,DriverAction.takeSnapShot());
+            DriverAction.getElement(superAdmin_Locators.Medical_Questions_Card).click();
+            GemTestReporter.addTestStep("Verify Medical Question Card is clickable","Medical Questions Card is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+
+            if(DriverAction.getElement(superAdmin_Locators.BreadCrumb_Covid_Questions).isDisplayed())
+            {
+                String str = DriverAction.getElement(superAdmin_Locators.BreadCrumb_Covid_Questions).getText();
+                GemTestReporter.addTestStep("Verify Breadcrumb is visible","Bread Crumb is visible with value : "+str,STATUS.PASS,DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify Breadcrumb is visible","Bread Crumb is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+            if(DriverAction.getElement(superAdmin_Locators.Left_Angle_Covid_Questions_Label).isDisplayed())
+            {
+                GemTestReporter.addTestStep("Verify Back button is visible","Back button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                DriverAction.getElement(superAdmin_Locators.Left_Angle_Covid_Questions_Label).click();
+                GemTestReporter.addTestStep("Verify Back button is clickable","Back button is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify Back button is visible","Back button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+            DriverAction.getElement(superAdmin_Locators.Medical_Questions_Card).click();
+            if(DriverAction.getElement(superAdmin_Locators.Medical_Questions_Label).isDisplayed())
+            {
+                GemTestReporter.addTestStep("Verify Medical Questions Label is visible", "Medical Question Label is visible", STATUS.PASS, DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify Medical Questions Label is visible","Medical Question Label is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+            if(DriverAction.getElement(superAdmin_Locators.Code_Column_Covid_Questions).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Value_Column_Covid_Questions).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Created_On_Column_Covid_Questions).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Created_By_Column_Covid_Questions).isDisplayed() && DriverAction.getElement(superAdmin_Locators.Action_Column_Covid_Questions).isDisplayed())
+            {
+                GemTestReporter.addTestStep("Verify Columns : Code,Value,Created On,Created By and Action","Following column should be visible : Code,Value,Created On,Created By,Action",STATUS.PASS,DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify Columns : Code,Value,Created On,Created By and Action","Following columns are not visible : Code,Value,Created On,Created By,Action",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+            if(DriverAction.getElement(superAdmin_Locators.Edit_Action_Button_Covid_Questions).isDisplayed())
+            {
+                GemTestReporter.addTestStep("Verify Edit Button is visible", "Edit button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+
+                DriverAction.getElement(superAdmin_Locators.Edit_Action_Button_Covid_Questions).click();
+                GemTestReporter.addTestStep("Verify Edit Button is clickable", "Edit button is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+                if(DriverAction.getElement(superAdmin_Locators.BreadCrumb_Covid_Questions).isDisplayed())
+                {
+                    String str = DriverAction.getElement(superAdmin_Locators.BreadCrumb_Covid_Questions).getText();
+                    GemTestReporter.addTestStep("Verify Breadcrumb is visible","Bread Crumb is visible with value : "+str,STATUS.PASS,DriverAction.takeSnapShot());
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Verify Breadcrumb is visible","Bread Crumb is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+                }
+                if(DriverAction.getElement(superAdmin_Locators. Medical_Questions_Update_Label).isDisplayed())
+                {
+                    GemTestReporter.addTestStep("Verify Update Label","Update Label is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Verify Update Label","Update Label is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+                }
+                if(DriverAction.getElement(superAdmin_Locators.Label_Edit_Covid_Questions).isDisplayed())
+                {
+                    GemTestReporter.addTestStep("Verify Medical Questions Update Label is visible","Medical Questions Update Label is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Verify Medical Questions Update Label is not visible","Medical Questions Update Label is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+                }
+                if(DriverAction.getElement(superAdmin_Locators.Value_Update_Covid_Questions).isDisplayed())
+                {
+                    GemTestReporter.addTestStep("Verify Value Text Field is visible","Value Text Field is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                    DriverAction.typeText(superAdmin_Locators.Value_Update_Covid_Questions,"Has more than one of your close relatives died before the age of 60 years as a result of heart attack, stroke, cancer, diabetes?");
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Verify Value Text Field is visible","Value Text Field is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+                }
+                if(DriverAction.getElement(superAdmin_Locators.Code_Update_Covid_Questions).isDisplayed())
+                {
+                    GemTestReporter.addTestStep("Verify Code Text Field is visible","Code Text Field is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                    DriverAction.typeText(superAdmin_Locators.Code_Update_Covid_Questions,"MQ-5");
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Verify Code Text Field is visible","Code Text Field is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+                }
+                if(DriverAction.getElement(superAdmin_Locators.Update_btn_Update_Medical_Questions).isDisplayed())
+                {
+                    String str1 = DriverAction.getCurrentURL();
+                    GemTestReporter.addTestStep("Verify Update Button is visible","Update Button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                    DriverAction.getElement(superAdmin_Locators.Update_btn_Update_Medical_Questions).click();
+                    String str2 = DriverAction.getCurrentURL();
+                    if(str1.equals(str2))
+                    {
+                        GemTestReporter.addTestStep("Verify Code Already Taken","Code Already taken is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                        DriverAction.typeText(superAdmin_Locators.Code_Update_Covid_Questions,"MQ-6");
+                        DriverAction.getElement(superAdmin_Locators.Update_btn_Update_Medical_Questions).click();
+                    }
+                    else
+                    {
+                        GemTestReporter.addTestStep("Verify Update Button is clickable","Update Button is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+                    }
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Verify Update Button is visible","Update Button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+                }
+                if(DriverAction.getElement(superAdmin_Locators.CodeAlreadyTakenError).isDisplayed()) {
+                    GemTestReporter.addTestStep("Verify Code Alraedy Taken Error message dispaly when the Medical question with same code is updated","Error Message successfully appears",STATUS.PASS,DriverAction.takeSnapShot());
+                }
+                else
+                {
+                    DriverAction.getElement(superAdmin_Locators.Edit_Action_Button_Covid_Questions).click();
+                }
+
+                if(DriverAction.getElement(superAdmin_Locators.Discard_btn_Update_Covid_Questions).isDisplayed())
+                {
+
+                    GemTestReporter.addTestStep("Verify Discard Button is visible","Discard button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                    // DriverAction.getElement(superAdmin_Locators.Discard_btn_Update_Covid_Questions).click();
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Verify Discard Button is visible","Discard button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+                }
+                if(DriverAction.getElement(superAdmin_Locators.Back_Edit_Covid_Questions).isDisplayed())
+                {
+                    GemTestReporter.addTestStep("Verify Back button is visible","Back button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+                    DriverAction.getElement(superAdmin_Locators.Back_Edit_Covid_Questions).click();
+                }
+                else
+                {
+                    GemTestReporter.addTestStep("Verify Back button is visible","Back button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+
+                }
+
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify Edit Button is visible", "Edit button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+            if(DriverAction.getElement(superAdmin_Locators.Delete_Action_Button_Covid_Questions).isDisplayed())
+            {
+                GemTestReporter.addTestStep("Verify Delete Button is visible", "Delete button is visible",STATUS.PASS,DriverAction.takeSnapShot());
+
+                //DriverAction.getElement(superAdmin_Locators.Delete_Action_Button_Covid_Questions).click();
+                GemTestReporter.addTestStep("Verify Delete Button is clickable", "Delete button is clickable",STATUS.PASS,DriverAction.takeSnapShot());
+            }
+            else
+            {
+                GemTestReporter.addTestStep("Verify Delete Button is visible", "Delete button is not visible",STATUS.FAIL,DriverAction.takeSnapShot());
+            }
+
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Medical Question Card is visible","Medical Questions Card is not  visible",STATUS.FAIL,DriverAction.takeSnapShot());
+        }
+
+        if(DriverAction.getElement(superAdmin_Locators.Pagination_Covid_Questions).isDisplayed())
+        {
+            String str1 = DriverAction.getElement(superAdmin_Locators.Pagination_Covid_Questions).getText();
+            GemTestReporter.addTestStep("Verify Pagination of Partner Management", "Pagination is visible : "+str1, STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Pagination of Partner Management", "Pagination is not visible", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+        if(DriverAction.getElement(superAdmin_Locators.Covid_Questions_Angle_Right_Partner_Management).isDisplayed())
+        {
+            DriverAction.getElement(superAdmin_Locators.Covid_Questions_Angle_Right_Partner_Management).click();
+            DriverAction.waitSec(2);
+            String pag_text = DriverAction.getElement(superAdmin_Locators.Pagination_Covid_Questions).getText();
+            DriverAction.waitSec(2);
+            GemTestReporter.addTestStep("Verify Next Page Navigation", "Navigate to Next Page is working : "+pag_text, STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Next Page Pagination", "Next Page Pagination is not working", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+        if(DriverAction.getElement(superAdmin_Locators.Covid_Questions_Angle_Left_Partner_Management).isDisplayed())
+        {
+            DriverAction.getElement(superAdmin_Locators.Covid_Questions_Angle_Left_Partner_Management).click();
+            DriverAction.waitSec(2);
+            String pag_text = DriverAction.getElement(superAdmin_Locators.Pagination_Covid_Questions).getText();
+            DriverAction.waitSec(2);
+            GemTestReporter.addTestStep("Verify Previous Page Navigation", "Navigate to Previous Page is working : "+pag_text, STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else
+        {
+            GemTestReporter.addTestStep("Verify Previous Page Pagination", "Previous Page Pagination is not working", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
 
 
     }
