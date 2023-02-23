@@ -154,6 +154,10 @@ Feature: Super Admin
     Given Enter Username and Password and validate <Validate_txt>,<username>,<password>
     Then  Navigate to Master Management Tab and validate logo
     Then  Navigate Cards and validate all functionality <username>
+    Then  Validate Relationship card and its functionality <username>
+    Then  Validate Product Master Card and its functionality <username>
+    Then  Click on Covid Questions and Validate
+    Then  Click on Medical Questions and Validate
 
     Examples:
       | Validate_txt | username                            | password |
