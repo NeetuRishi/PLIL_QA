@@ -301,7 +301,7 @@ public class superAdmin_Locators {
     //i[@class='fa-light fa-pen-to-square mx-2 cursor']
 
 //i[@class='fa-light fa-trash-can']
-
+public static By edit=By.xpath("//i[@class='fa-light fa-pen-to-square mx-2'][1]");
     //button[text()=' Create ']
     public static By update_button = By.xpath("//button[text()=' Update ']");
     public static By update_button1 = By.xpath("//button[text()='Update']");
@@ -318,13 +318,22 @@ public class superAdmin_Locators {
     public static By Pagination_Angle_Left1 = By.xpath("//div[@class='paginator']//span");
 
 
-    //product master
+
     public static By backButton = By.xpath("//i[@class='fa fa-angle-left arrow']");
     public static By createProductMaster = By.xpath("//button[text()='Create Product Master']");
     public static By inputBoxes(String placeholder) {        return By.xpath("//input[@placeholder='" + placeholder + "']");    }
     public static By loanTypeDropdown = By.xpath("//div/mat-select[@formcontrolname='loanTypeId']");
     public static By updateProductMaster=By.xpath("//button[text()='Update Product Master']");
     public static By productName1 = By.xpath("//table/tbody/tr[1]/td[2]");
+
+//    public static By edit=By.xpath("//i[@class='fa-light fa-pen-to-square mx-2'][1]");
+    public static By  totalRecords  = By.xpath("//div[@class='pageOf']");
+//    public static By LoanType = By.xpath(" //h2[text()='Loan Type']");
+    //h2[text()='Loan Type']public static String Salutation_Col = "(//table[@class='mat-table cdk-table mat-sort']/thead/tr/th/div)[itr]";
+//    public static By navigate_Back = By.xpath("//i[@class='fa fa-angle-left arrow']");//i[@class='fa fa-angle-left arrow']
+//public static String Salutation_Card = "//span[text()='itr']";public static String Relationship_Card = "//div[text()='itr']";
+    public static By ProductMasterCard = By.xpath("//span[text()='Product Masters']");
+
     public static By edit=By.xpath("//i[@class='fa-light fa-pen-to-square mx-2'][1]");
     public static By  totalRecords  = By.xpath("//div[@class='pageOf']");
 
@@ -333,4 +342,5 @@ public class superAdmin_Locators {
 
 
     //span[text()='Code already taken']
+
 }
