@@ -218,19 +218,27 @@ public class superAdmin_Locators {
     public static By IG_File_Generated_Successfully_Snack_Bar_Cancel_Btn = By.xpath("//simple-snack-bar/div/button/span[text()='Cancel']");
 
     // MASTER MANAGEMENT
+//span[text()='Medical Questions']
 
     public static By Covid_Questions_Card = By.xpath("//div[@class='row user-navigate ml-4 mt-2']/div/div[12]");
     public static By BreadCrumb_Covid_Questions = By.xpath("//ol[@class='breadcrumb']");
     public static By Left_Angle_Covid_Questions_Label = By.xpath("//h2[@class='header']/i");
     public static By Covid_Questions_Label = By.xpath("//h2[text()=' Covid Questions']");
+    public static By Medical_Questions_Label = By.xpath("//h2[text()='Medical Question']");
+
 
     public static By Covid_Questions_Update_Label = By.xpath("//h2[text()='Update Covid Questions']");
+    public static By Medical_Questions_Update_Label = By.xpath("//h2[text()='Update Medical Question']");
+
+    //h2[text()='Update Medical Question']
     public static By Back_Edit_Covid_Questions = By.xpath("//i[@class='fa fa-angle-left arrow']");
     public static By Label_Edit_Covid_Questions = By.xpath("//p[contains(text(),'Enter the code')]");
     public static By Value_Update_Covid_Questions = By.xpath("//div/input[@placeholder='Value']");
     public static By Code_Update_Covid_Questions = By.xpath("//div/input[@placeholder='Code']");
     public static By Discard_btn_Update_Covid_Questions = By.xpath("//button[text()=' Discard ']");
     public static By Update_btn_Update_Covid_Questions = By.xpath("//button[text()='Update']");
+    public static By Update_btn_Update_Medical_Questions = By.xpath("//button[text()=' Update ']");
+
 
     public static By Code_Column_Covid_Questions = By.xpath("//thead/tr/th[1]");
     public static By Value_Column_Covid_Questions = By.xpath("//thead/tr/th[2]");
@@ -259,6 +267,10 @@ public class superAdmin_Locators {
     public static String Salutation_Card = "//span[text()='itr']";
 
     public static String Relationship_Card = "//div[text()='itr']";
+
+    public static By ProductMasterCard = By.xpath("//span[text()='Product Masters']");
+
+    //span[text()='Product Masters']
 
     //h2[text()='Appointee Relation with Nominee']
     public static By Appointee_Nominee_Lable = By.xpath("//h2[text()='Appointee Relation with Nominee']");
@@ -306,13 +318,14 @@ public static By edit=By.xpath("//i[@class='fa-light fa-pen-to-square mx-2'][1]"
     public static By Pagination_Angle_Left1 = By.xpath("//div[@class='paginator']//span");
 
 
-    //gops locators
+
     public static By backButton = By.xpath("//i[@class='fa fa-angle-left arrow']");
     public static By createProductMaster = By.xpath("//button[text()='Create Product Master']");
     public static By inputBoxes(String placeholder) {        return By.xpath("//input[@placeholder='" + placeholder + "']");    }
     public static By loanTypeDropdown = By.xpath("//div/mat-select[@formcontrolname='loanTypeId']");
     public static By updateProductMaster=By.xpath("//button[text()='Update Product Master']");
     public static By productName1 = By.xpath("//table/tbody/tr[1]/td[2]");
+
 //    public static By edit=By.xpath("//i[@class='fa-light fa-pen-to-square mx-2'][1]");
     public static By  totalRecords  = By.xpath("//div[@class='pageOf']");
 //    public static By LoanType = By.xpath(" //h2[text()='Loan Type']");
@@ -320,4 +333,14 @@ public static By edit=By.xpath("//i[@class='fa-light fa-pen-to-square mx-2'][1]"
 //    public static By navigate_Back = By.xpath("//i[@class='fa fa-angle-left arrow']");//i[@class='fa fa-angle-left arrow']
 //public static String Salutation_Card = "//span[text()='itr']";public static String Relationship_Card = "//div[text()='itr']";
     public static By ProductMasterCard = By.xpath("//span[text()='Product Masters']");
+
+    public static By edit=By.xpath("//i[@class='fa-light fa-pen-to-square mx-2'][1]");
+    public static By  totalRecords  = By.xpath("//div[@class='pageOf']");
+
+    public static By  CodeAlreadyTakenError  = By.xpath("//span[text()='Code already taken']");
+
+
+
+    //span[text()='Code already taken']
+
 }
