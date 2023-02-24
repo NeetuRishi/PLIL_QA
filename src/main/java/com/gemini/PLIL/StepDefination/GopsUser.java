@@ -47,24 +47,41 @@ public class GopsUser {
     public void validateHomePage() {
         if (DriverAction.getElement(GopsUser_Locators.homeTab).isDisplayed())
             GemTestReporter.addTestStep("Verify whether Home Page Opens", "Home Page Opened Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify whether Home Page Opens", "Home Page did not Opened", STATUS.FAIL, DriverAction.takeSnapShot());
+
         if (DriverAction.getElement(GopsUser_Locators.PLIL_logo).isDisplayed())
             GemTestReporter.addTestStep("Check whether PLIL Logo is present or not", "Logo is found successfully", STATUS.PASS, DriverAction.takeSnapShot());
+    else
+            GemTestReporter.addTestStep("Check whether PLIL Logo is present or not", "Logo is not found" ,STATUS.FAIL, DriverAction.takeSnapShot());
+
     }
 
     @Then("^Validate Hamburger Button is present$")
     public void validateHamburgerButton() {
         if (DriverAction.getElement(GopsUser_Locators.hamburgerButton).isDisplayed())
             GemTestReporter.addTestStep("Verify whether Hamburger Button is present or not", "Hamburger button is found", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify whether Hamburger Button is present or not", "Hamburger button is not found", STATUS.FAIL, DriverAction.takeSnapShot());
+
     }
 
     @Then("^Validate Name,Email ID, Mobile Number are present$")
     public void validateDifferentOptions() {
         if (DriverAction.getElement(GopsUser_Locators.selectValue("Name")).isDisplayed())
             GemTestReporter.addTestStep("Verify whether Name Field is displayed", "Name is displayed", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify whether Name Field is displayed", "Name is not displayed", STATUS.FAIL, DriverAction.takeSnapShot());
+
         if (DriverAction.getElement(GopsUser_Locators.selectValue("Email ID")).isDisplayed())
             GemTestReporter.addTestStep("Verify whether Email ID Field is displayed", "Email ID is displayed", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify whether Email ID Field is displayed", "Email ID is not displayed", STATUS.FAIL, DriverAction.takeSnapShot());
+
         if (DriverAction.getElement(GopsUser_Locators.selectValue("Mobile No.")).isDisplayed())
             GemTestReporter.addTestStep("Verify whether Mobile No. Field is displayed", "Mobile No. is displayed", STATUS.PASS, DriverAction.takeSnapShot());
+else
+            GemTestReporter.addTestStep("Verify whether Mobile No. Field is displayed", "Mobile No. is not displayed", STATUS.FAIL, DriverAction.takeSnapShot());
 
     }
 
@@ -72,14 +89,25 @@ public class GopsUser {
     public void NavigateTo() {
         if (DriverAction.getElement(GopsUser_Locators.selectValue("Navigate to")).isDisplayed())
             GemTestReporter.addTestStep("Verify Navigate to label is present or not", "Navigate to label is present", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify Navigate to label is present or not", "Navigate to label is not present", STATUS.FAIL, DriverAction.takeSnapShot());
+
     }
 
     @Then("^Validate Gops Enquiry Card and Reverse Feed Enquiry Card is present$")
     public void validateDifferentCards() {
         if (DriverAction.getElement(GopsUser_Locators.card1).getText().equals("Reverse Feed Upload"))
             GemTestReporter.addTestStep("verify whether Reverse Feed Upload card is present", "Reverse Feed Upload card is present", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("verify whether Reverse Feed Upload card is present", "Reverse Feed Upload card is not present", STATUS.FAIL, DriverAction.takeSnapShot());
+
+
         if (DriverAction.getElement(GopsUser_Locators.card2).getText().equals("Gops Enquiry"))
             GemTestReporter.addTestStep("verify whether Gops Enquiry card is present", "Gops Enquiry card is present", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+
+            GemTestReporter.addTestStep("verify whether Gops Enquiry card is present", "Gops Enquiry card is not present", STATUS.FAIL, DriverAction.takeSnapShot());
+
 
     }
 
@@ -87,39 +115,54 @@ public class GopsUser {
     public void logoutValidation() {
         if (DriverAction.getElement(GopsUser_Locators.selectValue("Logout")).isDisplayed())
             GemTestReporter.addTestStep("verify whether Logout Button is present", "Logout button found ", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("verify whether Logout Button is present", "Logout button is not found ", STATUS.FAIL, DriverAction.takeSnapShot());
+
+
     }
 
     @Then("^Click on GOPS Enquiry Tab and validate that Gops Enquiry tab is highlighted$")
     public void clickOnGopsEnquiry() {
-        if (DriverAction.getElement(GopsUser_Locators.GopsTab).isDisplayed())
+        if (DriverAction.getElement(GopsUser_Locators.GopsTab).isDisplayed()) {
             GemTestReporter.addTestStep("Check whether Gops Enquiry Tab is present or not", "Gops Enquiry Tab found successfully", STATUS.PASS, DriverAction.takeSnapShot());
-        DriverAction.getElement(GopsUser_Locators.GopsTab).click();
-        DriverAction.waitSec(5);
-        GemTestReporter.addTestStep("Navigate to the Gops Enquiry Tab", "Navigated successfully", STATUS.PASS, DriverAction.takeSnapShot());
-        if (DriverAction.getElement(By.xpath("//a[@href='/admin/groupOps']")).getAttribute("class").equals("nav-link active"))
-            GemTestReporter.addTestStep("Check whether Gops Enquiry Tab got highlighted or not", "Gops Enquiry Tab got highlighted", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.getElement(GopsUser_Locators.GopsTab).click();
+            DriverAction.waitSec(5);
+            GemTestReporter.addTestStep("Navigate to the Gops Enquiry Tab", "Navigated successfully", STATUS.PASS, DriverAction.takeSnapShot());
+            if (DriverAction.getElement(By.xpath("//a[@href='/admin/groupOps']")).getAttribute("class").equals("nav-link active"))
+                GemTestReporter.addTestStep("Check whether Gops Enquiry Tab got highlighted or not", "Gops Enquiry Tab got highlighted", STATUS.PASS, DriverAction.takeSnapShot());
+            else
+                GemTestReporter.addTestStep("Check whether Gops Enquiry Tab got highlighted or not", "It did not get highlighted", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
         else
-            GemTestReporter.addTestStep("Check whether Gops Enquiry Tab got highlighted or not", "It did not get highlighted", STATUS.FAIL, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Check whether Gops Enquiry Tab is present or not", "Gops Enquiry Tab is not found", STATUS.FAIL, DriverAction.takeSnapShot());
+
 
     }
 
     @Then("^Check whether hamburgher button is present or not and clicking it minimizes the side bar$")
     public void clickHamburger() {
-        if (DriverAction.getElement(GopsUser_Locators.hamburgerButton).isDisplayed())
+        if (DriverAction.getElement(GopsUser_Locators.hamburgerButton).isDisplayed()) {
             GemTestReporter.addTestStep("Check whether hamburger button is present or not", "Hamburhger button found successfully", STATUS.PASS, DriverAction.takeSnapShot());
-        DriverAction.getElement(GopsUser_Locators.hamburgerButton).click();
-        GemTestReporter.addTestStep("Click on the Hamburger button", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
-        if (DriverAction.getElements(GopsUser_Locators.checkTabNames).size() == 0)
-            GemTestReporter.addTestStep("Verify whether left pane tabs got minimized", "Left pane got minimized successfully", STATUS.PASS, DriverAction.takeSnapShot());
-        else
-            GemTestReporter.addTestStep("Verify whether left pane tabs got minimized", "Could not minimize the left pane", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.getElement(GopsUser_Locators.hamburgerButton).click();
+            GemTestReporter.addTestStep("Click on the Hamburger button", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
+            if (DriverAction.getElements(GopsUser_Locators.checkTabNames).size() == 0)
+                GemTestReporter.addTestStep("Verify whether left pane tabs got minimized", "Left pane got minimized successfully", STATUS.PASS, DriverAction.takeSnapShot());
+            else
+                GemTestReporter.addTestStep("Verify whether left pane tabs got minimized", "Could not minimize the left pane", STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else {
+            GemTestReporter.addTestStep("Check whether hamburger button is present or not", "Hamburhger button is not  found ", STATUS.FAIL, DriverAction.takeSnapShot());
 
-    }
+        }
+        }
+
 
     @Then("^Validate Filter By Label is present$")
     public void filter() {
         if (DriverAction.getElement(GopsUser_Locators.selectValue("Filter by")).isDisplayed())
             GemTestReporter.addTestStep("Check whether Filter by label is present or not", "Filter By label found successfully", STATUS.PASS, DriverAction.takeSnapShot());
+else
+            GemTestReporter.addTestStep("Check whether Filter by label is present or not", "Filter By label is not found", STATUS.FAIL, DriverAction.takeSnapShot());
 
     }
 
@@ -128,41 +171,47 @@ public class GopsUser {
         //check for the presence of partner dropdown and check its functionality
         if (DriverAction.getElement(GopsUser_Locators.selectValue("Partner")).isDisplayed()) {
             GemTestReporter.addTestStep("Check whether drop down with partner placeholder is present or not", " found successfully", STATUS.PASS, DriverAction.takeSnapShot());
-        }
-        DriverAction.waitSec(4);
-        DriverAction.getElement(GopsUser_Locators.partnerDropdown).click();
-        GemTestReporter.addTestStep("click on the partner filter dropdown", "clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
-        DriverAction.getElement(GopsUser_Locators.dropdownMenu("1")).click();
-        GemTestReporter.addTestStep("Select the first option 'Aadhar Housing Finance' from the drodown menu", "selected successfully", STATUS.PASS, DriverAction.takeSnapShot());
-        DriverAction.waitSec(10);
-        List<WebElement> li = DriverAction.getElements(By.xpath("//table/tbody/tr"));
-        int i = 0;
-        for (i = 0; i < li.size(); i++) {
-            if (!(DriverAction.getElement(By.xpath("//table/tbody/tr[" + (i + 1) + "]/td[1]")).getText().equals("Aadhar Housing Finance"))) {
-                GemTestReporter.addTestStep("Check whether the correct partner filter was applied and is working or not", "The applied filter is not working properly", STATUS.FAIL, DriverAction.takeSnapShot());
-                break;
+
+            DriverAction.waitSec(4);
+            DriverAction.getElement(GopsUser_Locators.partnerDropdown).click();
+            GemTestReporter.addTestStep("click on the partner filter dropdown", "clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.getElement(GopsUser_Locators.dropdownMenu("1")).click();
+            GemTestReporter.addTestStep("Select the first option 'Aadhar Housing Finance' from the drodown menu", "selected successfully", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.waitSec(10);
+            List<WebElement> li = DriverAction.getElements(By.xpath("//table/tbody/tr"));
+            int i = 0;
+            for (i = 0; i < li.size(); i++) {
+                if (!(DriverAction.getElement(By.xpath("//table/tbody/tr[" + (i + 1) + "]/td[1]")).getText().equals("Aadhar Housing Finance"))) {
+                    GemTestReporter.addTestStep("Check whether the correct partner filter was applied and is working or not", "The applied filter is not working properly", STATUS.FAIL, DriverAction.takeSnapShot());
+                    break;
+                }
             }
-        }
-        if (i == li.size())
-            GemTestReporter.addTestStep("Check whether the correct partner filter was applied and is working or not", "The applied filter is working properly", STATUS.PASS, DriverAction.takeSnapShot());
+            if (i == li.size())
+                GemTestReporter.addTestStep("Check whether the correct partner filter was applied and is working or not", "The applied filter is working properly", STATUS.PASS, DriverAction.takeSnapShot());
 //check for the presence of status dropdown and check its functionality
-        if (DriverAction.getElement(GopsUser_Locators.statusDropdown).isDisplayed())
-            GemTestReporter.addTestStep("Check whether status dropdown is present or not", " found successfully", STATUS.PASS, DriverAction.takeSnapShot());
-        DriverAction.getElement(GopsUser_Locators.statusDropdown).click();
-        GemTestReporter.addTestStep("Click on the status dropdown to open it's menu", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
-        DriverAction.getElement(GopsUser_Locators.dropdownMenu("4")).click();
-        GemTestReporter.addTestStep("Select any filter from the status dropdown", "filter 'Uploaded to System' selected successfully", STATUS.PASS, DriverAction.takeSnapShot());
-        DriverAction.waitSec(10);
-        List<WebElement> li1 = DriverAction.getElements(By.xpath("//table/tbody/tr"));
-        int j = 0;
-        for (j = 0; j < li1.size(); j++) {
-            if (!(DriverAction.getElement(By.xpath("//table/tbody/tr[" + (j + 1) + "]/td[10]")).getText().equals(" Uploaded To System"))) {
-                GemTestReporter.addTestStep("Check whether the correct status filter was applied and is working or not", "The applied filter is not working properly", STATUS.FAIL, DriverAction.takeSnapShot());
-                break;
+            if (DriverAction.getElement(GopsUser_Locators.statusDropdown).isDisplayed())
+                GemTestReporter.addTestStep("Check whether status dropdown is present or not", " found successfully", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.getElement(GopsUser_Locators.statusDropdown).click();
+            GemTestReporter.addTestStep("Click on the status dropdown to open it's menu", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.getElement(GopsUser_Locators.dropdownMenu("4")).click();
+            GemTestReporter.addTestStep("Select any filter from the status dropdown", "filter 'Uploaded to System' selected successfully", STATUS.PASS, DriverAction.takeSnapShot());
+            DriverAction.waitSec(10);
+            List<WebElement> li1 = DriverAction.getElements(By.xpath("//table/tbody/tr"));
+            int j = 0;
+            for (j = 0; j < li1.size(); j++) {
+                if (!(DriverAction.getElement(By.xpath("//table/tbody/tr[" + (j + 1) + "]/td[10]")).getText().equals(" Uploaded To System"))) {
+                    GemTestReporter.addTestStep("Check whether the correct status filter was applied and is working or not", "The applied filter is not working properly", STATUS.FAIL, DriverAction.takeSnapShot());
+                    break;
+                }
             }
+            if (j == li1.size())
+                GemTestReporter.addTestStep("Check whether the correct status filter was applied and is working or not", "The applied filter is working properly", STATUS.PASS, DriverAction.takeSnapShot());
         }
-        if (j == li1.size())
-            GemTestReporter.addTestStep("Check whether the correct status filter was applied and is working or not", "The applied filter is working properly", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+        {
+            GemTestReporter.addTestStep("Check whether drop down with partner placeholder is present or not", " not found", STATUS.FAIL, DriverAction.takeSnapShot());
+
+        }
     }
 
     @Then("^Check whether date functionality is working properly or not$")
@@ -294,6 +343,8 @@ public class GopsUser {
     public void checkWhetherTabLabelAppearsOnTheHomepage() {
         if (DriverAction.getElement(By.xpath("//h4[text()='Reverse Feed Upload']")).isDisplayed())
             GemTestReporter.addTestStep("Check whether Reverse Feed Upload label got displayed on the homescreen ", " Label Found successfully", STATUS.PASS, DriverAction.takeSnapShot());
+else
+            GemTestReporter.addTestStep("Check whether Reverse Feed Upload label got displayed on the homescreen ", " Label is not  Found ", STATUS.FAIL, DriverAction.takeSnapShot());
 
     }
 
