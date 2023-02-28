@@ -11,7 +11,7 @@ Feature: Read_User
 
     Examples:
       |Validate_txt|Home|Enquiry|Report|username|password|Reverse Feed|Rejected|
-      |Home        |Home|Enquiry|Report|shubham.a.kumar@geminisolutions.com|Test@123|Reverse Feed|Rejected Case|
+      |Home        |Home|Enquiry|Report|rahul.adhikari@geminisolutions.com|Gemini#123|Reverse Feed|Rejected Case|
 
   @Login-User-Enquiry
   Scenario Outline: Launch EnquiryTab Read User
@@ -30,7 +30,7 @@ Feature: Read_User
 
     Examples:
       |Validate_txt|Home|Enquiry|Report|Filepath|username|password|Reverse Feed|Rejected|index|
-      |Home        |Home|Enquiry|Report|C:\Users\Rahul Adhikari\Downloads|shubham.a.kumar@geminisolutions.com|Test@123|Reverse Feed|Rejected Case|2|
+      |Home        |Home|Enquiry|Report|C:\Users\Rahul Adhikari\Downloads|rahul.adhikari@geminisolutions.com|Gemini#123|Reverse Feed|Rejected Case|2|
 
   @Login-User-Report @beta
   Scenario Outline: Launch ReportTab Read User
@@ -46,7 +46,7 @@ Feature: Read_User
 
     Examples:
       |Validate_txt|Home|Enquiry|Report|Filepath|username|password|Reverse Feed|Rejected|
-      |Home        |Home|Enquiry|Report|C:\Users\Rahul Adhikari\Downloads|shubham.a.kumar@geminisolutions.com |Test@123|Reverse Feed|Rejected Case|
+      |Home        |Home|Enquiry|Report|C:\Users\Rahul Adhikari\Downloads|rahul.adhikari@geminisolutions.com|Gemini#123|Reverse Feed|Rejected Case|
 
 
   @Login-User-Rejected @beta
@@ -66,7 +66,7 @@ Feature: Read_User
 
     Examples:
       |Validate_txt|Home|Enquiry|Report|Filepath|username|password|Reverse Feed|Rejected|index|
-      |Home        |Home|Enquiry|Report|C:\Users\Rahul Adhikari\Downloads|shubham.a.kumar@geminisolutions.com |Test@123|Reverse Feed|Rejected Case|5|
+      |Home        |Home|Enquiry|Report|C:\Users\Rahul Adhikari\Downloads|rahul.adhikari@geminisolutions.com|Gemini#123|Reverse Feed|Rejected Case|5|
 
   @Read-User-ReverseFeed-Login @beta
   Scenario Outline: Launch ReverseFeed Read User
@@ -84,4 +84,4 @@ Feature: Read_User
 
     Examples:
       |Validate_txt|Home|Enquiry|Report|Filepath|username|password|Reverse Feed|Rejected|index|
-      |Home        |Home|Enquiry|Report|C:\Users\Rahul Adhikari\Downloads|shubham.a.kumar@geminisolutions.com |Test@123|Reverse Feed|Rejected Case|4|
+      |Home        |Home|Enquiry|Report|C:\Users\Rahul Adhikari\Downloads|rahul.adhikari@geminisolutions.com|Gemini#123|Reverse Feed|Rejected Case|4|

@@ -327,7 +327,6 @@ public class superAdmin_Locators {
     public static By productName1 = By.xpath("//table/tbody/tr[1]/td[2]");
     public static By edit=By.xpath("//i[@class='fa-light fa-pen-to-square mx-2'][1]");
     public static By  totalRecords  = By.xpath("//div[@class='pageOf']");
-
     public static By  CodeAlreadyTakenError  = By.xpath("//span[text()='Code already taken']");
 
 

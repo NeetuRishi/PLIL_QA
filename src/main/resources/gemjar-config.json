@@ -6,6 +6,7 @@
   "gemjarUserName": "tripta.sahni",
   "gemjarToken": "42aec73f-39c3-4b5e-816c-8518e46ad61c1676543546409",
   "jewelEntryUrl": "https://apis.gemecosystem.com/enter-point",
+  "tagName": "@beta1",
   "glueCode":"com.gemini.PLIL.StepDefination",
   "dev": {
     "browserName": "chrome",

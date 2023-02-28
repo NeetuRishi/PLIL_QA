@@ -1,9 +1,6 @@
 package com.gemini.PLIL.StepDefination;
 
-import com.gemini.PLIL.Locators.GopsUser_Locators;
-import com.gemini.PLIL.Locators.Locator;
-import com.gemini.PLIL.Locators.Read_Locators;
-import com.gemini.PLIL.Locators.superAdmin_Locators;
+import com.gemini.PLIL.Locators.*;
 import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import com.gemini.generic.ui.utils.DriverAction;
@@ -246,6 +243,74 @@ public class superAdmin {
     public void Navigate_to_partner_management() {
         DriverAction.getElement(superAdmin_Locators.Partner_Management_Tab).click();
     }
+    @Then("^validate User Management Ui and its functionality (.+)$")
+    public void validateUserManagementUi(String tab) {
+        if (DriverAction.getElement(GopsUser_Locators.homeTab).isDisplayed()) {
+            GemTestReporter.addTestStep("Verify whether Home Page Opens", "Home Page Opened Successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else {
+            GemTestReporter.addTestStep("Verify whether Home Page Opens", "Home Page not  Opened Successfully", STATUS.FAIL, DriverAction.takeSnapShot());
+
+        }
+
+        if (DriverAction.getElement(GopsUser_Locators.PLIL_logo).isDisplayed()) {
+            GemTestReporter.addTestStep("Check whether PLIL Logo is present or not", "Logo is found successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        }
+        else {
+            GemTestReporter.addTestStep("Check whether PLIL Logo is present or not", "Logo is not found successfully", STATUS.FAIL, DriverAction.takeSnapShot());
+
+        }
+        String text = "", href = "";
+        if (tab.equals("Reverse Feed Upload")) {
+            text = "1";
+            href = "//a[@href='/dashboard/reverse-feed-upload']";
+        } else if (tab.equals("Gops Enquiry")){
+            text = "2";
+            href = "//a[@href='/admin/groupOps']";
+        }
+        else if(tab.equals("User Management"))
+        {
+
+            href="//a[@href='/admin/manage-user']";
+        }
+        else if(tab.equals("Bulk Upload"))
+        {
+            href="//a[@href='/dashboard/bulk-upload']";
+        }
+        else if(tab.equals("Master Management"))
+        {
+            href="//a[@href='/admin/master-managment']";
+        }
+        if (DriverAction.getElement(By.xpath(href)).isDisplayed())
+            GemTestReporter.addTestStep("Check whether " + tab + " is present or not", tab + " tab found successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        DriverAction.getElement(By.xpath(href)).click();
+        DriverAction.waitSec(5);
+        GemTestReporter.addTestStep("Navigate to the " + tab + " tab", "Navigated successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        if (DriverAction.getElement(By.xpath(href)).getAttribute("class").equals("nav-link active"))
+            GemTestReporter.addTestStep("Check whether " + tab + " tab got highlighted or not", tab + " tab got highlighted", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Check whether " + tab + " Tab got highlighted or not", "It did not get highlighted", STATUS.FAIL, DriverAction.takeSnapShot());
+
+        if (DriverAction.getElement(GopsUser_Locators.hamburgerButton).isDisplayed())
+            GemTestReporter.addTestStep("Check whether hamburger button is present or not", "Hamburhger button found successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        DriverAction.getElement(GopsUser_Locators.hamburgerButton).click();
+        GemTestReporter.addTestStep("Click on the Hamburger button", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        if (DriverAction.getElements(GopsUser_Locators.checkTabNames).size() == 0)
+            GemTestReporter.addTestStep("Verify whether left pane tabs got minimized", "Left pane got minimized successfully", STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify whether left pane tabs got minimized", "Could not minimize the left pane", STATUS.PASS, DriverAction.takeSnapShot());
+
+        DriverAction.getElement(GopsUser_Locators.hamburgerButton).click();
+
+        if (DriverAction.getElement(AdminLocators.userManagement(tab)).isDisplayed()) {
+            GemTestReporter.addTestStep("Validate whether " + tab + " label is displayed or not", "Label is displayed successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+        } else
+            GemTestReporter.addTestStep("Validate whether " + tab + " label is displayed or not", "Label is not displayed", STATUS.FAIL, DriverAction.takeSnapShot());
+
+
+    }
+
 
     @Then("^Validate Partner Management Screen$")
     public void Validate_Partner_Management_Screen() {
@@ -576,13 +641,9 @@ public class superAdmin {
                         WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
                         ele.sendKeys(map.get(i).get(2));
                         GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(2)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
-                       // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
                         ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
                         ele.sendKeys(map.get(i).get(1));
                         GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(1)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
-                       // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
                         DriverAction.getElement(superAdmin_Locators.Create_btn).click();
                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date();
@@ -616,7 +677,7 @@ public class superAdmin {
                         }
 
                     }
-                    //update
+                    //update the card details
                     String Code = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(1)))).getText();
                     String Value = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(2)))).getText();
                     DriverAction.getElement(superAdmin_Locators.edit_icon).click();
@@ -624,11 +685,9 @@ public class superAdmin {
                     Actions act = new Actions(DriverManager.getWebDriver());
                     act.sendKeys(Keys.CONTROL + "a").build().perform();
                     act.sendKeys(Keys.BACK_SPACE).build().perform();
-                   // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(4));
                     WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
                     ele.sendKeys(map.get(i).get(4));
                     GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(4)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
                     act.sendKeys(Keys.TAB).build().perform();
                     DriverAction.waitSec(5);
                     DriverAction.getElement(superAdmin_Locators.code_inp).click();
@@ -637,8 +696,6 @@ public class superAdmin {
                     ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
                     ele.sendKeys(map.get(i).get(3));
                     GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(3)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
-                   // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(3));
                     DriverAction.getElement(superAdmin_Locators.update_button).click();
                     DriverAction.waitSec(5);
                     String UpdatedCode = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(1)))).getText();
@@ -653,16 +710,12 @@ public class superAdmin {
                     if (DriverAction.getElement(superAdmin_Locators.Create_btn1).isDisplayed()) {
                         GemTestReporter.addTestStep("Validate Create Button is visible on Salutation Screen", "Create button is visible on Salutation Screen", STATUS.PASS, DriverAction.takeSnapShot());
                         DriverAction.getElement(superAdmin_Locators.Create_btn1).click();
-                       // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
                         WebElement  ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
                         ele.sendKeys(map.get(i).get(2));
                         GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(2)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
-                       // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
                         ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
                         ele.sendKeys(map.get(i).get(1));
                         GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(1)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
                         DriverAction.getElement(superAdmin_Locators.Create_btn).click();
                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date();
@@ -696,7 +749,7 @@ public class superAdmin {
                         }
 
                     }
-                    //update
+                    //update the card details
                     String Code = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(1)))).getText();
                     String Value = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(2)))).getText();
                     DriverAction.getElement(superAdmin_Locators.edit_icon1).click();
@@ -728,7 +781,7 @@ public class superAdmin {
                 }
 
 
-                //pagination
+                //pagination functioanality for the card
                 if (DriverAction.getElement(superAdmin_Locators.Pagination1).isDisplayed()) {
                     String pag_text = DriverAction.getElement(superAdmin_Locators.Pagination1).getText();
                     GemTestReporter.addTestStep("Verify Pagination", "Pagination is present : " + pag_text, STATUS.PASS, DriverAction.takeSnapShot());
@@ -753,11 +806,10 @@ public class superAdmin {
                 } else {
                     GemTestReporter.addTestStep("Verify Previous Page Pagination", "Previous Page Pagination is not working", STATUS.FAIL, DriverAction.takeSnapShot());
                 }
-
                 DriverAction.waitSec(10);
-                //delete
+
+                //delete the created card
                 String firstRowBeforeDelete = DriverAction.getElement(superAdmin_Locators.deleteRow).getText();
-                //Marital Status
                 if (String.valueOf(map.get(i).get(0)).equals("Age Proof") || String.valueOf(map.get(i).get(0)).equals("Marital Status")) {
                     DriverAction.getElement(superAdmin_Locators.deleteButton2).click();
                 } else {
@@ -795,8 +847,7 @@ public class superAdmin {
             GemTestReporter.addTestStep("Check wether Back Button < is present or not", "Found Successfully", STATUS.PASS, DriverAction.takeSnapShot());
         else
             GemTestReporter.addTestStep("Check wether Back Button < is present or not", "Not Found", STATUS.FAIL, DriverAction.takeSnapShot());
-//columns are display
-
+           //columns are display
         if (DriverAction.getElement(GopsUser_Locators.selectValue("Policy Number")).isDisplayed())
             GemTestReporter.addTestStep("Check wether Policy Number was displayed or not", "Found Successfully", STATUS.PASS, DriverAction.takeSnapShot());
         else
@@ -822,7 +873,7 @@ public class superAdmin {
         else
             GemTestReporter.addTestStep("Check wether Action was displayed or not", "Not Found", STATUS.FAIL, DriverAction.takeSnapShot());
 
-//create
+     //create a card
         if (DriverAction.getElement(GopsUser_Locators.selectValue(" Create Product Master ")).isDisplayed())
             GemTestReporter.addTestStep("Check wether Create Product Master button is present or not", "Button Found Successfully", STATUS.PASS, DriverAction.takeSnapShot());
         else
@@ -838,7 +889,6 @@ public class superAdmin {
         DriverAction.getElement(superAdmin_Locators.loanTypeDropdown).click();
         GemTestReporter.addTestStep("Click on the Select loan Type dropdown", "Clicked Successfully", STATUS.PASS, DriverAction.takeSnapShot());
         DriverAction.getElement(GopsUser_Locators.dropdownMenu("2")).click();
-
         GemTestReporter.addTestStep("Select any value from the loan type dropdown", "'Business Loan' Selected successfully", STATUS.PASS, DriverAction.takeSnapShot());
         DriverAction.getElement(superAdmin_Locators.inputBoxes("Policy Number")).sendKeys("1234");
         GemTestReporter.addTestStep("Add Policy Number to the input box", "Policy '1234' added successfully", STATUS.PASS, DriverAction.takeSnapShot());
@@ -846,13 +896,12 @@ public class superAdmin {
         GemTestReporter.addTestStep("Click on create product master", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
 
 
-        //edit
+        //edit the card details
         String before = DriverAction.getElement(superAdmin_Locators.productName1).getText();
         DriverAction.getElement(superAdmin_Locators.edit).click();
         GemTestReporter.addTestStep("Click on edit button to edit the Product Master", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
         DriverAction.getElement(superAdmin_Locators.inputBoxes("Product Name")).sendKeys("Demo change");
         GemTestReporter.addTestStep("Edit the Product name", "Product name edited successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
         DriverAction.getElement(superAdmin_Locators.updateProductMaster).click();
         GemTestReporter.addTestStep("Click on the update product master button", "Clicked successfully", STATUS.PASS, DriverAction.takeSnapShot());
         WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(10));
@@ -862,11 +911,11 @@ public class superAdmin {
             GemTestReporter.addTestStep("Check wether edit button works properly or not", "Product Name updated successfully i.e edit button works properly", STATUS.PASS, DriverAction.takeSnapShot());
         else
             GemTestReporter.addTestStep("Check wether edit button works properly or not", "Product Name was not updated i.e edit button does not works properly", STATUS.FAIL, DriverAction.takeSnapShot());
-//delete
-        DriverAction.waitSec(10);
+//delete the card
+       // DriverAction.waitSec(10);
         String elem1=DriverAction.getElement(superAdmin_Locators.totalRecords).getText();
         DriverAction.getElement(superAdmin_Locators.deleteButton).click();
-        DriverAction.waitSec(4);
+       // DriverAction.waitSec(4);
         String elem2=DriverAction.getElement(superAdmin_Locators.totalRecords).getText();
         if(elem1.equals(elem2))
             GemTestReporter.addTestStep("Check wether Record got deleted or not","Record was not deleted",STATUS.FAIL,DriverAction.takeSnapShot());
@@ -878,7 +927,6 @@ public class superAdmin {
     public void ValidateRelationship(String username) {
         DriverManager.getWebDriver().navigate().refresh();
         DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(3))));
-
         Map<Integer, List<String>> map = new HashMap<>();
         map.put(1, Arrays.asList("Appointee-Nominee ", "demo", "demo_value", " DFFR", "UpdatedDemo"));
         map.put(2, Arrays.asList("Nominee-Applicant ", "N", "Newly", "N1", "Newly1"));
@@ -937,20 +985,17 @@ public class superAdmin {
                 GemTestReporter.addTestStep("Validating wether all the required columns are present in" + map.get(i).get(0) + "Table", "All Columns are not there in" + map.get(i).get(0) + "Table", STATUS.FAIL, DriverAction.takeSnapShot());
 
             }
-            //create
+            //create a new card option
             if (map.get(i).get(0) == "Appointee-Nominee ") {
                 if (DriverAction.getElement(superAdmin_Locators.Create_btn1).isDisplayed()) {
                     GemTestReporter.addTestStep("Validate Create Button is visible on Salutation Screen", "Create button is visible on Salutation Screen", STATUS.PASS, DriverAction.takeSnapShot());
                     DriverAction.getElement(superAdmin_Locators.Create_btn1).click();
-                   // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
                     WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
                     ele.sendKeys(map.get(i).get(2));
                     GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(2)+"Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-                   // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
                     ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
                     ele.sendKeys(map.get(i).get(1));
                     GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(1)+"Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
                     DriverAction.getElement(superAdmin_Locators.Create_btn).click();
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     Date date = new Date();
@@ -989,15 +1034,12 @@ public class superAdmin {
                 if (DriverAction.getElement(superAdmin_Locators.Create_btn).isDisplayed()) {
                     GemTestReporter.addTestStep("Validate Create Button is visible on Salutation Screen", "Create button is visible on Salutation Screen", STATUS.PASS, DriverAction.takeSnapShot());
                     DriverAction.getElement(superAdmin_Locators.Create_btn).click();
-                   // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
                     WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
                     ele.sendKeys(map.get(i).get(2));
                     GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(2)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-                   // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
                     ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
                     ele.sendKeys(map.get(i).get(1));
                     GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(1)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
                     DriverAction.getElement(superAdmin_Locators.Create_btn).click();
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     Date date = new Date();
@@ -1034,16 +1076,12 @@ public class superAdmin {
                 if (DriverAction.getElement(superAdmin_Locators.Create_btn1).isDisplayed()) {
                     GemTestReporter.addTestStep("Validate Create Button is visible on Salutation Screen", "Create button is visible on Salutation Screen", STATUS.PASS, DriverAction.takeSnapShot());
                     DriverAction.getElement(superAdmin_Locators.Create_btn1).click();
-                   // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
                     WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
                     ele.sendKeys(map.get(i).get(2));
                     GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(2)+"Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
-                   // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
                     ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
                     ele.sendKeys(map.get(i).get(1));
                     GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(1)+"Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
                     DriverAction.getElement(superAdmin_Locators.Create_btn).click();
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     Date date = new Date();
@@ -1080,16 +1118,12 @@ public class superAdmin {
                 if (DriverAction.getElement(superAdmin_Locators.Create_btn1).isDisplayed()) {
                     GemTestReporter.addTestStep("Validate Create Button is visible on Salutation Screen", "Create button is visible on Salutation Screen", STATUS.PASS, DriverAction.takeSnapShot());
                     DriverAction.getElement(superAdmin_Locators.Create_btn1).click();
-                   // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(2));
                     WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
                     ele.sendKeys(map.get(i).get(2));
                     GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(2)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
-                    //DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(1));
                     ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
                     ele.sendKeys(map.get(i).get(1));
                     GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(1)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
                     DriverAction.getElement(superAdmin_Locators.Create_btn).click();
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     Date date = new Date();
@@ -1123,7 +1157,7 @@ public class superAdmin {
                     }
                 }
             }
-            //update
+            //update the card
             String Code = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(1)))).getText();
             String Value = DriverAction.getElement(By.xpath(superAdmin_Locators.Salutation_Column.replace("itr", String.valueOf(2)))).getText();
             if (map.get(i).get(0) == "Nominee-Applicant ") {
@@ -1135,22 +1169,17 @@ public class superAdmin {
             Actions act = new Actions(DriverManager.getWebDriver());
             act.sendKeys(Keys.CONTROL + "a").build().perform();
             act.sendKeys(Keys.BACK_SPACE).build().perform();
-           // DriverAction.typeText(superAdmin_Locators.value_inp, map.get(i).get(4));
             WebElement ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.value_inp);
             ele.sendKeys(map.get(i).get(4));
             GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(4)+" Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
             act.sendKeys(Keys.TAB).build().perform();
             DriverAction.waitSec(5);
             DriverAction.getElement(superAdmin_Locators.code_inp).click();
             act.sendKeys(Keys.CONTROL + "a").build().perform();
             act.sendKeys(Keys.BACK_SPACE).build().perform();
-           // DriverAction.typeText(superAdmin_Locators.code_inp, map.get(i).get(3));
-             ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
+            ele = DriverManager.getWebDriver().findElement(superAdmin_Locators.code_inp);
             ele.sendKeys(map.get(i).get(3));
             GemTestReporter.addTestStep("Validate Required Text is entered successfully", map.get(i).get(3)+"  Entered successfully", STATUS.PASS, DriverAction.takeSnapShot());
-
-
             if (String.valueOf(map.get(i).get(0)).equals("Nominee-Applicant ")) {
                 DriverAction.getElement(superAdmin_Locators.update_button).click();
             } else if (map.get(i).get(0) == "Cover basis ") {

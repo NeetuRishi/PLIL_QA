@@ -393,11 +393,6 @@ public class Read {
             DriverAction.getElement(Read_Locators.SampleDate1).click();
             DriverAction.setImplicitTimeOut(3);
             DriverAction.click(By.xpath("//div[contains(text(),\'" + mdate + "\')]"));
-//            Actions act = new Actions(DriverManager.getWebDriver());
-//            act.sendKeys(Keys.ENTER).build().perform();
-//            act.sendKeys(Keys.ENTER).build().perform();
-//             WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(20));
-            //  wait.until(ExpectedConditions.textToBe(Read_Locators.Startdate,"27-01-2023"));
             DriverAction.setImplicitTimeOut(10);
             String Startdate = DriverManager.getWebDriver().findElement(By.xpath("//div[@class='mat-date-range-input-container']")).getAttribute("text");
 
@@ -411,70 +406,79 @@ public class Read {
 
     @Then("^Download PDF and validate (.+)$")
     public void validatepdfdownload(String filepath) {
-
-        List<WebElement> l1=DriverManager.getWebDriver().findElements(By.xpath("(//table[@class='mat-table cdk-table mat-sort custom']/tbody/tr)"));
-        Boolean flag=false;
-        while(flag!=true) {
-            for (int i = 1; i <= l1.size(); i++) {
-                String Status = DriverAction.getElement(By.xpath(Read_Locators.StatusCol.replace("itr", String.valueOf(i)))).getText();
-                if (Status.equals(" Uploaded To System")) {
-                    DriverAction.doubleClick(By.xpath(Read_Locators.Action.replace("itr", String.valueOf(i))));
-                    flag=true;
-                    break;
-                }
-
-            }
-            if(flag==false) {
-                DriverAction.getElement(superAdmin_Locators.Pagination_Angle_Right).click();
-            }
-        }
-      //  DriverAction.click(Read_Locators.Action_Download_icon);
-        DriverAction.waitSec(15);
-
-        File file = new File(filepath);
-        File file1 = getLastModified(filepath);
-
-        if (String.valueOf(file1).contains("pdf")) {
-            GemTestReporter.addTestStep("Validating weather User able to download PDF file", "User successfully able to download the PDF file", STATUS.PASS, DriverAction.takeSnapShot());
-
+        if (DriverAction.getElement(Read_Locators.DataNotfoundtxt).isDisplayed()) {
+            GemTestReporter.addTestStep("Verify Data is present on screen", "Data is not present on screen", STATUS.PASS, DriverAction.takeSnapShot());
         } else {
-            GemTestReporter.addTestStep("Validating weather User able to download PDF file", "User not able to download the PDF file", STATUS.FAIL, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify Data is present on screen", "Data is present on screen", STATUS.PASS, DriverAction.takeSnapShot());
 
+            List<WebElement> l1 = DriverManager.getWebDriver().findElements(By.xpath("(//table[@class='mat-table cdk-table mat-sort custom']/tbody/tr)"));
+            Boolean flag = false;
+            while (flag != true) {
+                for (int i = 1; i <= l1.size(); i++) {
+                    String Status = DriverAction.getElement(By.xpath(Read_Locators.StatusCol.replace("itr", String.valueOf(i)))).getText();
+                    if (Status.equals(" Uploaded To System")) {
+                        DriverAction.doubleClick(By.xpath(Read_Locators.Action.replace("itr", String.valueOf(i))));
+                        flag = true;
+                        break;
+                    }
+
+                }
+                if (flag == false) {
+                    DriverAction.getElement(superAdmin_Locators.Pagination_Angle_Right).click();
+                }
+            }
+            //  DriverAction.click(Read_Locators.Action_Download_icon);
+            DriverAction.waitSec(15);
+
+            File file = new File(filepath);
+            File file1 = getLastModified(filepath);
+
+            if (String.valueOf(file1).contains("pdf")) {
+                GemTestReporter.addTestStep("Validating weather User able to download PDF file", "User successfully able to download the PDF file", STATUS.PASS, DriverAction.takeSnapShot());
+
+            } else {
+                GemTestReporter.addTestStep("Validating weather User able to download PDF file", "User not able to download the PDF file", STATUS.FAIL, DriverAction.takeSnapShot());
+
+            }
         }
-
 
     }
 
     @Then("^validate Application Status Table Data")
     public void ValidateApplicationStatusTable() {
         try {
-            String FetchedApplicationNo = DriverAction.getElement(Read_Locators.SampleLoanNo).getText();
-            DriverAction.click(Read_Locators.ApplicationStatusIcon);
-            if (DriverAction.getElement(By.xpath(Read_Locators.ApplicationStatusNo.replace("@status",FetchedApplicationNo))).isDisplayed()) {
-                GemTestReporter.addTestStep("Verify Application Status Number is visible on Application Status Table", "Application Status Number is visible on Application Status Table" , STATUS.PASS, DriverAction.takeSnapShot());
+            if (DriverAction.getElement(Read_Locators.DataNotfoundtxt).isDisplayed()) {
+                GemTestReporter.addTestStep("Verify Data is present on screen", "Data is not present on screen", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Verify Application Status Number is visible on Application Status Table", "Application Status Number is not visible on Application Status Table", STATUS.FAIL, DriverAction.takeSnapShot());
-            }
-            List<String> list1 = new ArrayList<>();
-            list1.add("Date");
-            list1.add("Status");
-            list1.add("Updated By");
-            list1.add("Description");
-            int c = 0;
-            for (int i = 0; i < list1.size(); i++) {
-                String Columns = DriverAction.getElement(By.xpath(Read_Locators.ApplicationStatusCol.replace("itr", String.valueOf(i + 1)))).getText();
-                if (Columns.equals(list1.get(i))) {
-                    c++;
+                GemTestReporter.addTestStep("Verify Data is present on screen", "Data is present on screen", STATUS.PASS, DriverAction.takeSnapShot());
+
+                String FetchedApplicationNo = DriverAction.getElement(Read_Locators.SampleLoanNo).getText();
+                DriverAction.click(Read_Locators.ApplicationStatusIcon);
+                if (DriverAction.getElement(By.xpath(Read_Locators.ApplicationStatusNo.replace("@status", FetchedApplicationNo))).isDisplayed()) {
+                    GemTestReporter.addTestStep("Verify Application Status Number is visible on Application Status Table", "Application Status Number is visible on Application Status Table", STATUS.PASS, DriverAction.takeSnapShot());
+                } else {
+                    GemTestReporter.addTestStep("Verify Application Status Number is visible on Application Status Table", "Application Status Number is not visible on Application Status Table", STATUS.FAIL, DriverAction.takeSnapShot());
+                }
+                List<String> list1 = new ArrayList<>();
+                list1.add("Date");
+                list1.add("Status");
+                list1.add("Updated By");
+                list1.add("Description");
+                int c = 0;
+                for (int i = 0; i < list1.size(); i++) {
+                    String Columns = DriverAction.getElement(By.xpath(Read_Locators.ApplicationStatusCol.replace("itr", String.valueOf(i + 1)))).getText();
+                    if (Columns.equals(list1.get(i))) {
+                        c++;
+                    }
+                }
+                if (c == list1.size()) {
+                    GemTestReporter.addTestStep("Validating weather all the required columns are present in Application Status Table", "All Columns are there in Application Status Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather all the required columns are present in Application Status Table", "All Columns are not there in Application Status Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
                 }
             }
-            if (c == list1.size()) {
-                GemTestReporter.addTestStep("Validating weather all the required columns are present in Application Status Table", "All Columns are there in Application Status Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather all the required columns are present in Application Status Table", "All Columns are not there in Application Status Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-
         }
         catch (Exception e) {
             logger.info("An exception occurred!", e);
@@ -517,35 +521,38 @@ public class Read {
 
     @Then("^validate Search Field on Screen (.+)$")
     public void ValidateSearchInput(int index) {
-    try{
-        if (DriverAction.getElement(Read_Locators.SearchInput).isDisplayed()) {
-             GemTestReporter.addTestStep("Verify Search Input is visible on Screen", "Search Input is visible on Screen" , STATUS.PASS, DriverAction.takeSnapShot());
+    try {
+        if (DriverAction.getElement(Read_Locators.DataNotfoundtxt).isDisplayed()) {
+            GemTestReporter.addTestStep("Verify Data is present on screen", "Data is not present on screen", STATUS.PASS, DriverAction.takeSnapShot());
         } else {
-            GemTestReporter.addTestStep("Verify Search Input is visible on Screen", "Search Input is not visible on Screen", STATUS.FAIL, DriverAction.takeSnapShot());
-        }
-        String FetchedLoanNo = DriverAction.getElement(Read_Locators.SampleLoanNo).getText();
-        DriverAction.typeText(Read_Locators.SearchInput, FetchedLoanNo);
-        Actions act = new Actions(DriverManager.getWebDriver());
-        act.sendKeys(Keys.ENTER).build().perform();
-        String FilteredLoanNo = DriverAction.getElement(Read_Locators.SampleLoanNo).getText();
-        if(FetchedLoanNo.equals(FilteredLoanNo))
-        {
-            GemTestReporter.addTestStep("Validate Data is Filtered Properly", "Data is Filtered successfully" , STATUS.PASS, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify Data is present on screen", "Data is present on screen", STATUS.PASS, DriverAction.takeSnapShot());
+
+            if (DriverAction.getElement(Read_Locators.SearchInput).isDisplayed()) {
+                GemTestReporter.addTestStep("Verify Search Input is visible on Screen", "Search Input is visible on Screen", STATUS.PASS, DriverAction.takeSnapShot());
+            } else {
+                GemTestReporter.addTestStep("Verify Search Input is visible on Screen", "Search Input is not visible on Screen", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+            String FetchedLoanNo = DriverAction.getElement(Read_Locators.SampleLoanNo).getText();
+            DriverAction.typeText(Read_Locators.SearchInput, FetchedLoanNo);
+            Actions act = new Actions(DriverManager.getWebDriver());
+            act.sendKeys(Keys.ENTER).build().perform();
+            String FilteredLoanNo = DriverAction.getElement(Read_Locators.SampleLoanNo).getText();
+            if (FetchedLoanNo.equals(FilteredLoanNo)) {
+                GemTestReporter.addTestStep("Validate Data is Filtered Properly", "Data is Filtered successfully", STATUS.PASS, DriverAction.takeSnapShot());
+
+            } else {
+                GemTestReporter.addTestStep("Validate Data is Filtered Properly", "Data is not Filtered successfully", STATUS.FAIL, DriverAction.takeSnapShot());
+            }
+            DriverManager.getWebDriver().navigate().refresh();
+            DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(index))));
 
         }
-        else {
-            GemTestReporter.addTestStep("Validate Data is Filtered Properly", "Data is not Filtered successfully", STATUS.FAIL, DriverAction.takeSnapShot());
         }
-        DriverManager.getWebDriver().navigate().refresh();
-        DriverAction.click(By.xpath(Read_Locators.Side_bar_tab.replace("itr", String.valueOf(index))));
+    catch(Exception e){
+            logger.info("An exception occurred!", e);
+            GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
+        }
 
-
-
-    }
-    catch (Exception e) {
-        logger.info("An exception occurred!", e);
-        GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
-    }
     }
 
 
@@ -586,168 +593,164 @@ public class Read {
     @Then("^validate Application Column ui$")
     public void validateapplicationui() {
         try {
-            DriverAction.click(Read_Locators.Application_No);
-            String Application_No = DriverAction.getElement(Read_Locators.Application_No).getText();
-            String Application_Label1=DriverAction.getElement(By.xpath(Read_Locators.Application_Label.replace("no", Application_No))).getText();
-            String arr[]=Application_Label1.split("-");
-            System.out.print(arr[1]);
-            if(arr[1].contains(Application_No))
-            {
-                GemTestReporter.addTestStep("Validating weather Application Detail Label is present on Application Popup", "Application Detail Label is present on Application Pop", STATUS.PASS, DriverAction.takeSnapShot());
-
-            }
-            else {
-                GemTestReporter.addTestStep("Validating weather Application Detail Label is present on Application Popup", "Application Detail Label is not present on Application Pop", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-
-
-            /*  if (DriverAction.getElement(By.xpath(Read_Locators.Application_Label.replace("no", Application_No))).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Application Detail Label is present on Application Popup", "Application Detail Label is present on Application Pop", STATUS.PASS, DriverAction.takeSnapShot());
-
+            if (DriverAction.getElement(Read_Locators.DataNotfoundtxt).isDisplayed()) {
+                GemTestReporter.addTestStep("Verify Data is present on screen", "Data is not present on screen", STATUS.PASS, DriverAction.takeSnapShot());
             } else {
-                GemTestReporter.addTestStep("Validating weather Application Detail Label is present on Application Popup", "Application Detail Label is not present on Application Pop", STATUS.FAIL, DriverAction.takeSnapShot());
+                GemTestReporter.addTestStep("Verify Data is present on screen", "Data is present on screen", STATUS.PASS, DriverAction.takeSnapShot());
 
-            }*/
-            if (DriverAction.getElement(Read_Locators.CUSTOMER_DETAILS_Label).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Customer Detail Label is present on Application Popup", "Customer Detail Label is present on Application Pop", STATUS.PASS, DriverAction.takeSnapShot());
+                DriverAction.click(Read_Locators.Application_No);
+                String Application_No = DriverAction.getElement(Read_Locators.Application_No).getText();
+                String Application_Label1 = DriverAction.getElement(By.xpath(Read_Locators.Application_Label.replace("no", Application_No))).getText();
+                String arr[] = Application_Label1.split("-");
+                System.out.print(arr[1]);
+                if (arr[1].contains(Application_No)) {
+                    GemTestReporter.addTestStep("Validating weather Application Detail Label is present on Application Popup", "Application Detail Label is present on Application Pop", STATUS.PASS, DriverAction.takeSnapShot());
 
-            } else {
-                GemTestReporter.addTestStep("Validating weather Customer Detail Label is present on Application Popup", "Customer Detail Label is not present on Application Pop", STATUS.FAIL, DriverAction.takeSnapShot());
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Application Detail Label is present on Application Popup", "Application Detail Label is not present on Application Pop", STATUS.FAIL, DriverAction.takeSnapShot());
 
+                }
+
+
+                if (DriverAction.getElement(Read_Locators.CUSTOMER_DETAILS_Label).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Customer Detail Label is present on Application Popup", "Customer Detail Label is present on Application Pop", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Customer Detail Label is present on Application Popup", "Customer Detail Label is not present on Application Pop", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Name_Col_Customer_Details).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Name Column is present in Customer Detail Table  on Application Popup", "Name Column is present in Customer Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Name Column is present in Customer Detail Table  on Application Popup", "Name Column is not present in Customer Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Mobile_No_Col_Customer_Details).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Mobile No Column is present in Customer Detail Table  on Application Popup", "Mobile No Column is present in Customer Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Name Column is present in Customer Detail Table  on Application Popup", "Mobile No Column is not present in Customer Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Email_Col_Customer_Details).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Email Column is present in Customer Detail Table  on Application Popup", "Email Column is present in Customer Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Email Column is present in Customer Detail Table  on Application Popup", "Email Column is not present in Customer Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Loan_Details_Label).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Loan Detail Label is present on Application Popup", "Loan Detail Label is present on Application Pop", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Loan Detail Label is present on Application Popup", "Loan Detail Label is not present on Application Pop", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Loan_Col_Loan_Details).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Loan Number Column is present in Loan Detail Table  on Application Popup", "Loan No Column is present in Loan Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Loan Number Column is present in Loan Detail Table  on Application Popup", "Loan No Column is not present in Loan Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Loan_Amount_Col_Loan_Details).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Loan Amount Column is present in Loan Detail Table  on Application Popup", "Loan Amount Column is present in Loan Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Loan Amount Column is present in Loan Detail Table  on Application Popup", "Loan Amount Column is not present in Loan Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Loan_Term_Col_Loan_Details).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Loan Term Column is present in Loan Detail Table  on Application Popup", "Loan Term Column is present in Loan Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Loan Term Column is present in Loan Detail Table  on Application Popup", "Loan Term Column is not present in Loan Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Loan_Disbursement_Col_Loan_Details).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Loan Disbursement Column is present in Loan Detail Table  on Application Popup", "Loan Disbursement Column is present in Loan Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Loan Disbursement Column is present in Loan Detail Table  on Application Popup", "Loan Disbursement Column is not present in Loan Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Policy_Details).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Policy Details Label is present on Application Popup", "Policy Details Label is present on Application Popup", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Policy Details Label is present on Application Popup", "Policy Details Label is not present on Application Popup", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Sum_Assured).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Sum Assured Column is present in Policy Detail Table  on Application Popup", "Sum Assured Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Sum Assured Column is present in Policy Detail Table  on Application Popup", "Sum Assured Column is not present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Premium).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Premium Column is present in Policy Detail Table  on Application Popup", "Premium Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Premium Column is present in Policy Detail Table  on Application Popup", "Premium Column is not present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Payment_Frequency).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Premium Frequency Column is present in Policy Detail Table  on Application Popup", "Premium Frequency Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Premium Frequency Column is present in Policy Detail Table  on Application Popup", "Premium Frequency Column is not present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Policy_Term).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Policy Term Column is present in Policy Detail Table  on Application Popup", "Policy Term Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Policy Term Column is present in Policy Detail Table  on Application Popup", "Policy Term Column is not present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Policy_Terms).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Policy Terms Column is present in Policy Detail Table  on Application Popup", "Policy Terms Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Policy Terms Column is present in Policy Detail Table  on Application Popup", "Policy Terms Column is not present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.DOB).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather DOB Column is present in Policy Detail Table  on Application Popup", "DOB Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather DOB Column is present in Policy Detail Table  on Application Popup", "DOB Column is present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Insured_Name).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Insured Name Column is present in Policy Detail Table  on Application Popup", "Insured Name Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Insured Name Column is present in Policy Detail Table  on Application Popup", "Insured Name Column is not present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                if (DriverAction.getElement(Read_Locators.Cross_Icon_Application_Popup).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Cross icon is present  on Application Popup", "Cross icon is  present  on Application Popup", STATUS.PASS, DriverAction.takeSnapShot());
+                    DriverAction.click(Read_Locators.Cross_Icon_Application_Popup);
+                    GemTestReporter.addTestStep("Validating weather Application Popup Exit successfully", " Application Pop exit successfully", STATUS.PASS, DriverAction.takeSnapShot());
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Cross icon is present  on Application Popup", "Cross icon is not present  on Application Popup", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
+                DriverAction.click(Read_Locators.Application_No);
+                JavascriptExecutor js = (JavascriptExecutor) DriverManager.getWebDriver();
+                js.executeScript("arguments[0].scrollIntoView(true);", DriverManager.getWebDriver().findElement(Read_Locators.Gender));
+
+                if (DriverAction.getElement(Read_Locators.Gender).isDisplayed()) {
+                    GemTestReporter.addTestStep("Validating weather Scroll is working on Application Popup", "Scroll bar is working fine Application Popup", STATUS.PASS, DriverAction.takeSnapShot());
+
+                } else {
+                    GemTestReporter.addTestStep("Validating weather Scroll is working on Application Popup", "Scroll bar is not working fine Application Popup", STATUS.FAIL, DriverAction.takeSnapShot());
+
+                }
             }
-            if (DriverAction.getElement(Read_Locators.Name_Col_Customer_Details).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Name Column is present in Customer Detail Table  on Application Popup", "Name Column is present in Customer Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Name Column is present in Customer Detail Table  on Application Popup", "Name Column is not present in Customer Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Mobile_No_Col_Customer_Details).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Mobile No Column is present in Customer Detail Table  on Application Popup", "Mobile No Column is present in Customer Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Name Column is present in Customer Detail Table  on Application Popup", "Mobile No Column is not present in Customer Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Email_Col_Customer_Details).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Email Column is present in Customer Detail Table  on Application Popup", "Email Column is present in Customer Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Email Column is present in Customer Detail Table  on Application Popup", "Email Column is not present in Customer Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Loan_Details_Label).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Loan Detail Label is present on Application Popup", "Loan Detail Label is present on Application Pop", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Loan Detail Label is present on Application Popup", "Loan Detail Label is not present on Application Pop", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Loan_Col_Loan_Details).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Loan Number Column is present in Loan Detail Table  on Application Popup", "Loan No Column is present in Loan Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Loan Number Column is present in Loan Detail Table  on Application Popup", "Loan No Column is not present in Loan Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Loan_Amount_Col_Loan_Details).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Loan Amount Column is present in Loan Detail Table  on Application Popup", "Loan Amount Column is present in Loan Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Loan Amount Column is present in Loan Detail Table  on Application Popup", "Loan Amount Column is not present in Loan Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Loan_Term_Col_Loan_Details).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Loan Term Column is present in Loan Detail Table  on Application Popup", "Loan Term Column is present in Loan Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Loan Term Column is present in Loan Detail Table  on Application Popup", "Loan Term Column is not present in Loan Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Loan_Disbursement_Col_Loan_Details).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Loan Disbursement Column is present in Loan Detail Table  on Application Popup", "Loan Disbursement Column is present in Loan Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Loan Disbursement Column is present in Loan Detail Table  on Application Popup", "Loan Disbursement Column is not present in Loan Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Policy_Details).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Policy Details Label is present on Application Popup", "Policy Details Label is present on Application Popup", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Policy Details Label is present on Application Popup", "Policy Details Label is not present on Application Popup", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Sum_Assured).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Sum Assured Column is present in Policy Detail Table  on Application Popup", "Sum Assured Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Sum Assured Column is present in Policy Detail Table  on Application Popup", "Sum Assured Column is not present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Premium).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Premium Column is present in Policy Detail Table  on Application Popup", "Premium Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Premium Column is present in Policy Detail Table  on Application Popup", "Premium Column is not present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Payment_Frequency).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Premium Frequency Column is present in Policy Detail Table  on Application Popup", "Premium Frequency Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Premium Frequency Column is present in Policy Detail Table  on Application Popup", "Premium Frequency Column is not present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Policy_Term).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Policy Term Column is present in Policy Detail Table  on Application Popup", "Policy Term Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Policy Term Column is present in Policy Detail Table  on Application Popup", "Policy Term Column is not present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Policy_Terms).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Policy Terms Column is present in Policy Detail Table  on Application Popup", "Policy Terms Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Policy Terms Column is present in Policy Detail Table  on Application Popup", "Policy Terms Column is not present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.DOB).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather DOB Column is present in Policy Detail Table  on Application Popup", "DOB Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather DOB Column is present in Policy Detail Table  on Application Popup", "DOB Column is present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Insured_Name).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Insured Name Column is present in Policy Detail Table  on Application Popup", "Insured Name Column is present in Policy Detail Table", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Insured Name Column is present in Policy Detail Table  on Application Popup", "Insured Name Column is not present in Policy Detail Table", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            if (DriverAction.getElement(Read_Locators.Cross_Icon_Application_Popup).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Cross icon is present  on Application Popup", "Cross icon is  present  on Application Popup", STATUS.PASS, DriverAction.takeSnapShot());
-                DriverAction.click(Read_Locators.Cross_Icon_Application_Popup);
-                GemTestReporter.addTestStep("Validating weather Application Popup Exit successfully", " Application Pop exit successfully", STATUS.PASS, DriverAction.takeSnapShot());
-            } else {
-                GemTestReporter.addTestStep("Validating weather Cross icon is present  on Application Popup", "Cross icon is not present  on Application Popup", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-            DriverAction.click(Read_Locators.Application_No);
-            JavascriptExecutor js = (JavascriptExecutor) DriverManager.getWebDriver();
-            js.executeScript("arguments[0].scrollIntoView(true);",DriverManager.getWebDriver().findElement(Read_Locators.Gender) );
-
-            if (DriverAction.getElement(Read_Locators.Gender).isDisplayed()) {
-                GemTestReporter.addTestStep("Validating weather Scroll is working on Application Popup", "Scroll bar is working fine Application Popup", STATUS.PASS, DriverAction.takeSnapShot());
-
-            } else {
-                GemTestReporter.addTestStep("Validating weather Scroll is working on Application Popup", "Scroll bar is not working fine Application Popup", STATUS.FAIL, DriverAction.takeSnapShot());
-
-            }
-
 
 
         } catch (Exception e) {
