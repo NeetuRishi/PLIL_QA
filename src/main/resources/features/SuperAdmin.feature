@@ -137,22 +137,4 @@ Feature: Super Admin
       |Validate_txt|username|password|
       |Home        |deepak.kumar@geminisolutions.com|Asdf@1234|
 
-  Scenario Outline: User Management screen (Admin User)
-    Given Enter Username and Password and validate <Validate_txt>,<username>,<password>
-    Then validate User Management Ui and its functionality <tab>
-    Then Create User <Name_inp>,<Email_inp>,<Mobile_inp>,<Name_val>,<Email_val>,<Mobile_val>,<val1>,<val2>
-  #  Then Validate whether Create User button is present and clickable
-   # Then Verify whether new user cannot be created or not with name <name1> , email <email>,mobile No <mobile1>
-  #  Then Check whether user was created or not with correct field values
- #   Then Validate whether search button is present and working properly
-   # Then Check whether edit button works properly or not
-  #  Then Validate whether Create User button is present and clickable
-  #  Then Verify whether new user cannot be created or not with name <name2> , email <email>,mobile No <mobile2>
-  #  Then Validate that user will not be able to create for the same email ID
-  #  Then Check whether delete button works properly or not
-  #  Then Click on the reset password button and check whether password email was sent
 
-
-    Examples:
-      | username                         | password  |Validate_txt|tab|Name_inp|Email_inp|Mobile_inp|Name_val|Email_val|Mobile_val|val1|val2|
-      | deepak.kumar@geminisolutions.com | Asdf@1234 |Home |User Management|name    |email    |mobile    |Rahul   |rahul.adhikari@geminisolutions.com|9501209019|Read|Pramerica Life Insurance Limited|
