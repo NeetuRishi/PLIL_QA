@@ -395,7 +395,8 @@ public class Read {
             DriverAction.click(By.xpath("//div[contains(text(),\'" + mdate + "\')]"));
             DriverAction.setImplicitTimeOut(10);
             String Startdate = DriverManager.getWebDriver().findElement(By.xpath("//div[@class='mat-date-range-input-container']")).getAttribute("text");
-
+            Actions act = new Actions(DriverManager.getWebDriver());
+            act.sendKeys(Keys.ENTER).build().perform();
         } catch (Exception e) {
             logger.info("An exception occurred!", e);
             GemTestReporter.addTestStep("EXCEPTION ERROR", "SOME ERROR OCCURRED", STATUS.FAIL);
